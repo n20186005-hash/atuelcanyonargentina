@@ -1,0 +1,1214 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { translations, type Locale } from '../../i18n/translations';
+import { getSeo } from '../../lib/seo';
+import galleryImagesData from '../../gallery-data.json';
+
+export function getStaticPaths() {
+  return (['es', 'en', 'zh', 'it'] as Locale[]).map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const t = translations[locale];
+const seo = getSeo(locale);
+const MAPS_URL = 'https://maps.app.goo.gl/HPuD1u4M1LSnEJ178';
+const GALLERY_PLAN = [
+  { key: 'canyon', from: 0, to: 3 },
+  { key: 'reservoir', from: 4, to: 7 },
+  { key: 'rock', from: 8, to: 11 },
+  { key: 'panorama', from: 12, to: 15 },
+];
+function categoryForIndex(i: number): string {
+  const plan = GALLERY_PLAN.find((p) => i >= p.from && i <= p.to);
+  return plan ? plan.key : 'canyon';
+}
+const galleryImages = (galleryImagesData as string[]).map((src, i) => ({ src, category: categoryForIndex(i) }));
+const ALL_LABELS: Record<Locale, string> = { zh: '全部', en: 'All', es: 'Todas', it: 'Tutte' };
+
+const MARKER_POS: Record<string, { top: string; left: string }> = {
+  entrada: { top: '74%', left: '16%' },
+  iglesia: { top: '56%', left: '38%' },
+  monumento: { top: '28%', left: '54%' },
+  corrales: { top: '70%', left: '70%' },
+  necrópolis: { top: '44%', left: '84%' },
+};
+
+const LANG_LABELS: Record<Locale, string> = { zh: '中文', en: 'EN', es: 'ES', it: 'IT' };
+
+const GOOGLE_REVIEWS = [
+  { name: 'Mariana L.', avatar: 'ML', rating: 5, date: '2025-06-18', text: 'El Cañón del Atuel es impresionante. La ruta RP173 pegada al acantilado es de película, y los embalses turquesa en medio del desierto rojo no tienen comparación. Llegamos en auto desde San Rafael y cada mirador valía la pena.' },
+  { name: 'James P.', avatar: 'JP', rating: 5, date: '2025-05-22', text: 'Una de las excursiones más bellas de Mendoza. Hicimos rafting en el Atuel y luego recorrimos los embalses. La combinación de aventura y paisaje es perfecta. Llevar mucha agua y protector solar, el sol pega fuerte.' },
+{ name: 'Giulia R.', avatar: 'GR', rating: 5, date: '2025-04-30', text: 'Canyon magnifico e poco turistico. Il contrasto tra roccia ocra e laghi turchesa è stupendo. Consiglio di guidare con calma la RP173 e fermarsi in tutti i miradores. Indimenticabile!' },
+  { name: '陈静', avatar: '陈', rating: 5, date: '2025-03-15', text: '阿图埃尔峡谷太震撼了！赭红色岩壁和碧蓝水库的对比像油画一样。RP173 公路自驾很刺激，沿途观景台很多。建议清晨出发，光线和温度都最舒服。' },
+  { name: 'Sophie M.', avatar: 'SM', rating: 4, date: '2025-02-08', text: 'Absolutely stunning drive through the canyon with the reservoirs winding between red cliffs. We only had a half day so we missed El Laberinto. Next time we will stay longer. Fuel up in San Rafael first.' },
+  { name: 'Diego F.', avatar: 'DF', rating: 5, date: '2024-11-12', text: 'Cada vez que vuelvo a San Rafael, el Atuel me sorprende. Los cinco embalses en cascata son una obra de la naturaleza y el hombre. Ideal para familias, rafting y fotos. Imperdible en Mendoza.' },
+];
+
+function renderText(text: string): string {
+  if (!text) return '';
+  return text
+    .split(/(\*\*.*?\*\*)/g)
+    .map((part) => {
+      if (part.startsWith('**') && part.endsWith('**')) return `<strong>${part.slice(2, -2)}</strong>`;
+      return part;
+    })
+    .join('');
+}
+
+const transportSections = [
+  {
+    title: t.transportation.airport.title,
+    content: t.transportation.airport.content,
+    options: t.transportation.airport.options,
+  },
+  ...(t.transportation.publicTransport
+    ? [{ title: t.transportation.publicTransport.title, content: t.transportation.publicTransport.content, options: t.transportation.publicTransport.options }]
+    : []),
+  {
+    title: t.transportation.city.title,
+    content: t.transportation.city.content,
+    steps: t.transportation.city.steps,
+  },
+];
+
+const PAGE_ENHANCEMENTS: Record<
+  Locale,
+  {
+    compareNav: string;
+    focusBadge: string;
+    comparison: {
+      title: string;
+      intro: string;
+      note: string;
+      headers: { name: string; province: string; landscape: string; experience: string; bestFor: string };
+      rows: { name: string; province: string; landscape: string; experience: string; bestFor: string; focus?: boolean }[];
+    };
+    mission: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      points: string[];
+    };
+    timeline: {
+      title: string;
+      intro: string;
+      items: { period: string; title: string; text: string }[];
+    };
+  }
+> = {
+  zh: {
+    compareNav: '峡谷对比',
+    focusBadge: '本页主角',
+    comparison: {
+      title: 'Cañón del Atuel 与门多萨其他峡谷有何不同？',
+      intro:
+        '门多萨省以安第斯前山的峡谷与水库景观闻名。规划行程时，最容易混淆的是 **阿图埃尔峡谷（Cañón del Atuel）**、门多萨市附近的 **Potrerillos（Cañón del Río Mendoza）** 与通往阿空加瓜的 **Uspallata 山谷**。三者地貌与体验各不相同。',
+      note:
+        '本页聚焦的是 **圣拉斐尔以南的 Cañón del Atuel**，它以五座连环水库、RP173 悬崖自驾公路与白浪漂流见长，是门多萨最独特的"水利峡谷"体验。',
+      headers: {
+        name: '目的地',
+        province: '所属区域',
+        landscape: '地貌类型',
+        experience: '核心体验',
+        bestFor: '最适合',
+      },
+      rows: [
+        {
+          name: '阿图埃尔峡谷',
+          province: '圣拉斐尔 San Rafael',
+          landscape: '深切峡谷 + 五连环水库',
+          experience: 'RP173 自驾观景、漂流、滑索',
+          bestFor: '自驾游客、探险与摄影爱好者',
+          focus: true,
+        },
+        {
+          name: 'Potrerillos 峡谷',
+          province: '门多萨市附近',
+          landscape: '单一水库（Embalse Potrerillos）+ 峡谷',
+          experience: '半日漂流、登山、湖滨休闲',
+          bestFor: '门多萨市出发的半日游游客',
+        },
+        {
+          name: 'Uspallata 山谷',
+          province: '门多萨西部安第斯山口',
+          landscape: '高海拔山谷与印加遗址',
+          experience: '公路观光、阿空加瓜路线中转',
+          bestFor: '跨境自驾与高山旅行者',
+        },
+      ],
+    },
+    mission: {
+      eyebrow: '阅读提示',
+      title: '如何理解阿图埃尔峡谷',
+      intro:
+        '本页聚焦圣拉斐尔以南的阿图埃尔峡谷——一个由自然切割的峡谷与 20 世纪水利工程共同写就的景观。我们提供地貌背景、实用交通与安全信息，帮助您在行前建立清晰的预期。',
+      points: [
+        '双重景观：把峡谷放入 **"自然之力 + 人类工程"** 的框架中理解——裸岩与碧水相邻',
+        '本地术语释义：对 **RP173、mirador（观景台）、embalse（水库）** 等词做简明说明',
+        '安全与责任：补充自驾提示、水上安全、防晒补水与无痕探访等关键要点',
+      ],
+    },
+    timeline: {
+      title: '从河流切割到梯级水库：一条简明时间轴',
+      intro:
+        '若把阿图埃尔峡谷仅看作一处自驾目的地，就会错过它更长久的形成过程。以下时间轴将地质、水文与人类活动放回同一条线上。',
+      items: [
+        {
+          period: '数百万年前—地质基础',
+          title: '沉积与火山岩层形成',
+          text: '古老的沉积岩与火山岩在安第斯前山层层堆积，成为后来峡谷切割的基础地层。',
+        },
+        {
+          period: '安第斯造山阶段',
+          title: '地壳抬升与断裂发育',
+          text: '安第斯山系抬升改变区域地形与水系坡降，阿图埃尔河沿断裂持续下切。',
+        },
+        {
+          period: '全新世以来',
+          title: '河流雕刻峡谷',
+          text: '阿图埃尔河在旱季细流、雨季暴涨的节律中，将岩层切割成今日深邃的赭红峡谷。',
+        },
+        {
+          period: '20 世纪中叶',
+          title: '五座梯级水库落成',
+          text: '为发电与灌溉，沿河修建 Agua del Toro、Los Reyunos、Valle Grande、Tierras Blancas 与 El Nihuil 五座水库，塑造出碧水相连的景观。',
+        },
+        {
+          period: '今天',
+          title: '保护与旅游并行',
+          text: '峡谷成为漂流、滑索与自驾观景的热门目的地，同时作为门多萨用水与用电的敏感生态系统受到保护。',
+        },
+      ],
+    },
+  },
+  en: {
+    compareNav: 'Compare',
+    focusBadge: 'Page Focus',
+    comparison: {
+      title: 'How is Cañón del Atuel different from other Mendoza canyons?',
+      intro:
+        'Mendoza Province is famous for its Precordillera canyons and reservoirs. When planning a trip, the three easiest to confuse are **Cañón del Atuel**, **Potrerillos (Cañón del Río Mendoza)** near Mendoza city, and the **Uspallata valley** on the way to Aconcagua. They differ in landscape and experience.',
+      note:
+        "This page focuses on **Cañón del Atuel south of San Rafael**, known for its five linked reservoirs, the cliff-edge RP173 scenic drive and Atuel river rafting: Mendoza’s most distinctive hydraulic canyon.",
+      headers: {
+        name: 'Destination',
+        province: 'Region',
+        landscape: 'Landscape Type',
+        experience: 'Core Experience',
+        bestFor: 'Best For',
+      },
+      rows: [
+        {
+          name: 'Cañón del Atuel',
+          province: 'San Rafael',
+          landscape: 'Deep gorge + five linked reservoirs',
+          experience: 'RP173 scenic drive, rafting, zip-line',
+          bestFor: 'Road-trippers, adventurers and photographers',
+          focus: true,
+        },
+        {
+          name: 'Potrerillos Canyon',
+          province: 'Near Mendoza city',
+          landscape: 'Single reservoir (Embalse Potrerillos) + gorge',
+          experience: 'Half-day rafting, climbing, lakeside leisure',
+          bestFor: 'Half-day visitors from Mendoza city',
+        },
+        {
+          name: 'Uspallata Valley',
+          province: 'Andean pass, west Mendoza',
+          landscape: 'High-altitude valley with Inca sites',
+          experience: 'Scenic drive, stopover to Aconcagua',
+          bestFor: 'Cross-border drivers and high-mountain travellers',
+        },
+      ],
+    },
+    mission: {
+      eyebrow: 'Reading Notes',
+      title: 'How to read this page',
+      intro:
+        'This page focuses on Cañón del Atuel south of San Rafael — a landscape written jointly by natural incision and 20th-century hydraulic engineering. We summarise geological context, practical transport and safety notes to help you plan with clear expectations.',
+      points: [
+        'Dual landscape: read the canyon within the framework of **"natural force + human engineering"** — bare rock next to blue water',
+        'Local terms: short explanations for **RP173, mirador (viewpoint), embalse (reservoir)**',
+        'Safety and responsibility: driving tips, water safety, sun protection and leave-no-trace notes',
+      ],
+    },
+    timeline: {
+      title: 'From River Incision to Cascading Reservoirs: A Short Timeline',
+      intro:
+        'If Cañón del Atuel is seen only as a driving destination, its longer formation story disappears. This timeline reconnects geology, water and human activity on one line.',
+      items: [
+        {
+          period: 'Millions of years ago',
+          title: 'Sedimentary and volcanic bedrock',
+          text: 'Ancient sedimentary and volcanic rock accumulated in the Precordillera, forming the bedrock later cut by the river.',
+        },
+        {
+          period: 'Andean uplift',
+          title: 'Relief rises and faults develop',
+          text: 'The Andes raised the regional relief and drainage gradient, and the Atuel River incised along the faults.',
+        },
+        {
+          period: 'Since the Holocene',
+          title: 'The river carves the canyon',
+          text: 'In its rhythm of dry-season trickles and rainy-season floods, the Atuel cut the rock into today’s deep ochre gorge.',
+        },
+        {
+          period: 'Mid-20th century',
+          title: 'Five cascading reservoirs built',
+          text: 'For power and irrigation, five reservoirs were built — Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas and El Nihuil — shaping the linked turquoise landscape.',
+        },
+        {
+          period: 'Today',
+          title: 'Conservation alongside tourism',
+          text: 'The canyon is a hub for rafting, zip-lines and scenic drives, while protected as a sensitive ecosystem sustaining Mendoza’s water and power.',
+        },
+      ],
+    },
+  },
+  es: {
+    compareNav: 'Comparar',
+    focusBadge: 'Enfoque',
+    comparison: {
+      title: '¿En qué se diferencia el Cañón del Atuel de otros cañones de Mendoza?',
+      intro:
+        'La provincia de Mendoza es famosa por sus cañones y embalses de la Precordillera. Al planificar, los tres más fáciles de confundir son el **Cañón del Atuel**, **Potrerillos (Cañón del Río Mendoza)** cerca de la ciudad y el **valle de Uspallata** camino a Aconcagua. Cambian el paisaje y la experiencia.',
+      note:
+        'Esta página se centra en el **Cañón del Atuel, al sur de San Rafael**, conocido por sus cinco embalses en cascata, la ruta escénica RP173 sobre el acantilado y el rafting del río Atuel: el "cañón hidráulico" más distintivo de Mendoza.',
+      headers: {
+        name: 'Destino',
+        province: 'Región',
+        landscape: 'Tipo de paisaje',
+        experience: 'Experiencia central',
+        bestFor: 'Ideal para',
+      },
+      rows: [
+        {
+          name: 'Cañón del Atuel',
+          province: 'San Rafael',
+          landscape: 'Garganta profunda + cinco embalses',
+          experience: 'Ruta RP173, rafting, canopy',
+          bestFor: 'Viajeros en auto, aventureros y fotógrafos',
+          focus: true,
+        },
+        {
+          name: 'Cañón de Potrerillos',
+          province: 'Cerca de Mendoza',
+          landscape: 'Embalse único (Potrerillos) + cañón',
+          experience: 'Rafting de medio día, escalada, recreación',
+          bestFor: 'Visitantes de medio día desde Mendoza',
+        },
+        {
+          name: 'Valle de Uspallata',
+          province: 'Paso andino, oeste de Mendoza',
+          landscape: 'Valle de altura con sitios incaicos',
+          experience: 'Ruta escénica, escala a Aconcagua',
+          bestFor: 'Viajeros transfronterizos y de alta montaña',
+        },
+      ],
+    },
+    mission: {
+      eyebrow: 'Notas de lectura',
+      title: 'Cómo interpretar esta página',
+      intro:
+        'Esta página se centra en el Cañón del Atuel, al sur de San Rafael — un paisaje escrito entre la incisión natural y la obra hidráulica del siglo XX. Resumimos el contexto geológico, el transporte práctico y notas de seguridad para ayudarte a planificar.',
+      points: [
+        'Paisaje dual: leé el cañón dentro del marco de **"fuerza natural + ingeniería humana"** — roca desnuda junto al agua azul',
+        'Términos locales: explicación breve de **RP173, mirador, embalse**',
+        'Seguridad y responsabilidad: conducción, seguridad hídrica, sol y dejar sin rastro',
+      ],
+    },
+    timeline: {
+      title: 'De la incisión del río a los embalses en cascata: una línea breve',
+      intro:
+        'Si el Cañón del Atuel se entiende solo como un paseo en auto, desaparece su historia de larga duración. Esta secuencia vuelve a unir geología, agua y presencia humana.',
+      items: [
+        {
+          period: 'Hace millones de años',
+          title: 'Roca sedimentaria y volcánica',
+          text: 'Roca sedimentaria y volcánica antigua se acumuló en la Precordillera, formando el sustrato luego recortado por el río.',
+        },
+        {
+          period: 'Levantamiento andino',
+          title: 'Aumenta el relieve y las fallas',
+          text: 'Los Andes elevaron el relieve y la pendiente de drenaje, y el Atuel incidió a lo largo de las fallas.',
+        },
+        {
+          period: 'Desde el Holoceno',
+          title: 'El río esculpe el cañón',
+          text: 'En su ritmo de mermas en sequía y crecidas en lluvia, el Atuel cortó la roca en la garganta ocre actual.',
+        },
+        {
+          period: 'Mediados del siglo XX',
+          title: 'Se construyen cinco embalses',
+          text: 'Para energía y riego se construyeron cinco embalses — Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas y El Nihuil — dando el paisaje turquesa en cascada.',
+        },
+        {
+          period: 'Hoy',
+          title: 'Conservación y turismo',
+          text: 'El cañón es centro de rafting, canopy y rutas escénicas, y se protege como ecosistema sensible del agua y la energía de Mendoza.',
+        },
+      ],
+    },
+  },
+  it: {
+    compareNav: 'Confronta',
+    focusBadge: 'Focus',
+    comparison: {
+      title: 'In cosa il Cañón del Atuel differisce dagli altri cañón di Mendoza?',
+      intro:
+        'La provincia di Mendoza è famosa per i cañón e gli invasi della Precordillera. Nella pianificazione, i tre più facili da confondere sono il **Cañón del Atuel**, **Potrerillos (Cañón del Río Mendoza)** vicino a Mendoza e la **valle di Uspallata** sulla strada per l’Aconcagua. Cambiano paesaggio ed esperienza.',
+      note:
+        "Questa pagina è dedicata al **Cañón del Atuel a sud di San Rafael**, noto per i cinque invasi a cascata, la strada panoramica RP173 sulla scogliera e il rafting sul fiume Atuel: il “cañón idraulico” più distintivo di Mendoza.",
+      headers: {
+        name: 'Destinazione',
+        province: 'Regione',
+        landscape: 'Tipo di paisaggio',
+        experience: 'Esperienza centrale',
+        bestFor: 'Ideale per',
+      },
+      rows: [
+        {
+          name: 'Cañón del Atuel',
+          province: 'San Rafael',
+          landscape: 'Gola profonda + cinque invasi',
+          experience: 'Strada RP173, rafting, zip-line',
+          bestFor: 'Viaggiatori in auto, avventurieri e fotografi',
+          focus: true,
+        },
+        {
+          name: 'Cañón di Potrerillos',
+          province: 'Vicino a Mendoza',
+          landscape: 'Invaso unico (Potrerillos) + gola',
+          experience: 'Rafting di mezza giornata, arrampicata, svago',
+          bestFor: 'Visite di mezza giornata da Mendoza',
+        },
+        {
+          name: 'Valle di Uspallata',
+          province: 'Passo andino, ovest Mendoza',
+          landscape: 'Valle d’altura con siti incaici',
+          experience: 'Strada panoramica, scalo per l’Aconcagua',
+          bestFor: 'Viaggiatori transfrontalieri e d’alta montagna',
+        },
+      ],
+    },
+    mission: {
+      eyebrow: 'Note di lettura',
+      title: 'Come leggere questa pagina',
+      intro:
+        'Questa pagina è dedicata al Cañón del Atuel a sud di San Rafael — un paesaggio scritto insieme dall’incisione naturale e dall’opera idraulica del XX secolo. Riassumiamo il contesto geologico, il trasporto pratico e note di sicurezza per aiutarti a pianificare.',
+      points: [
+        'Paesaggio duale: leggi il cañón nel quadro di **"forza naturale + ingegneria umana"** — roccia nuda accanto all’acqua blu',
+        'Termini locali: spiegazione breve di **RP173, mirador (punto panoramico), embalse (invaso)**',
+        'Sicurezza e responsabilità: guida, sicurezza idrica, sole e lasciare senza tracce',
+      ],
+    },
+    timeline: {
+      title: 'Dall’incisione del fiume agli invasi a cascata: una breve cronologia',
+      intro:
+        'Se il Cañón del Atuel viene letto solo come meta in auto, scompare la sua storia di lunga durata. Questa sequenza rimette insieme geologia, acqua e presenza umana.',
+      items: [
+        {
+          period: 'Milioni di anni fa',
+          title: 'Roccia sedimentaria e vulcanica',
+          text: 'Roccia sedimentaria e vulcanica antica si accumulò nella Precordillera, formando il substrato poi inciso dal fiume.',
+        },
+        {
+          period: 'Sollevamento andino',
+          title: 'Aumentano rilievo e faglie',
+          text: 'Le Ande elevarono il rilievo e la pendenza di drenaggio, e l’Atuel incise lungo le faglie.',
+        },
+        {
+          period: 'Dal Olocene',
+          title: 'Il fiume scolpisce il cañón',
+          text: 'Nel ritmo di magre in secca e piene di pioggia, l’Atuel tagliò la roccia nella gola ocra attuale.',
+        },
+        {
+          period: 'Metà del XX secolo',
+          title: 'Cinque invasi a cascata',
+          text: 'Per energia e irrigazione furono costruiti cinque invasi — Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas ed El Nihuil — dando il paesaggio turchese a cascata.',
+        },
+        {
+          period: 'Oggi',
+          title: 'Conservazione e turismo',
+          text: 'Il cañón è centro di rafting, zip-line e strade panoramiche, e viene protetto come ecosistema sensibile dell’acqua e dell’energia di Mendoza.',
+        },
+      ],
+    },
+  },
+};
+
+const extra = PAGE_ENHANCEMENTS[locale];
+---
+
+<BaseLayout locale={locale} title={seo.title} description={seo.description}>
+  <!-- 导航 -->
+  <nav class="site-nav" id="site-nav">
+    <div style="display:flex;align-items:center;gap:1.5rem;">
+      <span style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:#fff;">Cañón del Atuel</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:2rem;">
+      <div class="nav-links">
+        <a href="#compare">{extra.compareNav}</a>
+        <a href="#history">{t.nav.history}</a>
+        <a href="#architecture">{t.nav.architecture}</a>
+        <a href="#monuments">{t.nav.monuments}</a>
+        <a href="#eco">{t.nav.eco}</a>
+        <a href="#visiting">{t.nav.visiting}</a>
+        <a href="#transportation">{t.nav.transportation}</a>
+        <a href="#gallery">{t.nav.gallery}</a>
+        <a href="#reviews">{t.nav.reviews}</a>
+        <a href="#faq">{t.nav.faq}</a>
+        <a href="#location">{t.nav.location}</a>
+        <a href="#sitemap">{t.siteMap.title}</a>
+        <a href="#itinerary">{t.itinerary.title}</a>
+      </div>
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme" type="button">
+        <span class="theme-icon-sun">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </span>
+        <span class="theme-icon-moon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </span>
+      </button>
+      <div class="lang-switcher">
+        {
+          (['zh', 'en', 'es', 'it'] as Locale[]).map((l) => (
+            <button class={l === locale ? 'lang-btn active' : 'lang-btn'} data-locale={l} type="button">
+              {LANG_LABELS[l]}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-texture"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-tagline">{t.hero.tagline}</p>
+      <h1 class="hero-title">{t.hero.title}</h1>
+      <p class="hero-subtitle">{t.hero.subtitle}</p>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem;">
+        {
+          t.hero.tags.map((tag: string) => (
+            <span style="background:rgba(255,255,255,0.2);padding:0.25rem 0.75rem;border-radius:100px;font-size:0.85rem;font-weight:600;color:#fff;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.3);">
+              {tag}
+            </span>
+          ))
+        }
+      </div>
+      <div class="hero-description">
+        <p>📍 {t.hero.description.address}</p>
+        <p>📞 {t.hero.description.phone}</p>
+        <p>🏛️ {t.hero.description.category}</p>
+      </div>
+      <a href="#history" class="hero-cta">
+        {t.hero.cta}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17L17 7M17 7H7M17 7V17"></path>
+        </svg>
+      </a>
+      <div class="hero-cta-group">
+        <a href="#visiting" class="hero-cta-secondary">{t.visiting.title}</a>
+        <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" class="hero-cta-secondary">{t.location.openMaps}</a>
+      </div>
+    </div>
+    <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
+      <div class="hero-meta">
+        <div class="hero-rating">4.8</div>
+        <div class="hero-stars">★ ★ ★ ★ ★</div>
+        <div class="hero-reviews">7,171 {t.rating.reviews} · {t.rating.source}</div>
+      </div>
+    </a>
+  </section>
+
+  <!-- Name Disambiguation -->
+  <section id="compare" class="section" style="background:rgba(0,0,0,0.02);">
+    <div class="reveal">
+      <p class="section-label">00</p>
+      <h2 class="section-title">{extra.comparison.title}</h2>
+      <div class="section-divider"></div>
+      <p class="about-text" style="white-space:pre-line;margin-bottom:1.5rem;" set:html={renderText(extra.comparison.intro)}></p>
+    </div>
+    <div class="reveal">
+      <div class="compare-table-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>{extra.comparison.headers.name}</th>
+              <th>{extra.comparison.headers.province}</th>
+              <th>{extra.comparison.headers.landscape}</th>
+              <th>{extra.comparison.headers.experience}</th>
+              <th>{extra.comparison.headers.bestFor}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              extra.comparison.rows.map((row) => (
+                <tr class={row.focus ? 'is-focus' : undefined}>
+                  <td>{row.name}</td>
+                  <td>{row.province}</td>
+                  <td>{row.landscape}</td>
+                  <td>{row.experience}</td>
+                  <td>{row.bestFor}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="compare-cards">
+        {
+          extra.comparison.rows.map((row) => (
+            <article class={row.focus ? 'compare-card is-focus' : 'compare-card'}>
+              <div class="compare-card-top">
+                <h3 class="compare-card-title">{row.name}</h3>
+                {row.focus && <span class="compare-focus-badge">{extra.focusBadge}</span>}
+              </div>
+              <p><strong>{extra.comparison.headers.province}:</strong> {row.province}</p>
+              <p><strong>{extra.comparison.headers.landscape}:</strong> {row.landscape}</p>
+              <p><strong>{extra.comparison.headers.experience}:</strong> {row.experience}</p>
+              <p><strong>{extra.comparison.headers.bestFor}:</strong> {row.bestFor}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="compare-note" set:html={renderText(extra.comparison.note)}></div>
+    </div>
+  </section>
+
+  <!-- History -->
+  <section id="history" class="section">
+    <div class="reveal">
+      <p class="section-label">01</p>
+      <h2 class="section-title">{t.history.title}</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reveal">
+      <p class="about-text" style="white-space:pre-line;margin-bottom:3rem;" set:html={renderText(t.history.intro)}></p>
+    </div>
+    <div class="reveal">
+      <h3 style="font-family:var(--font-display);font-size:1.25rem;font-weight:650;color:var(--color-deep);margin:0 0 0.75rem;">{t.myths.title}</h3>
+      <p style="color:var(--color-earth-soft);line-height:1.7;margin:0 0 1.25rem;" set:html={renderText(t.myths.intro)}></p>
+      <div class="faq-list">
+        {
+          t.myths.items.map((item: any) => (
+            <div class="faq-item">
+              <button class="faq-question" data-faq type="button">
+                <span style="color:var(--color-deep);font-weight:600;">{item.title}</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="faq-icon">
+                  <path d="M6 9l6 6 6-6"></path>
+                </svg>
+              </button>
+              <div class="faq-answer">
+                {String(item.content)
+                  .split('\n\n')
+                  .map((paragraph: string) => (
+                    <p style="white-space:pre-line;" set:html={renderText(paragraph)}></p>
+                  ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <div class="reveal">
+      <div style="padding:2rem;background:var(--color-cream);border-radius:12px;border:1px solid rgba(0,0,0,0.05);position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-10px;right:-10px;opacity:0.05;transform:rotate(15deg);">
+          <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path>
+          </svg>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+          <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:600;color:var(--color-deep);margin:0;">{t.curiosities.title}</h3>
+        </div>
+        <p style="font-size:1rem;color:var(--color-earth-soft);line-height:1.6;margin:0;position:relative;z-index:1;white-space:pre-line;" set:html={renderText(t.curiosities.content)}></p>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="history-timeline-panel">
+        <h3 class="history-timeline-title">{extra.timeline.title}</h3>
+        <p class="history-timeline-intro" set:html={renderText(extra.timeline.intro)}></p>
+        <div class="history-timeline-grid">
+          {
+            extra.timeline.items.map((item) => (
+              <article class="history-timeline-item">
+                <div class="history-timeline-period">{item.period}</div>
+                <h4 class="history-timeline-item-title">{item.title}</h4>
+                <p class="history-timeline-item-text">{item.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section id="architecture" class="section" style="background:rgba(0,0,0,0.02);">
+    <div class="reveal">
+      <p class="section-label">02</p>
+      <h2 class="section-title">{t.architecture.title}</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reveal">
+      <p class="about-text" style="white-space:pre-line;margin-bottom:3rem;" set:html={renderText(t.architecture.intro)}></p>
+    </div>
+    <div class="reveal">
+      <div style="display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-bottom:3rem;">
+        {
+          (Object.entries(t.architecture.specs) as [string, any][]).map(([, spec]) => (
+            <div style="padding:1.5rem;background:#fff;border-radius:8px;border:1px solid rgba(0,0,0,0.05);box-shadow:0 4px 12px rgba(0,0,0,0.02);">
+              <h4 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--color-deep);margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;">
+                {spec.title}
+              </h4>
+              <p style="font-size:0.95rem;color:var(--color-earth-soft);line-height:1.6;" set:html={renderText(spec.content)}></p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <div class="reveal">
+      <div style="background:#fff;border-radius:12px;padding:2rem;border:1px solid rgba(0,0,0,0.05);">
+        <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:600;color:var(--color-deep);margin-bottom:1.5rem;">{t.architecture.plaque.title}</h3>
+        <div style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));">
+          {
+            t.architecture.plaque.items.map((item: any) => (
+              <div style="padding:1rem;background:rgba(0,0,0,0.02);border-radius:6px;border-left:3px solid var(--color-gold);">
+                <div style="font-size:0.85rem;color:var(--color-earth-soft);margin-bottom:0.25rem;font-weight:600;">{item.label}</div>
+                <div style="font-size:0.95rem;color:var(--color-deep);font-weight:500;">{item.value}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Monuments / Activities -->
+  <section id="monuments" class="section">
+    <div class="reveal">
+      <p class="section-label">03</p>
+      <h2 class="section-title">{t.monuments.title}</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reveal">
+      <p class="about-text" style="white-space:pre-line;margin-bottom:2rem;" set:html={renderText(t.monuments.intro)}></p>
+    </div>
+    <div class="reveal">
+      <div style="display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
+        {
+          t.monuments.items.map((item: any, i: number) => (
+            <div style="padding:1.5rem;background:#f8f9fa;border-radius:8px;border:1px solid rgba(0,0,0,0.05);">
+              <div style="width:40px;height:40px;border-radius:50%;background:var(--color-gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:bold;margin-bottom:1rem;">
+                {i + 1}
+              </div>
+              <h4 style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;color:var(--color-deep);margin-bottom:0.75rem;">{item.name}</h4>
+              <p style="font-size:0.9rem;color:var(--color-earth-soft);line-height:1.6;white-space:pre-line;" set:html={renderText(item.description)}></p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Heritage Protection -->
+  <section id="eco" class="section" style="background:var(--color-cream);">
+    <div class="reveal">
+      <p class="section-label">04</p>
+      <h2 class="section-title">{t.eco.title}</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reveal">
+      <div class="mission-panel">
+        <p class="mission-eyebrow">{extra.mission.eyebrow}</p>
+        <h3 class="mission-title">{extra.mission.title}</h3>
+        <p class="mission-intro" set:html={renderText(extra.mission.intro)}></p>
+        <div class="mission-points">
+          {
+            extra.mission.points.map((point) => (
+              <div class="mission-point" set:html={renderText(point)}></div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <p class="about-text" style="white-space:pre-line;margin-bottom:2rem;" set:html={renderText(t.eco.intro)}></p>
+    </div>
+    <div class="reveal">
+      <div class="bring-section" style="margin-top:0;">
+        <ul class="bring-list">
+          {
+            t.eco.items.map((item: string) => (
+              <li set:html={renderText(item)}></li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Time/Space contrast -->
+  <section class="section" style="background:var(--color-cream);">
+    <div class="reveal">
+      <p class="section-label">05</p>
+      <h2 class="section-title">{t.contrast.title}</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reveal">
+      <p class="about-text" style="white-space:pre-line;margin-bottom:3rem;" set:html={renderText(t.contrast.intro)}></p>
+    </div>
+    <div class="reveal">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;">
+        <div>
+          <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.1);margin-bottom:1rem;">
+            <img src="/gallery/canon-del-atuel-3.jpg" alt="Cañón del Atuel bare rock canyon walls" style="width:100%;height:auto;display:block;" />
+          </div>
+          <p style="text-align:center;font-size:0.95rem;color:var(--color-earth-soft);font-weight:600;">{t.contrast.before}</p>
+        </div>
+        <div>
+          <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.1);margin-bottom:1rem;">
+            <img src="/gallery/canon-del-atuel-12.jpg" alt="Cañón del Atuel turquoise reservoir" style="width:100%;height:auto;display:block;" />
+          </div>
+          <p style="text-align:center;font-size:0.95rem;color:var(--color-earth-soft);font-weight:600;">{t.contrast.after}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visiting -->
+  <section id="visiting" style="background:linear-gradient(180deg,var(--color-cream) 0%,#eee8dd 100%);">
+    <div class="section">
+      <div class="reveal">
+        <p class="section-label">06</p>
+        <h2 class="section-title">{t.visiting.title}</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="reveal">
+        <p class="about-text" style="white-space:pre-line;margin-bottom:3rem;" set:html={renderText(t.visiting.intro)}></p>
+      </div>
+      <div class="reveal">
+        <div class="info-grid">
+          {
+            [
+              { title: t.visiting.hours.title, content: t.visiting.hours.content, note: t.visiting.hours.note },
+              { title: t.visiting.price.title, content: t.visiting.price.content, note: t.visiting.price.note },
+              { title: t.visiting.duration.title, content: t.visiting.duration.content, note: t.visiting.duration.note },
+            ].map((c) => (
+              <div class="info-card">
+                <div class="info-card-title">{c.title}</div>
+                <div class="info-card-content" style="white-space:pre-line;" set:html={renderText(c.content)}></div>
+                <div class="info-card-note" set:html={renderText(c.note)}></div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="essentials-grid">
+          {
+            t.visiting.essentials.map((e) => (
+              <div class="essentials-card">
+                <div class="essentials-icon">{e.icon}</div>
+                <div>
+                  <div class="essentials-title">{e.title}</div>
+                  <div class="essentials-text">{e.text}</div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="bring-section" style="margin-top:3rem;">
+          <div class="bring-title">{t.visiting.tips.title}</div>
+          <ul class="bring-list">
+            {
+              t.visiting.tips.items.map((item: string) => (
+                <li set:html={renderText(item)}></li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+      <div class="reveal">
+        <div id="weather-widget"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transportation -->
+  <section id="transportation" class="section">
+    <div class="reveal">
+      <p class="section-label">07</p>
+      <h2 class="section-title">{t.transportation.title}</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reveal">
+      <div class="faq-list">
+        {
+          transportSections.map((sec) => (
+            <div class="faq-item expanded">
+              <div class="faq-question" style="cursor:default;">
+                <div style="display:flex;align-items:center;gap:1rem;">
+                  <span style="color:var(--color-deep);font-weight:600;">{sec.title}</span>
+                </div>
+              </div>
+              <div class="faq-answer">
+                <p style="white-space:pre-line;margin-bottom:1.5rem;" set:html={renderText(sec.content)}></p>
+                {
+                  sec.options && sec.options.length > 0 && (
+                    <div style="display:flex;flex-direction:column;gap:1rem;">
+                      {sec.options.map((opt: any) => (
+                        <div style="padding:1.25rem;background:rgba(0,0,0,0.03);border-radius:6px;">
+                          <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
+                            <strong style="color:var(--color-deep);font-size:1.05rem;">{opt.name}</strong>
+                          </div>
+                          {(opt.price || opt.time) && (
+                            <div style="font-size:0.9rem;color:var(--color-earth-soft);display:flex;gap:1rem;margin-bottom:1rem;">
+                              {opt.price && <span style="color:var(--color-gold);font-weight:600;">{opt.price}</span>}
+                              {opt.time && <span>{opt.time}</span>}
+                            </div>
+                          )}
+                          {opt.description && (
+                            <p style="font-size:0.9rem;color:var(--color-earth-soft);margin-bottom:0.5rem;" set:html={renderText(opt.description)}></p>
+                          )}
+                          {opt.steps && opt.steps.length > 0 && (
+                            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                              {opt.steps.map((step: string) => (
+                                <div style="font-size:0.9rem;color:var(--color-earth-soft);line-height:1.5;">• {renderText(step)}</div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )
+                }
+                {
+                  sec.steps && sec.steps.length > 0 && (
+                    <div style="display:flex;flex-direction:column;gap:0.75rem;background:rgba(0,0,0,0.02);padding:1.25rem;border-radius:6px;margin-top:1rem;">
+                      {sec.steps.map((step: string) => (
+                        <div style="font-size:0.9rem;color:var(--color-earth-soft);line-height:1.5;">• {renderText(step)}</div>
+                      ))}
+                    </div>
+                  )
+                }
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <div class="reveal">
+      <div style="margin-top:3rem;padding:2rem;background:rgba(0,0,0,0.02);border-radius:12px;border:1px solid rgba(0,0,0,0.05);">
+        <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:600;color:var(--color-deep);margin-bottom:1rem;">{t.transportation.tips.title}</h3>
+        <ul style="padding-left:1.5rem;color:var(--color-earth-soft);line-height:1.8;">
+          {
+            t.transportation.tips.items.map((tip: string) => (
+              <li set:html={renderText(tip)}></li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="section">
+    <div class="reveal">
+      <p class="section-label">08</p>
+      <h2 class="section-title">{t.gallery.title}</h2>
+      <div class="section-divider"></div>
+    </div>
+    {
+      galleryImages.length > 0 && (
+        <>
+          <div class="reveal">
+            <div class="gallery-filters" id="gallery-filters">
+              <button class="gallery-filter active" data-filter="all" type="button">{ALL_LABELS[locale]}</button>
+              {
+                t.gallery.categories.map((c) => (
+                  <button class="gallery-filter" data-filter={c.key} type="button">{c.label}</button>
+                ))
+              }
+            </div>
+          </div>
+          <div class="reveal">
+            <div class="gallery-grid" id="gallery-grid">
+              {
+                galleryImages.map((item, i) => (
+                  <div class="gallery-item" data-index={i} data-category={item.category}>
+                    <img src={item.src} alt={`Cañón del Atuel gallery image ${i + 1}`} loading="lazy" />
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+          <div class="reveal">
+            <div style="text-align:center;margin-top:2rem;">
+              <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" class="google-maps-btn">
+                {t.gallery.viewMore}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </>
+      )
+    }
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews" class="section" style="background:linear-gradient(180deg,var(--color-cream) 0%,#e8e2d6 100%);">
+    <div class="reveal">
+      <p class="section-label">09</p>
+      <h2 class="section-title">{t.reviews.title}</h2>
+      <p class="section-subtitle">{t.reviews.subtitle}</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reveal">
+      <div class="reviews-grid" style="margin-bottom:4rem;">
+        {
+          GOOGLE_REVIEWS.map((review) => (
+            <div class="review-card">
+              <div class="review-header">
+                <div class="review-avatar">{review.avatar}</div>
+                <div class="review-info">
+                  <div class="review-name">{review.name}</div>
+                  <div class="review-date">{review.date}</div>
+                </div>
+                <div class="review-rating">{'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}</div>
+              </div>
+              <p class="review-text">{review.text}</p>
+              <div class="review-source">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#4285F4"></path>
+                </svg>
+                Google
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <div class="reveal">
+      <div style="background:#fff;border-radius:12px;padding:2.5rem;border:1px solid rgba(0,0,0,0.05);box-shadow:0 10px 30px rgba(0,0,0,0.03);">
+        <h3 style="font-family:var(--font-display);font-size:1.4rem;font-weight:600;color:var(--color-deep);margin-bottom:1rem;text-align:center;">{t.reviews.nearbyTitle}</h3>
+        <p style="text-align:center;color:var(--color-earth-soft);margin-bottom:2rem;" set:html={renderText(t.reviews.nearbyIntro)}></p>
+        <div style="display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));">
+          {
+            t.reviews.nearbyItems.map((item: any) => (
+              <div style="padding:1.5rem;background:rgba(0,0,0,0.02);border-radius:8px;">
+                <h4 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--color-deep);margin-bottom:0.5rem;">📍 {item.name}</h4>
+                <p style="font-size:0.9rem;color:var(--color-earth-soft);line-height:1.5;" set:html={renderText(item.description)}></p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div style="text-align:center;margin-top:3rem;">
+        <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" class="google-maps-btn">
+          {t.reviews.viewMore}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7V17"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="section">
+      <div class="reveal">
+        <p class="section-label">10</p>
+        <h2 class="section-title">{t.faq.title}</h2>
+        <p class="section-subtitle">{t.faq.subtitle}</p>
+        <div class="section-divider"></div>
+      </div>
+      <div class="reveal">
+        <div class="faq-list">
+          {
+            t.faq.items.map((item: any) => (
+              <div class="faq-item">
+                <button class="faq-question" data-faq type="button">
+                  <span style="color:var(--color-deep);font-weight:600;">{item.question}</span>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="faq-icon">
+                    <path d="M6 9l6 6 6-6"></path>
+                  </svg>
+                </button>
+                <div class="faq-answer">
+                  {item.answer.split('\n\n').map((paragraph: string) => (
+                    <p set:html={renderText(paragraph)}></p>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section id="location" class="section">
+    <div class="reveal">
+      <p class="section-label">11</p>
+      <h2 class="section-title">{t.location.title}</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reveal">
+      <div class="location-section">
+        <div class="location-map-container">
+          <iframe
+            src="https://www.google.com/maps?q=Ca%C3%B1%C3%B3n%20del%20Atuel%20San%20Rafael%20Mendoza%20Argentina&output=embed"
+            width="800"
+            height="600"
+            style="border:0;"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Cañón del Atuel Location Map"
+          >
+          </iframe>
+        </div>
+        <div class="location-info">
+          <p class="location-address" style="white-space:pre-line;">{t.location.address}</p>
+          <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" class="maps-link">
+            {t.location.openMaps}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 17L17 7M17 7H7M17 7V17"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Site Map -->
+  <section id="sitemap" class="section">
+    <div class="reveal">
+      <p class="section-label">12</p>
+      <h2 class="section-title">{t.siteMap.title}</h2>
+      <p class="about-text" style="white-space:pre-line;margin-bottom:1rem;" set:html={renderText(t.siteMap.intro)}></p>
+      <div class="sitemap-hint">{t.siteMap.hint}</div>
+    </div>
+    <div class="reveal">
+      <div class="sitemap-wrap">
+        <div class="sitemap-map" id="sitemap-map">
+          <svg class="sitemap-svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="hillGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#d9a86a" />
+                <stop offset="100%" stop-color="#b56532" />
+              </linearGradient>
+            </defs>
+            <path d="M0,300 L0,210 C60,180 90,150 150,160 C200,168 230,120 300,130 C350,137 380,110 400,120 L400,300 Z" fill="url(#hillGrad)" opacity="0.85" />
+            <path d="M0,300 L0,240 C80,225 120,205 180,212 C250,220 300,200 400,210 L400,300 Z" fill="#a8531f" opacity="0.5" />
+            <path d="M40,260 C120,235 200,250 280,225 C320,213 360,225 390,215" stroke="#faf7f2" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="4 6" />
+            <path d="M70,150 C140,170 220,150 300,135" stroke="#faf7f2" stroke-width="1.5" fill="none" opacity="0.35" stroke-dasharray="3 7" />
+          </svg>
+          {
+            t.siteMap.zones.map((z, i) => (
+              <button class="sitemap-marker" type="button" data-zone={z.key}
+                data-name={z.name} data-desc={z.desc}
+                style={"top:${MARKER_POS[z.key].top};left:${MARKER_POS[z.key].left};"}>
+                {i + 1}
+              </button>
+            ))
+          }
+        </div>
+        <div class="sitemap-detail" id="sitemap-detail">
+          <div class="sitemap-detail-index" id="sitemap-detail-index">01</div>
+          <h3 class="sitemap-detail-name" id="sitemap-detail-name"></h3>
+          <p class="sitemap-detail-desc" id="sitemap-detail-desc"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Itinerary -->
+  <section id="itinerary" class="section" style="background:rgba(0,0,0,0.02);">
+    <div class="reveal">
+      <p class="section-label">13</p>
+      <h2 class="section-title">{t.itinerary.title}</h2>
+      <p class="about-text" style="white-space:pre-line;margin-bottom:3rem;" set:html={renderText(t.itinerary.intro)}></p>
+    </div>
+    <div class="reveal">
+      <div class="timeline">
+        {
+          t.itinerary.steps.map((s) => (
+            <div class="timeline-item">
+              <div class="timeline-time">{s.time}</div>
+              <div class="timeline-marker"><span class="timeline-dot"></span></div>
+              <div class="timeline-card">
+                <h4 class="timeline-title">{s.title}</h4>
+                <p class="timeline-text">{s.text}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-links">
+      <p class="footer-links-title">{t.footer.linksTitle}</p>
+      <div class="footer-links-grid">
+        {
+          t.footer.links.map((link: any) => (
+            <a href={link.url} target="_blank" rel="noopener noreferrer" class="footer-link-item">
+              {link.name}
+            </a>
+          ))
+        }
+      </div>
+      <div style="margin-top:1.25rem;text-align:center;">
+        <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" class="google-maps-btn">Google Maps →</a>
+      </div>
+    </div>
+    <div class="footer-legal" style="max-width:1100px;margin:0 auto;padding:1rem 2rem 0;text-align:center;">
+      <a href="/privacy" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.8rem;margin-right:1.5rem;">Privacy Policy</a>
+      <a href="/terms" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.8rem;margin-right:1.5rem;">Terms of Service</a>
+      <a href="/cookies" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.8rem;">Cookie Settings</a>
+    </div>
+    <p class="footer-text" style="margin-top:2rem;font-size:0.9rem;font-weight:600;color:var(--color-gold);">{t.footer.callToAction}</p>
+    <p class="footer-text" style="margin-top:1rem;white-space:pre-line;">{t.footer.text}</p>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" style="display:none;">
+    <button id="lightbox-close" class="lightbox-close" type="button">×</button>
+    <button id="lightbox-prev" class="lightbox-prev" type="button">‹</button>
+    <img id="lightbox-img" class="lightbox-img" src="" alt="" />
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+    <button id="lightbox-next" class="lightbox-next" type="button">›</button>
+  </div>
+</BaseLayout>

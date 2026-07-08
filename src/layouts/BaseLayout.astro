@@ -1,0 +1,92 @@
+---
+import '../styles/globals.css';
+import '../styles/additions.css';
+import { localeConfig, type Locale } from '../i18n/config';
+import { getSeo } from '../lib/seo';
+import { generateSchema } from '../lib/schema';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  pathOverride?: string;
+  includeSchema?: boolean;
+}
+
+const { locale, title, description, pathOverride, includeSchema = true } = Astro.props as Props;
+const cfg = localeConfig[locale] || localeConfig.es;
+const site = Astro.site ? Astro.site.href.replace(/\/$/, '') : 'https://atuelcanyonargentina.com';
+const canonical = pathOverride ? `${site}${pathOverride}` : `${site}/${locale}`;
+const alternates: Record<string, string> = {
+  es: `${site}/es`,
+  en: `${site}/en`,
+  zh: `${site}/zh`,
+  it: `${site}/it`,
+};
+const ogImage = `${site}/gallery/canon-del-atuel-1.jpg`;
+const seo = getSeo(locale);
+const schema = includeSchema ? generateSchema(locale, site) : null;
+---
+
+<!doctype html>
+<html lang={cfg.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonical} />
+    {
+      Object.entries(alternates).map(([l, url]) => (
+        <link rel="alternate" hreflang={l} href={url} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={alternates.es} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={cfg.ogLocale} />
+    {
+      Object.values(localeConfig)
+        .filter((c) => c.ogLocale !== cfg.ogLocale)
+        .map((c) => <meta property="og:alternate_locale" content={c.ogLocale} />)
+    }
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={seo.ogTitle} />
+    <meta property="og:description" content={seo.ogDescription} />
+    <meta property="og:site_name" content={seo.siteName} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seo.ogTitle} />
+    <meta name="twitter:description" content={seo.ogDescription} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf8f5" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121212" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    {/* 在绘制前设置主题，避免闪烁 */}
+    <script
+      is:inline
+      set:html={`(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();`}
+    ></script>
+
+    {
+      includeSchema && schema && (
+        <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)}></script>
+      )
+    }
+  </head>
+  <body>
+    <slot />
+    <script>
+      import '../scripts/site';
+    </script>
+  </body>
+</html>
