@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Cañón del Atuel">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0c08a" />
+      <stop offset="55%" stop-color="#c47a3a" />
+      <stop offset="100%" stop-color="#8b4513" />
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2f8f8f" />
+      <stop offset="100%" stop-color="#1a5c68" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#sky)" />
+  <circle cx="364" cy="133" r="44" fill="#f7e3b8" opacity="0.95" />
+  <path d="M0 236 L86 196 L150 226 L232 168 L312 224 L392 178 L512 232 L512 512 L0 512 Z" fill="#6b3a1a" />
+  <path d="M0 320 L96 286 L188 322 L286 278 L384 318 L512 288 L512 512 L0 512 Z" fill="#3b1f0e" />
+  <path d="M0 400 L512 400 L512 512 L0 512 Z" fill="url(#water)" />
+  <path d="M0 400 C96 388 176 414 264 402 C352 390 430 412 512 402" stroke="#f7e3b8" stroke-width="6" fill="none" opacity="0.5" />
+</svg>

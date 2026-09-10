@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CLUSTER, CLUSTER_SLUGS, CLUSTER_UI, type ClusterSlug } from '../../i18n/clusters';
+import { locales, hreflang, type Locale } from '../../i18n/config';
+import { generateClusterSchema } from '../../lib/schema';
+import { ATTRACTION, SITE } from '../../lib/site-config';
+
+export function getStaticPaths() {
+  return locales.flatMap((locale) =>
+    CLUSTER_SLUGS.map((slug) => ({ params: { locale, slug } }))
+  );
+}
+
+const { locale: rawLocale, slug: rawSlug } = Astro.params;
+const locale = (rawLocale || 'es') as Locale;
+const slug = rawSlug as ClusterSlug;
+
+const page = CLUSTER[locale][slug];
+const ui = CLUSTER_UI[locale];
+
+if (!page) {
+  return Astro.redirect(`/${locale}/`);
+}
+
+const schema = generateClusterSchema(
+  locale,
+  SITE.baseUrl,
+  slug,
+  page.h1,
+  page.metaDescription,
+  page.faq
+);
+
+const LANG_LABELS: Record<string, string> = { es: 'ES', en: 'EN', zh: '中文', it: 'IT' };
+const allLocales = locales as readonly string[];
+
+// 语言切换器必须指向「同一子页面的对应语言版本」，而不是各语言首页，
+// 否则多语言集群页面之间会失去互相关联。
+const siblings = CLUSTER_SLUGS.filter((s) => s !== slug).map((s) => ({
+  slug: s,
+  title: CLUSTER[locale][s].h1,
+  desc: CLUSTER[locale][s].lede,
+}));
+---
+
+<BaseLayout
+  locale={locale}
+  title={page.metaTitle}
+  description={page.metaDescription}
+  slug={slug}
+  ogTitle={page.metaTitle}
+  ogDescription={page.metaDescription}
+  includeSchema={false}
+  schemaExtra={schema}
+>
+  <nav class="site-nav" id="site-nav">
+    <div style="display:flex;align-items:center;gap:1.5rem;">
+      <a
+        href={`/${locale}/`}
+        style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:#fff;text-decoration:none;"
+      >{ATTRACTION.fullName} · {ATTRACTION.city}</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:2rem;">
+      <div class="nav-links">
+        <a href={`/${locale}/#attractions`}>{ui.relatedTitle}</a>
+        <a href={`/${locale}/#activities`}>{ui.backToGuide}</a>
+      </div>
+      <div class="lang-switcher">
+        {allLocales.map((l) => (
+          <a
+            href={`/${l}/${slug}`}
+            class={`lang-btn${l === locale ? ' active' : ''}`}
+            hreflang={hreflang[l as Locale] ?? l}
+          >{LANG_LABELS[l] || l.toUpperCase()}</a>
+        ))}
+      </div>
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme" type="button">
+        <span class="theme-icon-sun">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </span>
+        <span class="theme-icon-moon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <header class="subhero">
+    <div class="subhero-inner">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href={`/${locale}/`}>{ui.home}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{page.h1}</span>
+      </nav>
+      <h1 class="subhero-title">{page.h1}</h1>
+      <p class="subhero-lede">{page.lede}</p>
+    </div>
+  </header>
+
+  <main class="cluster-main">
+    {page.sections.map((section) => (
+      <section class="cluster-section">
+        <h2 class="cluster-h2">{section.h2}</h2>
+        {section.body && <p class="cluster-body">{section.body}</p>}
+        {section.bullets && (
+          <ul class="cluster-list">
+            {section.bullets.map((b) => (
+              <li>{b}</li>
+            ))}
+          </ul>
+        )}
+      </section>
+    ))}
+
+    <section class="cluster-section" id="faq">
+      <h2 class="cluster-h2">{ui.faqTitle}</h2>
+      <div class="faq-list">
+        {page.faq.map((item) => (
+          <div class="faq-item">
+            <button class="faq-question" data-faq type="button">
+              <span style="color:var(--color-deep);font-weight:600;">{item.q}</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="faq-icon">
+                <path d="M6 9l6 6 6-6"></path>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>{item.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="cluster-section cluster-related">
+      <h2 class="cluster-h2">{ui.relatedTitle}</h2>
+      <p class="cluster-body">{ui.relatedIntro}</p>
+      <div class="related-grid">
+        <a class="related-card related-card--home" href={`/${locale}/`}>
+          <span class="related-card-title">{ui.mainGuide}</span>
+          <span class="related-card-desc">{ui.mainGuideDesc}</span>
+        </a>
+        {siblings.map((s) => (
+          <a class="related-card" href={`/${locale}/${s.slug}`}>
+            <span class="related-card-title">{s.title}</span>
+            <span class="related-card-desc">{s.desc}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-text">
+      © {new Date().getFullYear()} {ui.home} · {ATTRACTION.fullName}, {ATTRACTION.city}, {ATTRACTION.state}, {ATTRACTION.country}
+    </p>
+  </footer>
+</BaseLayout>

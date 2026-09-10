@@ -1,0 +1,61 @@
+---
+// 实时天气面板（服务端组件）
+// 服务端渲染时取数并缓存，保证首屏即有内容与 SEO 可见性；
+// 浏览器端在空闲时静默刷新，使「实时」成立。
+import { getWeather } from '../lib/weather';
+import { renderWeatherPanel } from '../lib/weather-render';
+import { GUIDE, weatherPanelContent } from '../i18n/guide';
+import type { Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const g = GUIDE[locale].weather;
+const data = await getWeather();
+const initialHtml = renderWeatherPanel(data, g, locale);
+// 只序列化面板真正用到的文案，标题与导语已在正文里，不再重复
+const panelI18n = JSON.stringify(weatherPanelContent(g));
+---
+
+<div
+  class="weather-panel"
+  id="weather-panel"
+  data-locale={locale}
+  data-weather-i18n={panelI18n}
+  set:html={initialHtml}
+>
+</div>
+
+<script>
+  import { fetchWeather } from '../lib/weather';
+  import { renderWeatherPanel } from '../lib/weather-render';
+
+  const REFRESH_MS = 15 * 60 * 1000;
+  const FIRST_REFRESH_DELAY_MS = 4000;
+
+  async function refresh(): Promise<void> {
+    const panel = document.getElementById('weather-panel');
+    if (!panel || !panel.dataset.weatherI18n) return;
+    try {
+      const data = await fetchWeather();
+      if (!data) return; // 静默失败，保留服务端渲染的内容
+      const labels = JSON.parse(panel.dataset.weatherI18n);
+      panel.innerHTML = renderWeatherPanel(data, labels, panel.dataset.locale || 'en');
+    } catch {
+      /* 保留原有内容 */
+    }
+  }
+
+  window.addEventListener('load', () => {
+    window.setTimeout(refresh, FIRST_REFRESH_DELAY_MS);
+    window.setInterval(() => {
+      if (!document.hidden) refresh();
+    }, REFRESH_MS);
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) refresh();
+  });
+</script>

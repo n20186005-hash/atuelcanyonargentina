@@ -102,7 +102,8 @@ function visibleItems(): HTMLElement[] {
 function showLightbox(el: HTMLElement) {
   const img = el.querySelector('img');
   if (!img || !lightbox || !lightboxImg) return;
-  lightboxImg.src = img.getAttribute('src') || '';
+  // 灯箱使用高分辨率版本（data-full），列表仍用响应式缩略图
+  lightboxImg.src = img.dataset.full || img.getAttribute('src') || '';
   lightboxImg.alt = img.alt;
   if (lightboxCaption) lightboxCaption.textContent = catLabels[el.dataset.category || ''] || '';
   lightbox.style.display = 'flex';
@@ -173,70 +174,5 @@ if (sitemapMarkers.length && detailName && detailDesc) {
   showZone(sitemapMarkers[0]);
 }
 
-// 天气小组件
-const weatherEl = document.getElementById('weather-widget');
-if (weatherEl) {
-  const locale = (document.documentElement.lang || 'es').split('-')[0] as AppLocale;
-  const labels: Record<AppLocale, string[]> = {
-    zh: ['低', '中等', '高', '极高', '危险'],
-    en: ['Low', 'Moderate', 'High', 'Very High', 'Extreme'],
-    es: ['Bajo', 'Moderado', 'Alto', 'Muy Alto', 'Extremo'],
-    it: ['Basso', 'Moderato', 'Alto', 'Molto Alto', 'Estremo'],
-  };
-  const titles: Record<AppLocale, string> = {
-    zh: '圣拉斐尔实时天气',
-    en: 'Live Weather in San Rafael',
-    es: 'Clima en San Rafael',
-    it: 'Meteo a San Rafael',
-  };
-  const metaLabels: Record<AppLocale, { temp: string; precip: string; uv: string; sunrise: string; sunset: string }> = {
-    zh: { temp: '气温', precip: '降水', uv: '紫外线', sunrise: '日出', sunset: '日落' },
-    en: { temp: 'Temp', precip: 'Precip', uv: 'UV', sunrise: 'Sunrise', sunset: 'Sunset' },
-    es: { temp: 'Temp.', precip: 'Precip.', uv: 'UV', sunrise: 'Amanecer', sunset: 'Atardecer' },
-    it: { temp: 'Temp.', precip: 'Prec.', uv: 'UV', sunrise: 'Alba', sunset: 'Tramonto' },
-  };
-  const msgs: Record<AppLocale, (uv: string) => string> = {
-    zh: (uv) => `当前紫外线指数：${uv}。圣拉斐尔地区海拔约 750 米，前山日照强烈，请务必做好防晒！`,
-    en: (uv) => `Current UV Index: ${uv}. San Rafael sits at ~750m with strong foothill sun — sunscreen is essential!`,
-    es: (uv) => `Índice UV actual: ${uv}. ¡San Rafael está a ~750m, el sol de precordillera es fuerte, use protector solar!`,
-    it: (uv) => `Indice UV attuale: ${uv}. San Rafael è a ~750m, il sole di precordillera è forte — usa la crema solare!`,
-  };
-  const colors = ['#28a745', '#ffc107', '#fd7e14', '#dc3545', '#6f42c1'];
-  fetch(
-    'https://api.open-meteo.com/v1/forecast?latitude=-34.617&longitude=-68.331&current=temperature_2m,precipitation,uv_index&daily=sunrise,sunset&timezone=auto'
-  )
-    .then((r) => r.json())
-    .then((data) => {
-      if (!data || !data.current) return;
-      const temp = data.current.temperature_2m;
-      const precip = data.current.precipitation;
-      const uv = data.current.uv_index;
-      const sunriseRaw = data.daily?.sunrise?.[0];
-      const sunsetRaw = data.daily?.sunset?.[0];
-      const sunrise = sunriseRaw ? new Date(sunriseRaw).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--';
-      const sunset = sunsetRaw ? new Date(sunsetRaw).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--';
-      let idx = 0;
-      if (uv >= 3 && uv < 6) idx = 1;
-      else if (uv >= 6 && uv < 8) idx = 2;
-      else if (uv >= 8 && uv < 11) idx = 3;
-      else if (uv >= 11) idx = 4;
-      const uvLevel = labels[locale][idx];
-      const uvColor = colors[idx];
-      const uvText = `${uv} (${uvLevel})`;
-      const meta = metaLabels[locale];
-      weatherEl.innerHTML = `
-        <h3 style="font-size:1.2rem;font-weight:700;color:var(--color-deep);display:flex;align-items:center;gap:0.5rem;margin:0;">${titles[locale]}</h3>
-        <div style="display:flex;flex-wrap:wrap;gap:1rem;margin:0.5rem 0;">
-          <div style="background:#f8f9fa;padding:0.5rem 1rem;border-radius:8px;font-weight:600;">${meta.temp}: ${temp}°C</div>
-          <div style="background:#f8f9fa;padding:0.5rem 1rem;border-radius:8px;font-weight:600;">${meta.precip}: ${precip}mm</div>
-          <div style="background:#f8f9fa;padding:0.5rem 1rem;border-radius:8px;font-weight:600;color:${uvColor};">${meta.uv}: ${uvText}</div>
-          <div style="background:#f8f9fa;padding:0.5rem 1rem;border-radius:8px;font-weight:600;">${meta.sunrise}: ${sunrise}</div>
-          <div style="background:#f8f9fa;padding:0.5rem 1rem;border-radius:8px;font-weight:600;">${meta.sunset}: ${sunset}</div>
-        </div>
-        <p style="margin:0;font-size:0.95rem;color:var(--color-earth);line-height:1.5;">${msgs[locale](uvText)}</p>
-      `;
-    })
-    .catch(() => {
-      /* ignore */
-    });
-}
+// 天气模块已迁移至服务端组件 src/components/WeatherPanel.astro
+

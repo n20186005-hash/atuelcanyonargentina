@@ -4,21 +4,23 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "predev": "node scripts/generate-gallery.cjs",
+    "predev": "node scripts/generate-gallery.cjs && node scripts/generate-icons.cjs",
     "dev": "astro dev",
-    "prebuild": "node scripts/generate-gallery.cjs",
+    "prebuild": "node scripts/generate-gallery.cjs && node scripts/generate-icons.cjs",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "optimize:images": "node scripts/optimize-images.cjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
-    "astro": "^5.5.0",
     "@tailwindcss/vite": "^4.0.0",
+    "astro": "^5.5.0",
     "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "sharp": "^0.35.4",
     "typescript": "^5.7.0"
   }
 }

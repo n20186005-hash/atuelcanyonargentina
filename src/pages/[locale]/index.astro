@@ -1,8 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { translations, type Locale } from '../../i18n/translations';
-import { getSeo } from '../../lib/seo';
+import { getSeo, h1For } from '../../lib/seo';
+import { FAQ_BY_LOCALE } from '../../lib/schema';
+import { ENTITY_CONTENT } from '../../i18n/entity';
+import { ATTRACTIONS } from '../../i18n/attractions';
+import { GUIDE } from '../../i18n/guide';
+import WeatherPanel from '../../components/WeatherPanel.astro';
+import { ATTRACTION, SITE, AUTHORITY_SOURCES } from '../../lib/site-config';
 import galleryImagesData from '../../gallery-data.json';
+import imageManifestData from '../../image-manifest.json';
 
 export function getStaticPaths() {
   return (['es', 'en', 'zh', 'it'] as Locale[]).map((locale) => ({ params: { locale } }));
@@ -11,7 +18,62 @@ export function getStaticPaths() {
 const { locale } = Astro.params as { locale: Locale };
 const t = translations[locale];
 const seo = getSeo(locale);
-const MAPS_URL = 'https://maps.app.goo.gl/HPuD1u4M1LSnEJ178';
+const ec = ENTITY_CONTENT[locale];
+const guide = GUIDE[locale];
+const at = ATTRACTIONS[locale];
+// 可见 FAQ 与 FAQPage 结构化数据共用同一数据源
+const faqItems = (FAQ_BY_LOCALE[locale] || FAQ_BY_LOCALE.en).map((f) => ({ question: f.q, answer: f.a }));
+const H1 = h1For(locale);
+const site = Astro.site ? Astro.site.href.replace(/\/$/, '') : SITE.baseUrl;
+const pageUrl = `${site}/${locale}`;
+const MAPS_URL = ATTRACTION.mapsShareUrl;
+
+const NAV_LABELS: Record<
+  Locale,
+  { about: string; sources: string; attractions: string; activities: string; rp173: string }
+> = {
+  zh: {
+    about: '景点概览',
+    sources: '资料来源',
+    attractions: '必看景点',
+    activities: '活动与游览团',
+    rp173: 'RP173 路线',
+  },
+  en: {
+    about: 'About',
+    sources: 'Sources',
+    attractions: 'Top Attractions',
+    activities: 'Activities & Tours',
+    rp173: 'RP173 Route',
+  },
+  es: {
+    about: 'Sobre',
+    sources: 'Fuentes',
+    attractions: 'Qué ver',
+    activities: 'Actividades y excursiones',
+    rp173: 'Ruta RP173',
+  },
+  it: {
+    about: 'Info',
+    sources: 'Fonti',
+    attractions: 'Cosa vedere',
+    activities: 'Attività ed escursioni',
+    rp173: 'Strada RP173',
+  },
+};
+const navExtra = NAV_LABELS[locale];
+
+// 图片 Alt 语义绑定
+const imgAlt = {
+  rockWall: `${ATTRACTION.fullName} - bare rock canyon walls in ${ATTRACTION.city}, ${ATTRACTION.country}`,
+  reservoir: `${ATTRACTION.fullName} - turquoise reservoir in ${ATTRACTION.city}, ${ATTRACTION.state}, ${ATTRACTION.country}`,
+  gallery: (i: number, categoryLabel: string) =>
+    `${ATTRACTION.fullName} - ${categoryLabel} photo ${i + 1} in ${ATTRACTION.city}, ${ATTRACTION.country}`,
+  map: `${ATTRACTION.fullName} location map in ${ATTRACTION.city}, ${ATTRACTION.state}, ${ATTRACTION.country}`,
+};
+const categoryLabels: Record<string, string> = Object.fromEntries(
+  t.gallery.categories.map((c) => [c.key, c.label])
+);
 const GALLERY_PLAN = [
   { key: 'canyon', from: 0, to: 3 },
   { key: 'reservoir', from: 4, to: 7 },
@@ -22,7 +84,40 @@ function categoryForIndex(i: number): string {
   const plan = GALLERY_PLAN.find((p) => i >= p.from && i <= p.to);
   return plan ? plan.key : 'canyon';
 }
-const galleryImages = (galleryImagesData as string[]).map((src, i) => ({ src, category: categoryForIndex(i) }));
+
+// 响应式图片派生信息（由 scripts/optimize-images.cjs 生成）
+interface Rendition {
+  base: string;
+  width: number;
+  height: number;
+  aspect: number;
+  widths: number[];
+  jpg: Record<string, string>;
+  webp: Record<string, string>;
+  lqip: string;
+}
+const IMG = (imageManifestData as unknown as { images: Record<string, Rendition> }).images;
+const heroBg = IMG['canon-del-atuel-16'];
+const HERO_BG_WEBP = heroBg ? heroBg.webp[heroBg.widths[heroBg.widths.length - 1]] : undefined;
+
+function toSrcset(map: Record<string, string>, widths: number[]): string {
+  return widths.map((w) => `${map[w]} ${w}w`).join(', ');
+}
+function largest(map: Record<string, string>, widths: number[]): string {
+  return map[widths[widths.length - 1]];
+}
+
+const galleryImages = (galleryImagesData as string[]).map((base, i) => ({
+  base,
+  category: categoryForIndex(i),
+  img: IMG[base],
+}));
+
+/** 画廊缩略图显示尺寸提示 */
+const GALLERY_SIZES = '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 260px';
+/** 双栏对比图显示尺寸提示 */
+const HALF_SIZES = '(max-width: 900px) 100vw, 50vw';
+
 const ALL_LABELS: Record<Locale, string> = { zh: '全部', en: 'All', es: 'Todas', it: 'Tutte' };
 
 const MARKER_POS: Record<string, { top: string; left: string }> = {
@@ -441,25 +536,33 @@ const PAGE_ENHANCEMENTS: Record<
 const extra = PAGE_ENHANCEMENTS[locale];
 ---
 
-<BaseLayout locale={locale} title={seo.title} description={seo.description}>
+<BaseLayout locale={locale} title={seo.title} description={seo.description} preloadImage={HERO_BG_WEBP}>
   <!-- 导航 -->
   <nav class="site-nav" id="site-nav">
     <div style="display:flex;align-items:center;gap:1.5rem;">
-      <span style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:#fff;">Cañón del Atuel</span>
+      <span style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:#fff;">{ATTRACTION.fullName} · {ATTRACTION.city}</span>
     </div>
     <div style="display:flex;align-items:center;gap:2rem;">
       <div class="nav-links">
+        <a href="#about">{navExtra.about}</a>
         <a href="#compare">{extra.compareNav}</a>
         <a href="#history">{t.nav.history}</a>
         <a href="#architecture">{t.nav.architecture}</a>
         <a href="#monuments">{t.nav.monuments}</a>
+        <a href="#attractions">{navExtra.attractions}</a>
+        <a href="#activities">{navExtra.activities}</a>
         <a href="#eco">{t.nav.eco}</a>
         <a href="#visiting">{t.nav.visiting}</a>
         <a href="#transportation">{t.nav.transportation}</a>
+        <a href="#rp173">{navExtra.rp173}</a>
         <a href="#gallery">{t.nav.gallery}</a>
         <a href="#reviews">{t.nav.reviews}</a>
         <a href="#faq">{t.nav.faq}</a>
         <a href="#location">{t.nav.location}</a>
+        <a href="#facilities">{guide.nav.facilities}</a>
+        <a href="#weather">{guide.nav.weather}</a>
+        <a href="#deep-dive">{guide.nav.deepDive}</a>
+        <a href="#sources">{navExtra.sources}</a>
         <a href="#sitemap">{t.siteMap.title}</a>
         <a href="#itinerary">{t.itinerary.title}</a>
       </div>
@@ -502,7 +605,7 @@ const extra = PAGE_ENHANCEMENTS[locale];
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <p class="hero-tagline">{t.hero.tagline}</p>
-      <h1 class="hero-title">{t.hero.title}</h1>
+      <h1 class="hero-title">{H1}</h1>
       <p class="hero-subtitle">{t.hero.subtitle}</p>
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem;">
         {
@@ -536,6 +639,82 @@ const extra = PAGE_ENHANCEMENTS[locale];
         <div class="hero-reviews">7,171 {t.rating.reviews} · {t.rating.source}</div>
       </div>
     </a>
+  </section>
+
+  <!-- Entity Semantic Binding — 实体语义绑定 -->
+  <section id="about" class="section">
+    <div class="reveal">
+      <nav class="entity-breadcrumb" aria-label={ec.breadcrumbLabel}>
+        <ol>
+          <li><a href={pageUrl}>{ec.breadcrumb[0]}</a></li>
+          {ec.breadcrumb.slice(1).map((crumb) => (
+            <li><span aria-hidden="true" class="entity-breadcrumb-sep">›</span><span>{crumb}</span></li>
+          ))}
+        </ol>
+      </nav>
+      <h2 class="section-title">{ec.aboutTitle}</h2>
+      <div class="section-divider"></div>
+      <p class="about-text entity-welcome" set:html={renderText(ec.welcome)}></p>
+    </div>
+
+    <div class="reveal">
+      <h2 class="section-title entity-subtitle">{ec.locationTitle}</h2>
+      <p class="about-text" set:html={renderText(ec.locationIntro)}></p>
+    </div>
+    <div class="reveal">
+      <div class="location-section">
+        <div class="location-map-container">
+          <iframe
+            src={ATTRACTION.mapsEmbedSrc}
+            width="100%"
+            height="450"
+            style="border:0;"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            title={imgAlt.map}
+          >
+          </iframe>
+        </div>
+        <div class="location-info">
+          <p class="location-address" style="white-space:pre-line;">{t.location.address}</p>
+          <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" class="maps-link">
+            {t.location.openMaps}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 17L17 7M17 7H7M17 7V17"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <h2 class="section-title entity-subtitle">{ec.landmarksTitle}</h2>
+      <p class="about-text" set:html={renderText(ec.landmarksIntro)}></p>
+      <div class="landmark-grid">
+        {
+          ec.landmarks.map((lm) => (
+            <article class="landmark-card">
+              <h3 class="landmark-name">📍 {lm.name}</h3>
+              <p class="landmark-desc">{lm.desc}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="entity-history-note">
+        <h2 class="section-title entity-subtitle">{ec.historyTitle}</h2>
+        <p class="about-text" set:html={renderText(ec.historyIntro)}></p>
+        <a href="#history" class="google-maps-btn">
+          {t.nav.history}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7V17"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
   </section>
 
   <!-- Name Disambiguation -->
@@ -732,6 +911,102 @@ const extra = PAGE_ENHANCEMENTS[locale];
     </div>
   </section>
 
+  <!-- Top Attractions (Lago Atuel / El Nihuil / Volcán Overo ...) -->
+  <section id="attractions" class="section" style="background:var(--color-cream);">
+    <div class="reveal">
+      <p class="section-label">Lago Atuel · El Nihuil · Volcán Overo</p>
+      <h2 class="section-title">{at.attractionsTitle}</h2>
+      <div class="section-divider"></div>
+      <p class="about-text" set:html={renderText(at.attractionsIntro)}></p>
+    </div>
+    <div class="reveal">
+      <div style="display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));">
+        {
+          at.attractions.map((item) => (
+            <div style="padding:1.5rem;background:#fff;border-radius:10px;border:1px solid rgba(0,0,0,0.06);display:flex;flex-direction:column;gap:0.75rem;">
+              <span style="align-self:flex-start;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-mountain);background:rgba(196,122,58,0.1);padding:0.3rem 0.65rem;border-radius:999px;">
+                {item.tag}
+              </span>
+              <h3 style="font-family:var(--font-display);font-size:1.15rem;font-weight:650;color:var(--color-deep);margin:0;">
+                {item.name}
+              </h3>
+              <p style="font-size:0.92rem;color:var(--color-earth-soft);line-height:1.75;margin:0;" set:html={renderText(item.desc)}></p>
+              <p style="font-size:0.86rem;color:var(--color-earth-soft);line-height:1.65;margin:0;padding-top:0.75rem;border-top:1px dashed rgba(0,0,0,0.1);">
+                <span aria-hidden="true">💡</span> {item.tip}
+              </p>
+              {item.key === 'lago-atuel' && (
+                <a
+                  href={`/${locale}/lago-atuel-activities`}
+                  style="font-size:0.88rem;font-weight:600;color:var(--color-mountain);text-decoration:underline;text-underline-offset:3px;"
+                >{at.internalLinks.lake} →</a>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Outdoor Activities & Tours -->
+  <section id="activities" class="section">
+    <div class="reveal">
+      <p class="section-label">Rafting · Kayak · Hiking · 4x4</p>
+      <h2 class="section-title">{at.activitiesTitle}</h2>
+      <div class="section-divider"></div>
+      <p class="about-text" set:html={renderText(at.activitiesIntro)}></p>
+    </div>
+    <div class="reveal">
+      <div style="display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+        {
+          at.activities.map((item) => (
+            <div style="padding:1.35rem;background:#f8f9fa;border-radius:8px;border:1px solid rgba(0,0,0,0.05);">
+              <h3 style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;color:var(--color-deep);margin:0 0 0.6rem;">
+                {item.name}
+              </h3>
+              <p style="font-size:0.9rem;color:var(--color-earth-soft);line-height:1.7;margin:0 0 0.85rem;">
+                {item.desc}
+              </p>
+              <p style="font-size:0.78rem;letter-spacing:0.04em;color:var(--color-stone);margin:0;">{item.meta}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:3rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.3rem;font-weight:650;color:var(--color-deep);margin:0 0 0.75rem;">
+        {at.toursTitle}
+      </h3>
+      <p class="about-text" style="margin-bottom:1.5rem;" set:html={renderText(at.toursIntro)}></p>
+      <div style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        {
+          at.tours.map((opt) => (
+            <div style="padding:1.25rem;border-radius:8px;border-left:4px solid var(--color-gold);background:rgba(196,122,58,0.06);">
+              <p style="font-family:var(--font-display);font-size:1rem;font-weight:650;color:var(--color-deep);margin:0 0 0.5rem;">
+                {opt.name}
+              </p>
+              <p style="font-size:0.89rem;color:var(--color-earth-soft);line-height:1.7;margin:0 0 0.6rem;">
+                {opt.desc}
+              </p>
+              <p style="font-size:0.78rem;color:var(--color-stone);margin:0;">{opt.meta}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p style="margin-top:1.5rem;font-size:0.9rem;line-height:1.8;">
+        <a
+          href={`/${locale}/atuel-canyon-tours-from-san-rafael`}
+          style="color:var(--color-mountain);font-weight:600;text-decoration:underline;text-underline-offset:3px;"
+        >{at.internalLinks.tours}</a>
+        <span style="color:var(--color-stone);"> · </span>
+        <a
+          href={`/${locale}/rp173-road-trip-guide`}
+          style="color:var(--color-mountain);font-weight:600;text-decoration:underline;text-underline-offset:3px;"
+        >{at.internalLinks.route}</a>
+      </p>
+    </div>
+  </section>
+
   <!-- Heritage Protection -->
   <section id="eco" class="section" style="background:var(--color-cream);">
     <div class="reveal">
@@ -783,13 +1058,39 @@ const extra = PAGE_ENHANCEMENTS[locale];
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;">
         <div>
           <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.1);margin-bottom:1rem;">
-            <img src="https://atuelcanyonargentina.com/gallery/canon-del-atuel-10.jpg" alt="Cañón del Atuel bare rock canyon walls" style="width:100%;height:auto;display:block;" />
+            <picture>
+              <source type="image/webp" srcset={toSrcset(IMG['canon-del-atuel-10'].webp, IMG['canon-del-atuel-10'].widths)} sizes={HALF_SIZES} />
+              <img
+                src={largest(IMG['canon-del-atuel-10'].jpg, IMG['canon-del-atuel-10'].widths)}
+                srcset={toSrcset(IMG['canon-del-atuel-10'].jpg, IMG['canon-del-atuel-10'].widths)}
+                sizes={HALF_SIZES}
+                width={IMG['canon-del-atuel-10'].width}
+                height={IMG['canon-del-atuel-10'].height}
+                alt={imgAlt.rockWall}
+                loading="lazy"
+                decoding="async"
+                style="width:100%;height:auto;display:block;"
+              />
+            </picture>
           </div>
           <p style="text-align:center;font-size:0.95rem;color:var(--color-earth-soft);font-weight:600;">{t.contrast.before}</p>
         </div>
         <div>
           <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.1);margin-bottom:1rem;">
-            <img src="https://atuelcanyonargentina.com/gallery/canon-del-atuel-9.jpg" alt="Cañón del Atuel turquoise reservoir" style="width:100%;height:auto;display:block;" />
+            <picture>
+              <source type="image/webp" srcset={toSrcset(IMG['canon-del-atuel-9'].webp, IMG['canon-del-atuel-9'].widths)} sizes={HALF_SIZES} />
+              <img
+                src={largest(IMG['canon-del-atuel-9'].jpg, IMG['canon-del-atuel-9'].widths)}
+                srcset={toSrcset(IMG['canon-del-atuel-9'].jpg, IMG['canon-del-atuel-9'].widths)}
+                sizes={HALF_SIZES}
+                width={IMG['canon-del-atuel-9'].width}
+                height={IMG['canon-del-atuel-9'].height}
+                alt={imgAlt.reservoir}
+                loading="lazy"
+                decoding="async"
+                style="width:100%;height:auto;display:block;"
+              />
+            </picture>
           </div>
           <p style="text-align:center;font-size:0.95rem;color:var(--color-earth-soft);font-weight:600;">{t.contrast.after}</p>
         </div>
@@ -852,16 +1153,61 @@ const extra = PAGE_ENHANCEMENTS[locale];
           </ul>
         </div>
       </div>
-      <div class="reveal">
-        <div id="weather-widget"></div>
+    </div>
+  </section>
+
+  <!-- Practical Facilities & Supplies -->
+  <section id="facilities" class="section">
+    <div class="reveal">
+      <p class="section-label">07</p>
+      <h2 class="section-title">{guide.facilities.title}</h2>
+      <div class="section-divider"></div>
+      <p class="about-text" set:html={renderText(guide.facilities.intro)}></p>
+      <p class="neutral-notice" set:html={renderText(guide.facilities.notice)}></p>
+    </div>
+    <div class="reveal">
+      <div class="facility-grid">
+        {
+          guide.facilities.items.map((item) => (
+            <article class="facility-card">
+              <span class="facility-icon" aria-hidden="true">
+                {item.icon}
+              </span>
+              <h3 class="facility-name">{item.name}</h3>
+              <p class="facility-where">{item.where}</p>
+              <p class="facility-text">{item.text}</p>
+            </article>
+          ))
+        }
       </div>
+    </div>
+    <div class="reveal">
+      <div class="checklist">
+        <h3 class="checklist-title">{guide.facilities.tipsTitle}</h3>
+        <ul class="checklist-list">
+          {guide.facilities.tips.map((tip) => <li>{tip}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Weather -->
+  <section id="weather" class="section" style="background:linear-gradient(180deg,var(--color-cream) 0%,#eee8dd 100%);">
+    <div class="reveal">
+      <p class="section-label">08</p>
+      <h2 class="section-title">{guide.weather.title}</h2>
+      <div class="section-divider"></div>
+      <p class="about-text" set:html={renderText(guide.weather.intro)}></p>
+    </div>
+    <div class="reveal">
+      <WeatherPanel locale={locale} />
     </div>
   </section>
 
   <!-- Transportation -->
   <section id="transportation" class="section">
     <div class="reveal">
-      <p class="section-label">07</p>
+      <p class="section-label">09</p>
       <h2 class="section-title">{t.transportation.title}</h2>
       <div class="section-divider"></div>
     </div>
@@ -935,10 +1281,54 @@ const extra = PAGE_ENHANCEMENTS[locale];
     </div>
   </section>
 
+  <!-- RP173 Route (How to Get There) -->
+  <section id="rp173" class="section" style="background:rgba(0,0,0,0.02);">
+    <div class="reveal">
+      <p class="section-label">RP173 · San Rafael → El Nihuil</p>
+      <h2 class="section-title">{at.routeTitle}</h2>
+      <div class="section-divider"></div>
+      <p class="about-text" set:html={renderText(at.routeIntro)}></p>
+    </div>
+    <div class="reveal">
+      <ol style="list-style:none;padding:0;margin:0;display:grid;gap:0.9rem;">
+        {
+          at.routeStops.map((stop, i) => (
+            <li style="display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;padding:1rem 1.15rem;background:#fff;border-radius:8px;border:1px solid rgba(0,0,0,0.05);">
+              <span style="width:30px;height:30px;border-radius:50%;background:var(--color-gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:700;">
+                {i + 1}
+              </span>
+              <div>
+                <p style="margin:0 0 0.35rem;font-family:var(--font-display);font-size:1rem;font-weight:650;color:var(--color-deep);">
+                  {stop.name}
+                  <span style="margin-left:0.6rem;font-family:var(--font-body);font-size:0.78rem;font-weight:500;color:var(--color-stone);">{stop.dist}</span>
+                </p>
+                <p style="margin:0;font-size:0.89rem;color:var(--color-earth-soft);line-height:1.7;">{stop.desc}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+    <div class="reveal" style="margin-top:2.5rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:650;color:var(--color-deep);margin:0 0 1rem;">
+        {at.routeNotesTitle}
+      </h3>
+      <ul style="padding-left:1.5rem;color:var(--color-earth-soft);line-height:1.85;">
+        {at.routeNotes.map((note) => <li>{note}</li>)}
+      </ul>
+      <p style="margin-top:1.5rem;font-size:0.9rem;">
+        <a
+          href={`/${locale}/rp173-road-trip-guide`}
+          style="color:var(--color-mountain);font-weight:600;text-decoration:underline;text-underline-offset:3px;"
+        >{at.internalLinks.route} →</a>
+      </p>
+    </div>
+  </section>
+
   <!-- Gallery -->
   <section id="gallery" class="section">
     <div class="reveal">
-      <p class="section-label">08</p>
+      <p class="section-label">10</p>
       <h2 class="section-title">{t.gallery.title}</h2>
       <div class="section-divider"></div>
     </div>
@@ -960,7 +1350,25 @@ const extra = PAGE_ENHANCEMENTS[locale];
               {
                 galleryImages.map((item, i) => (
                   <div class="gallery-item" data-index={i} data-category={item.category}>
-                    <img src={item.src} alt={`Cañón del Atuel gallery image ${i + 1}`} loading="lazy" />
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcset={toSrcset(item.img.webp, item.img.widths)}
+                        sizes={GALLERY_SIZES}
+                      />
+                      <img
+                        src={largest(item.img.jpg, item.img.widths)}
+                        srcset={toSrcset(item.img.jpg, item.img.widths)}
+                        sizes={GALLERY_SIZES}
+                        width={item.img.width}
+                        height={item.img.height}
+                        alt={imgAlt.gallery(i, categoryLabels[item.category] || '')}
+                        loading={i < 4 ? 'eager' : 'lazy'}
+                        decoding="async"
+                        data-full={largest(item.img.jpg, item.img.widths)}
+                        style={`background-image:url('${item.img.lqip}');background-size:cover;background-position:center;`}
+                      />
+                    </picture>
                   </div>
                 ))
               }
@@ -984,7 +1392,7 @@ const extra = PAGE_ENHANCEMENTS[locale];
   <!-- Reviews -->
   <section id="reviews" class="section" style="background:linear-gradient(180deg,var(--color-cream) 0%,#e8e2d6 100%);">
     <div class="reveal">
-      <p class="section-label">09</p>
+      <p class="section-label">11</p>
       <h2 class="section-title">{t.reviews.title}</h2>
       <p class="section-subtitle">{t.reviews.subtitle}</p>
       <div class="section-divider"></div>
@@ -1046,7 +1454,7 @@ const extra = PAGE_ENHANCEMENTS[locale];
   <section id="faq" class="section">
     <div class="section">
       <div class="reveal">
-        <p class="section-label">10</p>
+        <p class="section-label">12</p>
         <h2 class="section-title">{t.faq.title}</h2>
         <p class="section-subtitle">{t.faq.subtitle}</p>
         <div class="section-divider"></div>
@@ -1054,7 +1462,7 @@ const extra = PAGE_ENHANCEMENTS[locale];
       <div class="reveal">
         <div class="faq-list">
           {
-            t.faq.items.map((item: any) => (
+            faqItems.map((item) => (
               <div class="faq-item">
                 <button class="faq-question" data-faq type="button">
                   <span style="color:var(--color-deep);font-weight:600;">{item.question}</span>
@@ -1078,7 +1486,7 @@ const extra = PAGE_ENHANCEMENTS[locale];
   <!-- Location -->
   <section id="location" class="section">
     <div class="reveal">
-      <p class="section-label">11</p>
+      <p class="section-label">13</p>
       <h2 class="section-title">{t.location.title}</h2>
       <div class="section-divider"></div>
     </div>
@@ -1086,14 +1494,14 @@ const extra = PAGE_ENHANCEMENTS[locale];
       <div class="location-section">
         <div class="location-map-container">
           <iframe
-            src="https://www.google.com/maps?q=Ca%C3%B1%C3%B3n%20del%20Atuel%20San%20Rafael%20Mendoza%20Argentina&output=embed"
+            src={ATTRACTION.mapsEmbedSrc}
             width="800"
             height="600"
             style="border:0;"
             allowfullscreen
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Cañón del Atuel Location Map"
+            referrerpolicy="strict-origin-when-cross-origin"
+            title={imgAlt.map}
           >
           </iframe>
         </div>
@@ -1113,7 +1521,7 @@ const extra = PAGE_ENHANCEMENTS[locale];
   <!-- Interactive Site Map -->
   <section id="sitemap" class="section">
     <div class="reveal">
-      <p class="section-label">12</p>
+      <p class="section-label">14</p>
       <h2 class="section-title">{t.siteMap.title}</h2>
       <p class="about-text" style="white-space:pre-line;margin-bottom:1rem;" set:html={renderText(t.siteMap.intro)}></p>
       <div class="sitemap-hint">{t.siteMap.hint}</div>
@@ -1155,7 +1563,7 @@ const extra = PAGE_ENHANCEMENTS[locale];
   <!-- Itinerary -->
   <section id="itinerary" class="section" style="background:rgba(0,0,0,0.02);">
     <div class="reveal">
-      <p class="section-label">13</p>
+      <p class="section-label">15</p>
       <h2 class="section-title">{t.itinerary.title}</h2>
       <p class="about-text" style="white-space:pre-line;margin-bottom:3rem;" set:html={renderText(t.itinerary.intro)}></p>
     </div>
@@ -1177,6 +1585,69 @@ const extra = PAGE_ENHANCEMENTS[locale];
     </div>
   </section>
 
+  <!-- In-depth knowledge base -->
+  <section id="deep-dive" class="section">
+    <div class="reveal">
+      <p class="section-label">16</p>
+      <h2 class="section-title">{guide.deepDive.title}</h2>
+      <div class="section-divider"></div>
+      <p class="about-text" set:html={renderText(guide.deepDive.intro)}></p>
+    </div>
+    <div class="deep-blocks">
+      {
+        guide.deepDive.blocks.map((block) => (
+          <article class="reveal deep-block">
+            <h3 class="deep-title">
+              <span class="deep-icon" aria-hidden="true">
+                {block.icon}
+              </span>
+              {block.title}
+            </h3>
+            {block.paragraphs.map((p) => (
+              <p class="deep-text" set:html={renderText(p)} />
+            ))}
+            {block.facts && (
+              <dl class="deep-facts">
+                {block.facts.map((f) => (
+                  <div class="deep-fact">
+                    <dt>{f.label}</dt>
+                    <dd>{f.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Sources & Official Links (E-E-A-T) -->
+  <section id="sources" class="section" style="background:rgba(0,0,0,0.02);">
+    <div class="reveal">
+      <p class="section-label">17</p>
+      <h2 class="section-title">{ec.sourcesTitle}</h2>
+      <div class="section-divider"></div>
+      <p class="about-text" set:html={renderText(ec.sourcesIntro)}></p>
+    </div>
+    <div class="reveal">
+      <div class="sources-grid">
+        {
+          AUTHORITY_SOURCES.map((s) => (
+            <a href={s.url} target="_blank" rel="noopener noreferrer" class="source-card">
+              <h3 class="source-name">{s.name}</h3>
+              <p class="source-desc">{s.desc[locale]}</p>
+              <span class="source-url">{s.url}</span>
+            </a>
+          ))
+        }
+      </div>
+      <p class="sources-official" set:html={renderText(
+        `${ec.officialLabel}: <a href="${ATTRACTION.govtTourismUrl}" target="_blank" rel="noopener noreferrer">${ATTRACTION.govtTourismUrl}</a>`
+      )}></p>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-links">
@@ -1194,6 +1665,13 @@ const extra = PAGE_ENHANCEMENTS[locale];
         <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" class="google-maps-btn">Google Maps →</a>
       </div>
     </div>
+    <div class="footer-nap">
+      <h3 class="footer-nap-title">{ec.napTitle}</h3>
+      <p>{ec.napName}</p>
+      <p>{ec.napAddress}</p>
+      <p>{ec.napPhone}</p>
+      <p>{ec.napHours}</p>
+    </div>
     <div class="footer-legal" style="max-width:1100px;margin:0 auto;padding:1rem 2rem 0;text-align:center;">
       <a href="/privacy" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.8rem;margin-right:1.5rem;">Privacy Policy</a>
       <a href="/terms" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.8rem;margin-right:1.5rem;">Terms of Service</a>
@@ -1201,6 +1679,9 @@ const extra = PAGE_ENHANCEMENTS[locale];
     </div>
     <p class="footer-text" style="margin-top:2rem;font-size:0.9rem;font-weight:600;color:var(--color-gold);">{t.footer.callToAction}</p>
     <p class="footer-text" style="margin-top:1rem;white-space:pre-line;">{t.footer.text}</p>
+    <p class="footer-image-credits">
+      <strong>{ec.imageCreditsTitle}:</strong> {ec.imageCredits}
+    </p>
   </footer>
 
   <!-- Lightbox -->

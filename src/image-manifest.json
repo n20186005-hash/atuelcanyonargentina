@@ -1,0 +1,610 @@
+{
+  "generatedAt": "2026-09-10T02:42:05.995Z",
+  "widths": [
+    480,
+    960,
+    1600
+  ],
+  "images": {
+    "canon-del-atuel-1": {
+      "base": "canon-del-atuel-1",
+      "width": 4000,
+      "height": 2252,
+      "aspect": 1.7762,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-1-480.jpg",
+        "960": "/img/canon-del-atuel-1-960.jpg",
+        "1600": "/img/canon-del-atuel-1-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-1-480.webp",
+        "960": "/img/canon-del-atuel-1-960.webp",
+        "1600": "/img/canon-del-atuel-1-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAADwAwCdASoYAA0APxl0slCspqSisAgBkCMJaACdABosfc2/nucxlcAAAMqh4PJpnPwNKj6nBYnufWoSa1t5ZkubVWcALXtx4zoIor1x2b9xPU+kKlyOCn1gwhFMqddaBC4CNmEZHkqbo6RV4AA="
+    },
+    "canon-del-atuel-2": {
+      "base": "canon-del-atuel-2",
+      "width": 3024,
+      "height": 4032,
+      "aspect": 0.75,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-2-480.jpg",
+        "960": "/img/canon-del-atuel-2-960.jpg",
+        "1600": "/img/canon-del-atuel-2-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-2-480.webp",
+        "960": "/img/canon-del-atuel-2-960.webp",
+        "1600": "/img/canon-del-atuel-2-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAABwBACdASoYACAAPxlysVGspiSisBgMAZAjCWwAnQBgjp/G4EUqbm6A258y+AD+tLc04EeUPC5/2u8sgHif+zV7ld/6r/H37YCrgaCR/8pX/xu/8Eal25Di1+jmr/TRK+F7EIeIjvzDn9rtjSeU9K8mUE0z+Gps/nsnx4FRLY/yBCbeY2yPdQQo24FAS7/ETrBE2XAaqkahr3YYWY0AAA=="
+    },
+    "canon-del-atuel-3": {
+      "base": "canon-del-atuel-3",
+      "width": 3024,
+      "height": 4032,
+      "aspect": 0.75,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-3-480.jpg",
+        "960": "/img/canon-del-atuel-3-960.jpg",
+        "1600": "/img/canon-del-atuel-3-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-3-480.webp",
+        "960": "/img/canon-del-atuel-3-960.webp",
+        "1600": "/img/canon-del-atuel-3-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAADwBACdASoYACAAPxmAtVUsp6SjKAqpkCMJYwDBzDTvxvFiTujOoRaiTuHM+r+wjkAA/uEZwrvPM8EXOqzkxwRuavg1Byxymmd7lSd0+EGLcg9GDjv3tdu5QG8VIoz5KRZ6cUQsPA0jxJK1Q0MEtjeFiFy17zInUerVqiMnpJkwZduW2cXs6MEE6SRieUAA"
+    },
+    "canon-del-atuel-4": {
+      "base": "canon-del-atuel-4",
+      "width": 6000,
+      "height": 4000,
+      "aspect": 1.5,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-4-480.jpg",
+        "960": "/img/canon-del-atuel-4-960.jpg",
+        "1600": "/img/canon-del-atuel-4-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-4-480.webp",
+        "960": "/img/canon-del-atuel-4-960.webp",
+        "1600": "/img/canon-del-atuel-4-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAABQAwCdASoYABAAPxl6tlIsp6UisAgBkCMJZQAAB+JNvDMeSAD5q3oZCizpadOMtVL4SFIFqNkwh/NaqAuxJx5Lz8Xghi2cQAA="
+    },
+    "canon-del-atuel-5": {
+      "base": "canon-del-atuel-5",
+      "width": 3024,
+      "height": 4032,
+      "aspect": 0.75,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-5-480.jpg",
+        "960": "/img/canon-del-atuel-5-960.jpg",
+        "1600": "/img/canon-del-atuel-5-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-5-480.webp",
+        "960": "/img/canon-del-atuel-5-960.webp",
+        "1600": "/img/canon-del-atuel-5-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAACwBQCdASoYACAAPxmAslUsqCQjKAqpkCMJYwCxH4Iv/k5aKiAD61CQA0Hp2dEZ7b1IjK5GkEAA/q8FtanCl5ziY9JFXmONIuHN6NIFDAPkjC5PSoocPMefeVU395aeH4MINAgE6uzqh7GbV1XWH70BRetxSd3uWIHR+E/4mui1B/A77GsTXb9m9uydfcpE2f4HyrsjQrNNeyN8ogL1fgt8xBHZBIi8AAA="
+    },
+    "canon-del-atuel-6": {
+      "base": "canon-del-atuel-6",
+      "width": 2268,
+      "height": 4032,
+      "aspect": 0.5625,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-6-480.jpg",
+        "960": "/img/canon-del-atuel-6-960.jpg",
+        "1600": "/img/canon-del-atuel-6-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-6-480.webp",
+        "960": "/img/canon-del-atuel-6-960.webp",
+        "1600": "/img/canon-del-atuel-6-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRvoAAABXRUJQVlA4IO4AAABQBwCdASoYACsAPxl8t1Qsp6UjJWzJkCMJaAC7Gvjt/8CqDQR28eZUmdD/4qYS1TxpaWlt9Bn/iC2tGlkXIf/YS+IAAOx3nUGCvjcDWxqBFX9zLn9C6gbRv3LbeP8QmdODGD/+RmCh+12pJB0MwY6FWjjnfmyNRfwZyBnkavRnbZxqwR21CyeH4ZvGyi5HhaEe1dEyW0BLYZVSyJapzGSJUTJMz9rLfHT/CNOh+mghmq6KQW/5QCpGee3XXxbvKY7kmNBm4WC/lUDyZxv5K6ZEoQjCUCRRIOEVSUkLZX3QDOjkLKnudOQeCsckSYAA"
+    },
+    "canon-del-atuel-7": {
+      "base": "canon-del-atuel-7",
+      "width": 4080,
+      "height": 3072,
+      "aspect": 1.3281,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-7-480.jpg",
+        "960": "/img/canon-del-atuel-7-960.jpg",
+        "1600": "/img/canon-del-atuel-7-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-7-480.webp",
+        "960": "/img/canon-del-atuel-7-960.webp",
+        "1600": "/img/canon-del-atuel-7-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAADQBACdASoYABIAPxl+s1KsqKSisBgIAZAjCWQAnQAQ6H1nzYiNtB/49du5FbBqAAD8j5ML5pWcakIYKkjWbbxQi9aZCn27SpI8tg8dx4yHwmysdBSe66iZmtJ1sQh5VfsIePMzy3Zq/Gmvx03XSs1aDCUjGiqdcPi3dN8n9eGxoQo/O0wdZAAA"
+    },
+    "canon-del-atuel-8": {
+      "base": "canon-del-atuel-8",
+      "width": 3200,
+      "height": 1440,
+      "aspect": 2.2222,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-8-480.jpg",
+        "960": "/img/canon-del-atuel-8-960.jpg",
+        "1600": "/img/canon-del-atuel-8-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-8-480.webp",
+        "960": "/img/canon-del-atuel-8-960.webp",
+        "1600": "/img/canon-del-atuel-8-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAACwAwCdASoYAAsAPxl4tlGspyUisAgBkCMJZQAAW40KjvCJWqPxMAD+o2claifoCTEI4CxZ5+3uaQOMleL8DRoB39eR02l3EIQLkZvIbShQH1lvzbi43stcAAA="
+    },
+    "canon-del-atuel-9": {
+      "base": "canon-del-atuel-9",
+      "width": 2268,
+      "height": 4032,
+      "aspect": 0.5625,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-9-480.jpg",
+        "960": "/img/canon-del-atuel-9-960.jpg",
+        "1600": "/img/canon-del-atuel-9-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-9-480.webp",
+        "960": "/img/canon-del-atuel-9-960.webp",
+        "1600": "/img/canon-del-atuel-9-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRhoBAABXRUJQVlA4IA4BAADwBgCdASoYACsAPxmAt1Ysp6UjpWsxkCMJbAC1G4UJGEALW2LwvpbYyjLXkiBakyDKc7C5AK3LkGwQXs6ele8QAP7oyLHdkpMhagCzC2j2LES6/9wcQZv+C/T3/1t2RYVcW1Oku+I6RwRwLc5j5tZuBVMXm5xlM/CwWOq0f5M0csf6SDtv0bAcr5cnL6XdCd8Hq5vtx8bVevmZMGT8tH0OzPZ54KbZolji16TWEbv8k6MgTs5XttA8DOl3sywQSaXabBzIEeBhvUStNNqvxXZOYaT2yfI+V7P5c5FZQetpHqIP7nTN1t/Qqhk0wACDfBf9wBd2Na6+aw/ZcaY4uhENFYG8IjBBCCqAFlgAAAA="
+    },
+    "canon-del-atuel-10": {
+      "base": "canon-del-atuel-10",
+      "width": 5712,
+      "height": 4284,
+      "aspect": 1.3333,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-10-480.jpg",
+        "960": "/img/canon-del-atuel-10-960.jpg",
+        "1600": "/img/canon-del-atuel-10-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-10-480.webp",
+        "960": "/img/canon-del-atuel-10-960.webp",
+        "1600": "/img/canon-del-atuel-10-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAADQBACdASoYABIAPxl+tlSsqCSjKAqpkCMJQBOmWYA1MANR6ZPvL7jIIf8mlL4XAAD+w0IPP2TL4Pv4h3oA3+SLrDx4d7EsJEOO8wPol89N6U//rC0MYCN4ZQ0fXAiUMGFmvmaFBacuUIyEquuX9BYksGLUwPfXQ+joRAkTBAJ5rIAA"
+    },
+    "canon-del-atuel-11": {
+      "base": "canon-del-atuel-11",
+      "width": 1536,
+      "height": 1024,
+      "aspect": 1.5,
+      "widths": [
+        480,
+        960,
+        1536
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-11-480.jpg",
+        "960": "/img/canon-del-atuel-11-960.jpg",
+        "1536": "/img/canon-del-atuel-11-1536.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-11-480.webp",
+        "960": "/img/canon-del-atuel-11-960.webp",
+        "1536": "/img/canon-del-atuel-11-1536.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAAAQBQCdASoYABAAPxl2slEspySisAgBkCMJbACdMoMYOG7b/4Dxy/oM7DBo+iotsiIAAN4xoA6m2uCD+B+ZPR6Inw6DtI3lKRNCVu6p0zTvtnmqxqMuXNHW5ugrxC8UyUjdUXDBqD6CoMgdSkkb1UEP/enfrZpMPAgZxn6ZLL6MGhyXJwAAAA=="
+    },
+    "canon-del-atuel-12": {
+      "base": "canon-del-atuel-12",
+      "width": 4284,
+      "height": 5712,
+      "aspect": 0.75,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-12-480.jpg",
+        "960": "/img/canon-del-atuel-12-960.jpg",
+        "1600": "/img/canon-del-atuel-12-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-12-480.webp",
+        "960": "/img/canon-del-atuel-12-960.webp",
+        "1600": "/img/canon-del-atuel-12-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAAAwBQCdASoYACAAPxl4sVEspySisAgBkCMJZwC+wCHZ4YDPgCsqs4Fecdvg9sLL1JkdAAD+jD3zZGu68n90OvUjNuKBeweCi74/6VUfvhO12TlFXvUroCbrHSTTHHmiebpuZHB4qAW8T3nnidHoekSibpdKZ1etgpoHvyL5OnVf5bh9sRBR/moCvgE3uVmaII0uX+CqQmoaqYJpiAAAAA=="
+    },
+    "canon-del-atuel-13": {
+      "base": "canon-del-atuel-13",
+      "width": 5712,
+      "height": 4284,
+      "aspect": 1.3333,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-13-480.jpg",
+        "960": "/img/canon-del-atuel-13-960.jpg",
+        "1600": "/img/canon-del-atuel-13-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-13-480.webp",
+        "960": "/img/canon-del-atuel-13-960.webp",
+        "1600": "/img/canon-del-atuel-13-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAADQBACdASoYABIAPxmAtFSsp6SjKAqpkCMJZwDGQAYTbRj7lfcmj0yIVotCG2AggAD+wDbqHIjUUCI9sQvDQj8SeM1t04fNQXIz58wkDjHUQKWmG6hGNge/2gHh90ZcR9PxBxEcA4wTCwV/h2yW91JwdywcEKXDsqUJEIw0n+Q1eZHA6g3ObMle580UvP/Kt8+oTav0M4E7UIGOZbyo4gAAAAA="
+    },
+    "canon-del-atuel-14": {
+      "base": "canon-del-atuel-14",
+      "width": 2268,
+      "height": 4032,
+      "aspect": 0.5625,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-14-480.jpg",
+        "960": "/img/canon-del-atuel-14-960.jpg",
+        "1600": "/img/canon-del-atuel-14-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-14-480.webp",
+        "960": "/img/canon-del-atuel-14-960.webp",
+        "1600": "/img/canon-del-atuel-14-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRkoBAABXRUJQVlA4ID4BAADwBwCdASoYACsAPxl8t1Msp6WiqqoBkCMJaAC+ZX/Z/8vKWQb7DIYydQWbMi1zhHBy2qsdgg03JZAbgsnVuircpJCyO2WemAAA/nOr+zjh6ahsBTPlWuiLCkDZLsn1RrvpoHXRwI/ytFJiTjFhOvXqhAlvkNET705BCOGX2pah1laY83dQE5jctnrsKnnTLDLqBj7O7W6YBFUTDk1BOcSiv8wEkz+Zhg9GSttwBDOHx7fT/Ak6FVxvIIVB6arHP46Df0zkzLMdKy1uihpfGF0EBH5CsyaUrm6UdFwTeVJ3XNVGRRL1p9+id3AR3V2rkL42Fb+YKCoLmmYFF00FWka9kfYBH5V44jaCg4ISt+a1UftBRA58a9v6CbtWzzxS9nOJOZyRF7uuONm6gU0foKSE+sMeA/9SM01xyKOwAAA="
+    },
+    "canon-del-atuel-15": {
+      "base": "canon-del-atuel-15",
+      "width": 3072,
+      "height": 4080,
+      "aspect": 0.7529,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-15-480.jpg",
+        "960": "/img/canon-del-atuel-15-960.jpg",
+        "1600": "/img/canon-del-atuel-15-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-15-480.webp",
+        "960": "/img/canon-del-atuel-15-960.webp",
+        "1600": "/img/canon-del-atuel-15-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRugAAABXRUJQVlA4INwAAAAwBgCdASoYACAAPxl0tVOspiSisBgIAZAjCWwAtt0AAKu7tRDFQy/2DNgWjZiyffg5pYFcQh4zjSbgAP6xjV23vwil7nve15WdyS5hIi7uHu+RP5+oK9RpT+Oe1GIQVhKCBdlRgHXYiD1AN9DuelAgo73FngnFFnI5XltsSZHPQnV/CxVv6OIMkLZ1lFDMtocYe8BjLYEHAGnYsk740iAwj+4SbWvn5QBJt+c8E9AeDiBvecONLjppOIyq/5AN34RCya28aTfW5H2tCu1vFgCc9o9PgmwCAIAeGYAA"
+    },
+    "canon-del-atuel-16": {
+      "base": "canon-del-atuel-16",
+      "width": 4080,
+      "height": 1836,
+      "aspect": 2.2222,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "jpg": {
+        "480": "/img/canon-del-atuel-16-480.jpg",
+        "960": "/img/canon-del-atuel-16-960.jpg",
+        "1600": "/img/canon-del-atuel-16-1600.jpg"
+      },
+      "webp": {
+        "480": "/img/canon-del-atuel-16-480.webp",
+        "960": "/img/canon-del-atuel-16-960.webp",
+        "1600": "/img/canon-del-atuel-16-1600.webp"
+      },
+      "lqip": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADQAwCdASoYAAsAPxl2s1EspySisAgBkCMJYwC06CFm+fbe7+2ZgAAA8mLu3R4gFiTVTPUBFDYG4bkyT4CZ5i+c7DQ2cWUKH19QLqOKepFQqU3POgE8mBikQecAAA=="
+    }
+  },
+  "renditions": [
+    {
+      "base": "canon-del-atuel-1",
+      "width": 480,
+      "height": 270
+    },
+    {
+      "base": "canon-del-atuel-1",
+      "width": 960,
+      "height": 540
+    },
+    {
+      "base": "canon-del-atuel-1",
+      "width": 1600,
+      "height": 901
+    },
+    {
+      "base": "canon-del-atuel-2",
+      "width": 480,
+      "height": 640
+    },
+    {
+      "base": "canon-del-atuel-2",
+      "width": 960,
+      "height": 1280
+    },
+    {
+      "base": "canon-del-atuel-2",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "base": "canon-del-atuel-3",
+      "width": 480,
+      "height": 640
+    },
+    {
+      "base": "canon-del-atuel-3",
+      "width": 960,
+      "height": 1280
+    },
+    {
+      "base": "canon-del-atuel-3",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "base": "canon-del-atuel-4",
+      "width": 480,
+      "height": 320
+    },
+    {
+      "base": "canon-del-atuel-4",
+      "width": 960,
+      "height": 640
+    },
+    {
+      "base": "canon-del-atuel-4",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "base": "canon-del-atuel-5",
+      "width": 480,
+      "height": 640
+    },
+    {
+      "base": "canon-del-atuel-5",
+      "width": 960,
+      "height": 1280
+    },
+    {
+      "base": "canon-del-atuel-5",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "base": "canon-del-atuel-6",
+      "width": 480,
+      "height": 853
+    },
+    {
+      "base": "canon-del-atuel-6",
+      "width": 960,
+      "height": 1707
+    },
+    {
+      "base": "canon-del-atuel-6",
+      "width": 1600,
+      "height": 2844
+    },
+    {
+      "base": "canon-del-atuel-7",
+      "width": 480,
+      "height": 361
+    },
+    {
+      "base": "canon-del-atuel-7",
+      "width": 960,
+      "height": 723
+    },
+    {
+      "base": "canon-del-atuel-7",
+      "width": 1600,
+      "height": 1205
+    },
+    {
+      "base": "canon-del-atuel-8",
+      "width": 480,
+      "height": 216
+    },
+    {
+      "base": "canon-del-atuel-8",
+      "width": 960,
+      "height": 432
+    },
+    {
+      "base": "canon-del-atuel-8",
+      "width": 1600,
+      "height": 720
+    },
+    {
+      "base": "canon-del-atuel-9",
+      "width": 480,
+      "height": 853
+    },
+    {
+      "base": "canon-del-atuel-9",
+      "width": 960,
+      "height": 1707
+    },
+    {
+      "base": "canon-del-atuel-9",
+      "width": 1600,
+      "height": 2844
+    },
+    {
+      "base": "canon-del-atuel-10",
+      "width": 480,
+      "height": 360
+    },
+    {
+      "base": "canon-del-atuel-10",
+      "width": 960,
+      "height": 720
+    },
+    {
+      "base": "canon-del-atuel-10",
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "base": "canon-del-atuel-11",
+      "width": 480,
+      "height": 320
+    },
+    {
+      "base": "canon-del-atuel-11",
+      "width": 960,
+      "height": 640
+    },
+    {
+      "base": "canon-del-atuel-11",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "base": "canon-del-atuel-12",
+      "width": 480,
+      "height": 640
+    },
+    {
+      "base": "canon-del-atuel-12",
+      "width": 960,
+      "height": 1280
+    },
+    {
+      "base": "canon-del-atuel-12",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "base": "canon-del-atuel-13",
+      "width": 480,
+      "height": 360
+    },
+    {
+      "base": "canon-del-atuel-13",
+      "width": 960,
+      "height": 720
+    },
+    {
+      "base": "canon-del-atuel-13",
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "base": "canon-del-atuel-14",
+      "width": 480,
+      "height": 853
+    },
+    {
+      "base": "canon-del-atuel-14",
+      "width": 960,
+      "height": 1707
+    },
+    {
+      "base": "canon-del-atuel-14",
+      "width": 1600,
+      "height": 2844
+    },
+    {
+      "base": "canon-del-atuel-15",
+      "width": 480,
+      "height": 638
+    },
+    {
+      "base": "canon-del-atuel-15",
+      "width": 960,
+      "height": 1275
+    },
+    {
+      "base": "canon-del-atuel-15",
+      "width": 1600,
+      "height": 2125
+    },
+    {
+      "base": "canon-del-atuel-16",
+      "width": 480,
+      "height": 216
+    },
+    {
+      "base": "canon-del-atuel-16",
+      "width": 960,
+      "height": 432
+    },
+    {
+      "base": "canon-del-atuel-16",
+      "width": 1600,
+      "height": 720
+    }
+  ],
+  "og": {
+    "path": "/og-image.jpg",
+    "width": 1200,
+    "height": 630,
+    "bytes": 188031
+  }
+}

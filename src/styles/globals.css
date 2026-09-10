@@ -169,10 +169,20 @@ body {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url('https://atuelcanyonargentina.com/gallery/canon-del-atuel-16.jpg');
+  background: url('/img/canon-del-atuel-16-1600.jpg');
   background-size: cover;
   background-position: center;
   z-index: 0;
+}
+
+/* 优先使用体积更小的 WebP */
+@supports (background-image: image-set(url('/img/canon-del-atuel-16-1600.webp') type('image/webp'))) {
+  .hero-bg {
+    background-image: image-set(
+      url('/img/canon-del-atuel-16-1600.webp') type('image/webp'),
+      url('/img/canon-del-atuel-16-1600.jpg') type('image/jpeg')
+    );
+  }
 }
 
 .hero-bg::after {
