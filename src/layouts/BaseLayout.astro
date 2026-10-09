@@ -25,6 +25,8 @@ interface Props {
   includeSchema?: boolean;
   /** 首屏 LCP 图片（WebP）预加载 */
   preloadImage?: string;
+  /** 法律页等辅助页设为 true，输出 noindex, follow */
+  noindex?: boolean;
 }
 
 const {
@@ -38,16 +40,17 @@ const {
   schemaExtra,
   includeSchema = true,
   preloadImage,
+  noindex = false,
 } = Astro.props as Props;
 const cfg = localeConfig[locale] || localeConfig.es;
 const site = Astro.site ? Astro.site.href.replace(/\/$/, '') : 'https://atuelcanyonargentina.com';
 const suffix = slug ? `/${slug}` : '';
-const canonical = pathOverride ? `${site}${pathOverride}` : `${site}/${locale}${suffix}`;
+const canonical = pathOverride ? `${site}${pathOverride}` : `${site}/${locale}${suffix}/`;
 const alternates: Record<string, string> = {
-  es: `${site}/es${suffix}`,
-  en: `${site}/en${suffix}`,
-  zh: `${site}/zh${suffix}`,
-  it: `${site}/it${suffix}`,
+  es: `${site}/es${suffix}/`,
+  en: `${site}/en${suffix}/`,
+  zh: `${site}/zh${suffix}/`,
+  it: `${site}/it${suffix}/`,
 };
 const seo = getSeo(locale);
 const ogImage = `${site}/og-image.jpg`;
@@ -104,7 +107,7 @@ const metaOgDescription = ogDescription || seo.ogDescription;
     <meta name="twitter:description" content={metaOgDescription} />
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf8f5" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121212" />
 

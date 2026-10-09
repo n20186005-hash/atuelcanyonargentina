@@ -29,11 +29,11 @@ export const FAQ_BY_LOCALE: Record<string, Faq[]> = {
     },
     {
       q: '游览阿图埃尔峡谷需要多长时间？',
-      a: '仅沿 RP173 观光、停靠主要观景台约需 4–5 小时；若结合漂流、滑索或圣拉斐尔酒庄，建议预留一整天。峡谷公路全天可通行，水上项目一般 09:00–18:00 运营。',
+      a: '仅沿 RP173 观光、停靠主要观景台约需 4–5 小时；若结合漂流、滑索或圣拉斐尔酒庄，建议预留一整天。峡谷公路（RP173）为公共省道，通常全天可通行，但大雨或落石后部分路段可能临时封闭——出发前请查询圣拉斐尔旅游局的实时路况。水上项目一般 09:00–18:00 运营。',
     },
     {
       q: '峡谷里那些碧蓝的水库是天然的吗？',
-      a: '阿图埃尔河上的五座水库（Agua del Toro、Los Reyunos、Valle Grande、Tierras Blancas、El Nihuil）均为 20 世纪中叶起修建的人工水利设施，用于发电与灌溉。它们把狂野的河流塑造成今日碧蓝相连的湖泊景观，是自然与工程的共同作品。',
+      a: '阿图埃尔河自身的水库——Valle Grande、Tierras Blancas、Aisol 与 El Nihuil——均为 20 世纪中叶起修建的人工水利设施，用于发电与灌溉。（常一并被提及的 Agua del Toro 与 Los Reyunos 属于另一水系 Río Diamante。）它们把狂野的河流塑造成今日碧蓝相连的湖泊景观，是自然与工程的共同作品。',
     },
     {
       q: '阿图埃尔峡谷适合带小孩或家庭出游吗？',
@@ -75,11 +75,11 @@ export const FAQ_BY_LOCALE: Record<string, Faq[]> = {
     },
     {
       q: 'How long does a visit take?',
-      a: 'Sightseeing along RP173 with the main viewpoints takes about 4–5 hours; with rafting, zip-line or San Rafael wineries, plan a full day. The canyon road is open all day; water activities generally run 09:00–18:00.',
+      a: 'Sightseeing along RP173 with the main viewpoints takes about 4–5 hours; with rafting, zip-line or San Rafael wineries, plan a full day. The canyon road (RP173) is a public provincial road and generally open, but sections can close temporarily after heavy rain or rockfall — check San Rafael Turismo for current road status before you travel. Water activities generally run 09:00–18:00.',
     },
     {
       q: 'Are the turquoise reservoirs natural?',
-      a: 'The five Atuel reservoirs (Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas, El Nihuil) are artificial hydraulic works built from the mid-20th century for power and irrigation. They reshaped the wild river into today’s linked turquoise lakes — a joint work of nature and engineering.',
+      a: 'The Atuel’s own reservoirs — Valle Grande, Tierras Blancas, Aisol and El Nihuil — are artificial hydraulic works built from the mid-20th century for power and irrigation. (Agua del Toro and Los Reyunos, often mentioned nearby, belong to the separate Río Diamante basin.) Together they reshaped the wild river into today’s linked turquoise lakes — a joint work of nature and engineering.',
     },
     {
       q: 'Is Cañón del Atuel suitable for families with children?',
@@ -121,11 +121,11 @@ export const FAQ_BY_LOCALE: Record<string, Faq[]> = {
     },
     {
       q: '¿Cuánto dura la visita?',
-      a: 'El avistamiento por RP173 con los miradores principales lleva unas 4–5 horas; con rafting, canopy o bodegas de San Rafael, planeá un día completo. La ruta del cañón está abierta todo el día; las actividades acuáticas suelen ir de 09:00 a 18:00.',
+      a: 'El avistamiento por RP173 con los miradores principales lleva unas 4–5 horas; con rafting, canopy o bodegas de San Rafael, planeá un día completo. La ruta del cañón (RP173) es una ruta provincial pública y generalmente abierta, pero tramos pueden cerrarse temporalmente tras lluvias fuertes o derrumbes: consultá a Turismo de San Rafael el estado actual de la ruta antes de salir. Las actividades acuáticas suelen ir de 09:00 a 18:00.',
     },
     {
       q: '¿Los embalses turquesa son naturales?',
-      a: 'Los cinco embalses del Atuel (Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas, El Nihuil) son obras hidráulicas artificiales construidas desde mediados del siglo XX para energía y riego. Remodelaron el río salvaje en los lagos turquesa de hoy: una obra conjunta de naturaleza e ingeniería.',
+      a: 'Los embalses propios del Atuel — Valle Grande, Tierras Blancas, Aisol y El Nihuil — son obras hidráulicas artificiales construidas desde mediados del siglo XX para energía y riego. (Agua del Toro y Los Reyunos, que suelen mencionarse por cercanía, pertenecen a la cuenca separada del Río Diamante.) Remodelaron el río salvaje en los lagos turquesa de hoy: una obra conjunta de naturaleza e ingeniería.',
     },
     {
       q: '¿Es apto para familias con niños?',
@@ -167,11 +167,11 @@ export const FAQ_BY_LOCALE: Record<string, Faq[]> = {
     },
     {
       q: 'Quanto dura la visita?',
-      a: 'L’avvistamento su RP173 con i miradores principali richiede circa 4–5 ore; con rafting, zip-line o cantine di San Rafael, prevedi una giornata intera. La strada del canyon è aperta tutto il giorno; le attività acquatiche di solito vanno dalle 09:00 alle 18:00.',
+      a: 'L’avvistamento su RP173 con i miradores principali richiede circa 4–5 ore; con rafting, zip-line o cantine di San Rafael, prevedi una giornata intera. La strada del canyon (RP173) è una strada provinciale pubblica e generalmente aperta, ma alcuni tratti possono chiudersi temporaneamente dopo forti piogge o frane: controlla lo stato aggiornato della strada da Turismo di San Rafael prima di partire. Le attività acquatiche di solito vanno dalle 09:00 alle 18:00.',
     },
     {
       q: 'Gli invasi turchesi sono naturali?',
-      a: 'I cinque invasi dell’Atuel (Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas, El Nihuil) sono opere idrauliche artificiali costruite dalla metà del XX secolo per energia e irrigazione. Hanno rimodellato il fiume selvaggio nei laghi turchesi di oggi: un’opera congiunta di natura e ingegneria.',
+      a: 'Gli invasi propri dell’Atuel — Valle Grande, Tierras Blancas, Aisol ed El Nihuil — sono opere idrauliche artificiali costruite dalla metà del XX secolo per energia e irrigazione. (Agua del Toro e Los Reyunos, spesso citati per vicinanza, appartengono alla separata conca del Río Diamante.) Hanno rimodellato il fiume selvaggio nei laghi turchesi di oggi: un’opera congiunta di natura e ingegneria.',
     },
     {
       q: 'È adatto alle famiglie con bambini?',
@@ -284,10 +284,10 @@ const AMENITY_BY_LOCALE: Record<string, { name: string; value: boolean }[]> = {
 };
 
 const DESC_BY_LOCALE: Record<string, string> = {
-  zh: '阿根廷门多萨省圣拉斐尔的阿图埃尔峡谷（Cañón del Atuel）：赭红岩壁与五座碧蓝水库交织的水利峡谷，适合漂流、RP173 自驾与观景。',
-  en: 'Cañón del Atuel in San Rafael, Mendoza, Argentina. A hydraulic canyon of ochre rock and five turquoise reservoirs, ideal for rafting, the RP173 scenic drive and viewpoints.',
-  es: 'Cañón del Atuel en San Rafael, Mendoza, Argentina. Cañón hidráulico de roca ocre y cinco embalses turquesa, ideal para rafting, la ruta RP173 y miradores.',
-  it: 'Cañón del Atuel a San Rafael, Mendoza, Argentina. Cañón idraulico di roccia ocra e cinque invasi turchesi, ideale per rafting, strada RP173 e miradores.',
+  zh: '阿根廷门多萨省圣拉斐尔的阿图埃尔峡谷（Cañón del Atuel）：赭红岩壁与碧蓝水库交织的水利峡谷，适合漂流、RP173 自驾与观景。',
+  en: 'Cañón del Atuel in San Rafael, Mendoza, Argentina. A hydraulic canyon of ochre rock and turquoise reservoirs, ideal for rafting, the RP173 scenic drive and viewpoints.',
+  es: 'Cañón del Atuel en San Rafael, Mendoza, Argentina. Cañón hidráulico de roca ocre y embalses turquesa, ideal para rafting, la ruta RP173 y miradores.',
+  it: 'Cañón del Atuel a San Rafael, Mendoza, Argentina. Cañón idraulico di roccia ocra e invasi turchesi, ideale per rafting, strada RP173 e miradores.',
 };
 
 export function generateSchema(locale: string, baseUrl: string) {
@@ -368,7 +368,7 @@ export function generateSchema(locale: string, baseUrl: string) {
           { '@type': 'PropertyValue', name: 'geoCoordinate', value: 'San Rafael, Mendoza, Argentina' },
           { '@type': 'PropertyValue', name: 'altitude', value: 'approx. 750 m' },
           { '@type': 'PropertyValue', name: 'type', value: 'Cañón hidráulico / Embalses en cascata' },
-          { '@type': 'PropertyValue', name: 'reservoirs', value: '5 embalses (Agua del Toro–El Nihuil)' },
+          { '@type': 'PropertyValue', name: 'reservoirs', value: '4 embalses del Atuel (Valle Grande–El Nihuil)' },
           { '@type': 'PropertyValue', name: 'scenicRoad', value: 'Ruta Provincial RP173' },
         ],
         sameAs: [ATTRACTION.mapsShareUrl, ...AUTHORITY_SOURCES.map((s) => s.url).filter((u) => u !== ATTRACTION.mapsShareUrl)],

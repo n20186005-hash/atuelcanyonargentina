@@ -130,15 +130,6 @@ const MARKER_POS: Record<string, { top: string; left: string }> = {
 
 const LANG_LABELS: Record<Locale, string> = { zh: '中文', en: 'EN', es: 'ES', it: 'IT' };
 
-const GOOGLE_REVIEWS = [
-  { name: 'Mariana L.', avatar: 'ML', rating: 5, date: '2025-06-18', text: 'El Cañón del Atuel es impresionante. La ruta RP173 pegada al acantilado es de película, y los embalses turquesa en medio del desierto rojo no tienen comparación. Llegamos en auto desde San Rafael y cada mirador valía la pena.' },
-  { name: 'James P.', avatar: 'JP', rating: 5, date: '2025-05-22', text: 'Una de las excursiones más bellas de Mendoza. Hicimos rafting en el Atuel y luego recorrimos los embalses. La combinación de aventura y paisaje es perfecta. Llevar mucha agua y protector solar, el sol pega fuerte.' },
-{ name: 'Giulia R.', avatar: 'GR', rating: 5, date: '2025-04-30', text: 'Canyon magnifico e poco turistico. Il contrasto tra roccia ocra e laghi turchesa è stupendo. Consiglio di guidare con calma la RP173 e fermarsi in tutti i miradores. Indimenticabile!' },
-  { name: '陈静', avatar: '陈', rating: 5, date: '2025-03-15', text: '阿图埃尔峡谷太震撼了！赭红色岩壁和碧蓝水库的对比像油画一样。RP173 公路自驾很刺激，沿途观景台很多。建议清晨出发，光线和温度都最舒服。' },
-  { name: 'Sophie M.', avatar: 'SM', rating: 4, date: '2025-02-08', text: 'Absolutely stunning drive through the canyon with the reservoirs winding between red cliffs. We only had a half day so we missed El Laberinto. Next time we will stay longer. Fuel up in San Rafael first.' },
-  { name: 'Diego F.', avatar: 'DF', rating: 5, date: '2024-11-12', text: 'Cada vez que vuelvo a San Rafael, el Atuel me sorprende. Los cinco embalses en cascata son una obra de la naturaleza y el hombre. Ideal para familias, rafting y fotos. Imperdible en Mendoza.' },
-];
-
 function renderText(text: string): string {
   if (!text) return '';
   return text
@@ -199,7 +190,7 @@ const PAGE_ENHANCEMENTS: Record<
       intro:
         '门多萨省以安第斯前山的峡谷与水库景观闻名。规划行程时，最容易混淆的是 **阿图埃尔峡谷（Cañón del Atuel）**、门多萨市附近的 **Potrerillos（Cañón del Río Mendoza）** 与通往阿空加瓜的 **Uspallata 山谷**。三者地貌与体验各不相同。',
       note:
-        '本页聚焦的是 **圣拉斐尔以南的 Cañón del Atuel**，它以五座连环水库、RP173 悬崖自驾公路与白浪漂流见长，是门多萨最独特的"水利峡谷"体验。',
+        '本页聚焦的是 **圣拉斐尔以南的 Cañón del Atuel**，它以阿图埃尔河梯级水库（Valle Grande、Tierras Blancas、Aisol、El Nihuil）、RP173 悬崖自驾公路与白浪漂流见长，是门多萨最独特的"水利峡谷"体验。',
       headers: {
         name: '目的地',
         province: '所属区域',
@@ -211,7 +202,7 @@ const PAGE_ENHANCEMENTS: Record<
         {
           name: '阿图埃尔峡谷',
           province: '圣拉斐尔 San Rafael',
-          landscape: '深切峡谷 + 五连环水库',
+          landscape: '深切峡谷 + 梯级水库',
           experience: 'RP173 自驾观景、漂流、滑索',
           bestFor: '自驾游客、探险与摄影爱好者',
           focus: true,
@@ -265,8 +256,8 @@ const PAGE_ENHANCEMENTS: Record<
         },
         {
           period: '20 世纪中叶',
-          title: '五座梯级水库落成',
-          text: '为发电与灌溉，沿河修建 Agua del Toro、Los Reyunos、Valle Grande、Tierras Blancas 与 El Nihuil 五座水库，塑造出碧水相连的景观。',
+          title: '阿图埃尔河四座梯级水库落成',
+          text: '为发电与灌溉，沿阿图埃尔河修建 Valle Grande、Tierras Blancas、Aisol 与 El Nihuil 四座水库（Agua del Toro 与 Los Reyunos 属另一水系 Río Diamante），塑造出碧水相连的景观。',
         },
         {
           period: '今天',
@@ -634,9 +625,9 @@ const extra = PAGE_ENHANCEMENTS[locale];
     </div>
     <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
       <div class="hero-meta">
-        <div class="hero-rating">4.8</div>
+        <div class="hero-rating">{ATTRACTION.ratingValue}</div>
         <div class="hero-stars">★ ★ ★ ★ ★</div>
-        <div class="hero-reviews">7,171 {t.rating.reviews} · {t.rating.source}</div>
+        <div class="hero-reviews">{ATTRACTION.reviewCount} {t.rating.reviews} · {t.rating.source}</div>
       </div>
     </a>
   </section>
@@ -1398,28 +1389,17 @@ const extra = PAGE_ENHANCEMENTS[locale];
       <div class="section-divider"></div>
     </div>
     <div class="reveal">
-      <div class="reviews-grid" style="margin-bottom:4rem;">
-        {
-          GOOGLE_REVIEWS.map((review) => (
-            <div class="review-card">
-              <div class="review-header">
-                <div class="review-avatar">{review.avatar}</div>
-                <div class="review-info">
-                  <div class="review-name">{review.name}</div>
-                  <div class="review-date">{review.date}</div>
-                </div>
-                <div class="review-rating">{'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}</div>
-              </div>
-              <p class="review-text">{review.text}</p>
-              <div class="review-source">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#4285F4"></path>
-                </svg>
-                Google
-              </div>
-            </div>
-          ))
-        }
+      <div class="reviews-snapshot" style="margin-bottom:4rem;text-align:center;background:#fff;border-radius:12px;padding:3rem 2rem;border:1px solid rgba(0,0,0,0.05);box-shadow:0 10px 30px rgba(0,0,0,0.03);">
+        <div style="font-family:var(--font-display);font-size:3.2rem;font-weight:600;color:var(--color-deep);line-height:1;">{ATTRACTION.ratingValue}</div>
+        <div style="color:#f5a623;font-size:1.5rem;letter-spacing:0.25em;margin:0.5rem 0 1rem;" aria-hidden="true">★ ★ ★ ★ ★</div>
+        <p style="color:var(--color-earth-soft);margin-bottom:0.4rem;font-weight:600;">{ATTRACTION.reviewCount} {t.rating.reviews} · {t.rating.source}</p>
+        <p style="color:var(--color-earth-soft);font-size:0.85rem;margin-bottom:1.5rem;">{t.rating.verified}</p>
+        <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" class="google-maps-btn">
+          {t.reviews.viewMore}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7V17"></path>
+          </svg>
+        </a>
       </div>
     </div>
     <div class="reveal">
@@ -1436,16 +1416,6 @@ const extra = PAGE_ENHANCEMENTS[locale];
             ))
           }
         </div>
-      </div>
-    </div>
-    <div class="reveal">
-      <div style="text-align:center;margin-top:3rem;">
-        <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" class="google-maps-btn">
-          {t.reviews.viewMore}
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M7 17L17 7M17 7H7M17 7V17"></path>
-          </svg>
-        </a>
       </div>
     </div>
   </section>
@@ -1645,6 +1615,7 @@ const extra = PAGE_ENHANCEMENTS[locale];
       <p class="sources-official" set:html={renderText(
         `${ec.officialLabel}: <a href="${ATTRACTION.govtTourismUrl}" target="_blank" rel="noopener noreferrer">${ATTRACTION.govtTourismUrl}</a>`
       )}></p>
+      <p class="sources-updated" style="text-align:center;color:var(--color-earth-soft);font-size:0.85rem;margin-top:1.5rem;">{ec.sourcesUpdated}</p>
     </div>
   </section>
 

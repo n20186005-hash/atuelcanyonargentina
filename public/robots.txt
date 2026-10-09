@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://atuelcanyonargentina.com/sitemap-index.xml

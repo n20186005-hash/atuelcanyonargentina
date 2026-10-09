@@ -24,12 +24,12 @@ export interface Seo {
 export function getSeo(locale: string): Seo {
   const map: Record<string, Seo> = {
     es: {
-      title: 'Cañón del Atuel (Mendoza): Mapa, RP173 y Excursiones',
+      title: 'Cañón del Atuel: cómo llegar y recorrer la RP173 | San Rafael',
       description:
-        'Planificá tu visita al Cañón del Atuel en San Rafael, Mendoza: mapa de la RP173, excursiones y rafting, Lago Atuel, el Volcán Overo, horarios y clima actualizado antes de salir.',
+        'Descubrí el Cañón del Atuel en San Rafael, Mendoza. Cómo llegar, recorrer la RP173, conocer sus miradores y planificar tu visita.',
       ogTitle: 'Cañón del Atuel (San Rafael, Mendoza) — Guía de Viaje',
       ogDescription:
-        'Guía del visitante al Cañón del Atuel: mapa de la ruta RP173, cinco embalses turquesa, excursiones desde San Rafael, Lago Atuel y clima en vivo.',
+        'Guía del visitante al Cañón del Atuel: mapa de la ruta RP173, embalses turquesa, excursiones desde San Rafael, Lago Atuel y clima en vivo.',
       ogImageAlt: 'Cañón del Atuel en San Rafael, Mendoza, Argentina',
       siteName: 'Guía del Cañón del Atuel',
       keywords: [
@@ -49,12 +49,12 @@ export function getSeo(locale: string): Seo {
       ],
     },
     en: {
-      title: 'Atuel Canyon (Cañón del Atuel) Guide: Map, Tours & Tips',
+      title: 'Atuel Canyon (Cañón del Atuel) | San Rafael, Argentina',
       description:
-        'Plan your visit to Atuel Canyon (Cañón del Atuel) in San Rafael, Mendoza: RP173 route map, tours from San Rafael, rafting, Lago Atuel, Volcán Overo and live weather tips.',
+        'Explore Atuel Canyon in San Rafael, Mendoza. Find the RP173 scenic route, how to get there, viewpoints, travel tips and activities.',
       ogTitle: 'Atuel Canyon (Cañón del Atuel) — Complete Travel Guide',
       ogDescription:
-        'Visitor guide to Atuel Canyon: the RP173 scenic drive, five turquoise reservoirs, tours from San Rafael, rafting and Lago Atuel activities.',
+        'Visitor guide to Atuel Canyon: the RP173 scenic drive, turquoise reservoirs, tours from San Rafael, rafting and Lago Atuel activities.',
       ogImageAlt: 'Atuel Canyon (Cañón del Atuel) in San Rafael, Mendoza, Argentina',
       siteName: 'Atuel Canyon Travel Guide',
       keywords: [
@@ -97,12 +97,12 @@ export function getSeo(locale: string): Seo {
       ],
     },
     it: {
-      title: 'Cañón del Atuel (Mendoza): Mappa, RP173 ed Escursioni',
+      title: 'Cañón del Atuel: come arrivare e cosa vedere | Mendoza',
       description:
-        'Organizza la visita al Cañón del Atuel a San Rafael, Mendoza: mappa della RP173, escursioni e rafting, Lago Atuel, Volcán Overo, orari e meteo aggiornato prima di partire.',
+        'Visita il Cañón del Atuel a San Rafael, Argentina. Scopri il percorso panoramico RP173, i punti panoramici, le attività e i consigli utili.',
       ogTitle: 'Cañón del Atuel (San Rafael, Mendoza) — Guida di Viaggio',
       ogDescription:
-        'Guida per il visitatore al Cañón del Atuel: mappa della RP173, cinque invasi turchesi, escursioni da San Rafael, rafting e attività sul Lago Atuel.',
+        'Guida per il visitatore al Cañón del Atuel: mappa della RP173, invasi turchesi, escursioni da San Rafael, rafting e attività sul Lago Atuel.',
       ogImageAlt: 'Cañón del Atuel a San Rafael, Mendoza, Argentina',
       siteName: 'Guida del Cañón del Atuel',
       keywords: [

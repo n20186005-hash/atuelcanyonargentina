@@ -76,7 +76,7 @@ export const translations: Record<Locale, Translations> = {
   zh: {
     nav: { history: `峡谷概览`, architecture: `地质与水利`, monuments: `体验活动`, eco: `生态保护`, visiting: `参观信息`, transportation: `交通指南`, gallery: `照片集锦`, reviews: `游客评价`, faq: `常见问题`, location: `地图位置` },
     hero: {
-      tags: [`门多萨省自然奇观`, `五座连环水库`, `RP173 峡谷自驾公路`],
+      tags: [`门多萨省自然奇观`, `阿图埃尔水库群`, `RP173 峡谷自驾公路`],
       tagline: `阿根廷 · 门多萨省 · 圣拉斐尔`,
       title: `Cañón del Atuel`,
       subtitle: `阿图埃尔峡谷 · 水利峡谷 · 安第斯前山`,
@@ -87,7 +87,7 @@ export const translations: Record<Locale, Translations> = {
         category: `自然奇观 · 峡谷与水库`
       }
     },
-    rating: { reviews: `条评价`, source: `Google 评论` },
+    rating: { reviews: `条评价`, source: `Google 评论`, verified: `核实于 2026 年 10 月 · 汇总自 Google Maps 评分` },
     history: {
       title: `安第斯前山的裂痕`,
       intro: `Cañón del Atuel（阿图埃尔峡谷）是阿根廷门多萨省最令人惊叹的自然与工程景观之一，位于圣拉斐尔（San Rafael）以南、安第斯山脉前山（Precordillera）之中。阿图埃尔河（Río Atuel）自安第斯雪峰奔涌而下，在干旱的红色岩层中切出一道深邃峡谷，并被一系列水库拦截，形成碧蓝湖水与赭红峭壁交相辉映的奇景。
@@ -95,8 +95,8 @@ export const translations: Record<Locale, Translations> = {
 峡谷的诞生
 阿图埃尔河发源于门多萨省西南的安第斯山脉，全长约 185 公里。数百万年来，河流沿着地质断裂持续下切，将古老的沉积岩与火山岩切割成深邃的峡谷地貌。峡谷最窄处仅容一线天光，岩壁呈现从赭红、橙黄到灰白的层叠色彩。
 
-水的驯服：五座水库的传奇
-20 世纪中叶起，门多萨省为开发水电与灌溉，沿阿图埃尔河梯级修建了五座水库（embalses）：Agua del Toro、Los Reyunos、Valle Grande、Tierras Blancas 与 El Nihuil。河流被一节节截断，在荒芜的峡谷中孕育出五颗 turquoise 般的湖泊，使这里成为阿根廷最重要的人工水利景观之一，也为圣拉斐尔绿洲提供了电力与生命之水。
+水的驯服：阿图埃尔水库的传奇
+20 世纪中叶起，门多萨省为开发水电与灌溉，沿阿图埃尔河梯级修建了四座水库（embalses）：Valle Grande、Tierras Blancas、Aisol 与 El Nihuil。（常一并被提及的 Agua del Toro 与 Los Reyunos 属另一水系 Río Diamante。）河流被一节节截断，在荒芜的峡谷中孕育出碧蓝相连的湖泊，使这里成为阿根廷最重要的人工水利景观之一，也为圣拉斐尔绿洲提供了电力与生命之水。
 
 门多萨的"水银行"
 今天，阿图埃尔河流域贡献了门多萨省相当一部分的水电与灌溉用水。水库群不仅是能源与农业的命脉，也缔造了漂流、滑索、湖滨休闲等独特的旅游形态——自然之力与人类工程在此达成了罕见的共生。`
@@ -127,8 +127,8 @@ export const translations: Record<Locale, Translations> = {
     },
     curiosities: {
       title: `自然与工程趣闻`,
-      content: `五湖连珠
-沿阿图埃尔河自上而下，五座水库如珍珠般串联：Agua del Toro、Los Reyunos、Valle Grande、Tierras Blancas 与 El Nihuil。从空中俯瞰，碧蓝湖水在赭红峡谷中蜿蜒，是门多萨最震撼的水利画卷。
+      content: `四湖连珠
+沿阿图埃尔河自上而下，四座水库如珍珠般串联：Valle Grande、Tierras Blancas、Aisol 与 El Nihuil。从空中俯瞰，碧蓝湖水在赭红峡谷中蜿蜒，是门多萨最震撼的水利画卷。（Río Diamante 水系的 Agua del Toro 与 Los Reyunos 位于邻近的另一山谷。）
 
 El Laberinto（迷宫石林）
 在 Valle Grande 水库一带，风与水的侵蚀雕琢出一片奇诡的红色岩柱群，被形象地称为迷宫。穿行其间，宛如走进大自然的雕塑公园。
@@ -161,7 +161,7 @@ RP173：悬崖上的观光公路
         design: { title: `岩层与色彩`, content: `峡谷两侧的岩壁如同打开的地质教科书：赭红、橙黄、灰白相间，源自不同地质时期的矿物沉积——富含氧化铁呈红色，碳酸钙呈浅色条带。
 
 在清晨与黄昏的低角度阳光下，岩壁色彩最为浓烈，与 turquoise 湖水形成强烈对比，是摄影师钟爱的题材。` },
-        optics: { title: `水文与水库`, content: `阿图埃尔河年均径流有限且季节波动大。为调节水流、发电与灌溉，门多萨沿河修建了五座梯级水库，把丰水期的河水储蓄起来，既防洪又供能。
+        optics: { title: `水文与水库`, content: `阿图埃尔河年均径流有限且季节波动大。为调节水流、发电与灌溉，门多萨沿阿图埃尔河修建了四座梯级水库，把丰水期的河水储蓄起来，既防洪又供能。
 
 水库群使原本狂野的河流变得温润可控，也创造了独特的水利峡谷景观：裸岩与碧水相邻，荒原与绿洲共生。` }
       },
@@ -171,7 +171,7 @@ RP173：悬崖上的观光公路
           { label: `名称`, value: `Cañón del Atuel（阿图埃尔峡谷）` },
           { label: `位置`, value: `圣拉斐尔以南，门多萨省，阿根廷` },
           { label: `河流`, value: `Río Atuel（全长约 185 km）` },
-          { label: `水库群`, value: `5 座梯级水库（Agua del Toro–El Nihuil）` },
+          { label: `水库群`, value: `4 座梯级水库（Valle Grande–El Nihuil）` },
           { label: `类型`, value: `深切峡谷 / 水利景观 / 户外运动天堂` },
           { label: `门户城镇`, value: `San Rafael（圣拉斐尔）` }
         ]
@@ -241,7 +241,7 @@ RP173：悬崖上的观光公路
       tips: { title: `交通与自驾小贴士`, items: [
         `门户城镇：圣拉斐尔（San Rafael）是前往峡谷的大本营，补给与住宿齐全`,
         `门多萨市区距峡谷约 240 公里，建议预留半天车程`,
-        `RP173 为铺装山路但弯道多，雨季需注意落石与湿滑`,
+        `RP173 峡谷主干路段为铺装路面但弯道多、临崖，支路多为碎石路，雨季需注意落石与湿滑`,
         `可与圣拉斐尔葡萄酒之路（Ruta del Vino San Rafael）组合一日游`,
         `加油站集中在圣拉斐尔，进山前请加满油`
       ] }
@@ -249,21 +249,21 @@ RP173：悬崖上的观光公路
     gallery: { title: `照片集锦`, viewMore: `在 Google Maps 查看更多照片`, categories: [ { key: `canyon`, label: `峡谷河段` }, { key: `reservoir`, label: `水库湖泊` }, { key: `rock`, label: `岩层与石林` }, { key: `panorama`, label: `全景远眺` } ] },
     reviews: {
       title: `游客评价与周边探索`,
-      subtitle: `来自阿图埃尔峡谷的真实声音：Google Maps 游客评价`,
+      subtitle: `阿图埃尔峡谷的游客评分概览（基于 Google Maps）`,
       viewMore: `在 Google Maps 查看更多评价`,
       nearbyTitle: `周边值得一游的景点`,
       nearbyIntro: `探索完阿图埃尔峡谷后，您可顺道造访以下邻近目的地：`,
       nearbyItems: [
-        { name: `El Nihuil 水库`, description: `阿图埃尔河最下游的水库之一，湖面开阔、水面平静，是帆船、滑水与湖滨露营的热门去处，距圣拉斐尔约 1 小时车程。` },
+        { name: `El Nihuil 水库`, description: `阿图埃尔河上游的水库之一，湖面开阔、水面平静，是帆船、滑水与湖滨露营的热门去处，距圣拉斐尔约 1 小时车程。` },
         { name: `圣拉斐尔葡萄酒之路（Ruta del Vino）`, description: `圣拉斐尔是门多萨重要的葡萄酒产区，以马尔贝克（Malbec）与特浓情（Torrontés）闻名。游览峡谷后，可在附近酒庄品鉴与用餐。` },
         { name: `Cañón del Río Mendoza（波塔雷洛斯）`, description: `位于门多萨市附近的另一条著名峡谷与水库（Embalse Potrerillos），同样以漂流与登山著称，可与阿图埃尔峡谷形成对比游览。` }
       ]
     },
     faq: { title: `常见问题`, subtitle: `深入了解阿图埃尔峡谷`, items: [
       { question: `阿图埃尔峡谷（Cañón del Atuel）在哪里？怎么去？`, answer: `阿图埃尔峡谷位于阿根廷门多萨省圣拉斐尔（San Rafael）以南约 40 公里处，沿 RP173 省道可达。最方便的方式是从门多萨市区（约 240 公里）自驾或乘巴士到圣拉斐尔，再包车或参加一日游前往峡谷。` },
-      { question: `游览阿图埃尔峡谷需要多长时间？`, answer: `仅沿 RP173 观光、停靠主要观景台约需 4–5 小时；若结合漂流、滑索或圣拉斐尔酒庄，建议预留一整天。峡谷公路全天可通行，水上项目一般 09:00–18:00 运营。` },
+      { question: `游览阿图埃尔峡谷需要多长时间？`, answer: `仅沿 RP173 观光、停靠主要观景台约需 4–5 小时；若结合漂流、滑索或圣拉斐尔酒庄，建议预留一整天。峡谷公路（RP173）为公共省道，通常全天可通行，但大雨或落石后部分路段可能临时封闭——出发前请查询圣拉斐尔旅游局的实时路况。水上项目一般 09:00–18:00 运营。` },
       { question: `阿图埃尔峡谷适合带小孩或家庭出游吗？`, answer: `非常适合。观景台与水库区域轻松安全，适合家庭与摄影；漂流与滑索等项目有专业安全装备，但需根据儿童年龄选择难度。请全程看护儿童，远离涨水河段。` },
-      { question: `峡谷里那些碧蓝的水库是天然的吗？`, answer: `阿图埃尔河上的五座水库（Agua del Toro、Los Reyunos、Valle Grande、Tierras Blancas、El Nihuil）均为 20 世纪中叶起修建的人工水利设施，用于发电与灌溉。它们把狂野的河流塑造成今日碧蓝相连的湖泊景观，是自然与工程的共同作品。` },
+      { question: `峡谷里那些碧蓝的水库是天然的吗？`, answer: `阿图埃尔河自身的水库——Valle Grande、Tierras Blancas、Aisol 与 El Nihuil——均为 20 世纪中叶起修建的人工水利设施，用于发电与灌溉。（常一并被提及的 Agua del Toro 与 Los Reyunos 属另一水系 Río Diamante。）它们把狂野的河流塑造成今日碧蓝相连的湖泊景观，是自然与工程的共同作品。` },
       { question: `自驾 RP173 需要注意什么？`, answer: `RP173 是贴着峡谷崖壁蜿蜒的景观公路，弯道多、部分路段临崖。请控制车速、避免夜间行车、进山前加满油，并留意雨季落石与突发的强风。建议下载离线地图，因为峡谷内手机信号不稳定。` }
     ]},
     location: { title: `地图位置`, address: `RP173, Cañón del Atuel\nSan Rafael, Mendoza Province\nArgentina\n阿根廷门多萨省圣拉斐尔\n阿图埃尔峡谷`, openMaps: `在 Google Maps 查看位置` },
@@ -278,7 +278,7 @@ RP173：悬崖上的观光公路
         { key: `iglesia`, name: `RP173 峡谷公路`, desc: `贴着崖壁蜿蜒的景观公路，沿途多个观景台可俯瞰峡谷与水库，是自驾爱好者的心头好。` },
         { key: `monumento`, name: `El Laberinto（迷宫石林）`, desc: `风与水雕琢出的红色岩柱群，形态奇诡，宛如大自然的雕塑公园，适合徒步与摄影。` },
         { key: `corrales`, name: `Valle Grande 水库`, desc: `阿图埃尔河梯级水库之一，碧蓝湖水映衬赭红岩壁，可租船、垂钓与休闲。` },
-        { key: `necrópolis`, name: `El Nihuil 水库`, desc: `峡谷下游的开阔水库，水面平静，是帆船、滑水与湖滨露营的热门目的地。` }
+        { key: `necrópolis`, name: `El Nihuil 水库`, desc: `峡谷上游的开阔水库，水面平静，是帆船、滑水与湖滨露营的热门目的地。` }
       ]
     },
     itinerary: {
@@ -289,7 +289,7 @@ RP173：悬崖上的观光公路
         { time: `09:30`, title: `Valle Grande 水库`, text: `停驻首个观景台，俯瞰碧蓝湖水与红色岩壁的交织，拍摄水利画卷。` },
         { time: `11:00`, title: `El Laberinto 迷宫石林`, text: `下车徒步穿行红色岩柱群，感受风与水的雕塑之力。` },
         { time: `12:30`, title: `峡谷午餐 / 漂流`, text: `在水库边简餐，或参加漂流行程，体验白浪与峡谷的激情。` },
-        { time: `15:00`, title: `El Nihuil 水库`, text: `继续下行至开阔湖面，享受午后宁静，可租船或静坐观鸟。` },
+        { time: `15:00`, title: `El Nihuil 水库`, text: `继续上行至开阔湖面，享受午后宁静，可租船或静坐观鸟。` },
         { time: `17:30`, title: `返程观落日`, text: `沿 RP173 返程，在落日余晖中回望赭红峡谷，为一日画上句点。` }
       ]
     },
@@ -302,7 +302,7 @@ RP173：悬崖上的观光公路
   en: {
     nav: { history: `Canyon Overview`, architecture: `Geology & Dams`, monuments: `Activities`, eco: `Conservation`, visiting: `Visit Info`, transportation: `Getting There`, gallery: `Gallery`, reviews: `Reviews`, faq: `FAQ`, location: `Location` },
     hero: {
-      tags: [`Mendoza Natural Wonder`, `Five Linked Reservoirs`, `RP173 Canyon Scenic Drive`],
+      tags: [`Mendoza Natural Wonder`, `Four Atuel Reservoirs`, `RP173 Canyon Scenic Drive`],
       tagline: `Argentina · Mendoza Province · San Rafael`,
       title: `Cañón del Atuel`,
       subtitle: `Atuel Canyon · Hydraulic Canyon · Andean Precordillera`,
@@ -313,7 +313,7 @@ RP173：悬崖上的观光公路
         category: `Natural Wonder · Canyon & Reservoirs`
       }
     },
-    rating: { reviews: `reviews`, source: `Google Reviews` },
+    rating: { reviews: `reviews`, source: `Google Reviews`, verified: `Verified October 2026 · aggregated from Google Maps ratings` },
     history: {
       title: `A Rift in the Andean Foothills`,
       intro: `Cañón del Atuel is one of Mendoza Province’s most stunning natural and engineered landscapes, set in the Precordillera of the Andes south of San Rafael. The Atuel River plunges down from the snowy Andes and has carved a deep canyon through arid, red rock — then been chained by a series of reservoirs that turn turquoise lakes and ochre cliffs into a single, unforgettable panorama.
@@ -321,8 +321,8 @@ RP173：悬崖上的观光公路
 How the Canyon Was Born
 The Atuel River rises in the Andes of south-west Mendoza and runs about 185 km. For millions of years it has incised along geological faults, cutting ancient sedimentary and volcanic rock into a profound gorge. At its narrowest, only a sliver of sky shows; the walls display layered hues of red, orange and grey.
 
-Taming the Water: the Legend of Five Reservoirs
-From the mid-20th century, Mendoza began building five cascading reservoirs (embalses) — Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas and El Nihuil — to generate hydropower and irrigate the land. The river was cut section by section, and in the middle of the desert canyon appeared five turquoise lakes, making this one of Argentina’s most remarkable hydraulic landscapes and the source of power and life for the San Rafael oasis.
+Taming the Water: the Legend of the Atuel Reservoirs
+From the mid-20th century, Mendoza built a cascade of reservoirs on the Atuel — Valle Grande, Tierras Blancas, Aisol and El Nihuil — to generate hydropower and irrigate the land. (Agua del Toro and Los Reyunos, often mentioned nearby, are part of the separate Río Diamante basin.) The river was cut section by section, and in the middle of the desert canyon appeared its linked turquoise lakes, making this one of Argentina’s most remarkable hydraulic landscapes and the source of power and life for the San Rafael oasis.
 
 Mendoza's "Water Bank"
 Today the Atuel basin supplies a significant share of Mendoza’s electricity and irrigation water. The reservoir chain is both a lifeline for energy and agriculture and the stage for rafting, zip-lines and lakeside leisure — a rare symbiosis of natural force and human engineering.`
@@ -353,8 +353,8 @@ These simple tales, continuous with the Huarpe reverence for water, form the sof
     },
     curiosities: {
       title: `Nature & Engineering Trivia`,
-      content: `Five Lakes in a Row
-From upstream to downstream, five reservoirs string together like pearls: Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas and El Nihuil. Seen from above, turquoise water winds through the ochre canyon — Mendoza’s most striking hydraulic painting.
+      content: `Four Lakes of the Atuel
+From upstream to downstream, the Atuel’s four reservoirs string together like pearls: Valle Grande, Tierras Blancas, Aisol and El Nihuil. Seen from above, turquoise water winds through the ochre canyon — Mendoza’s most striking hydraulic painting. (The Río Diamante basin, with Agua del Toro and Los Reyunos, lies in a separate valley nearby.)
 
 El Laberinto (The Labyrinth)
 Near the Valle Grande reservoir, wind and water have sculpted a field of bizarre red rock pillars, aptly called the Labyrinth. Wandering among them feels like stepping into nature’s sculpture park.
@@ -387,7 +387,7 @@ The canyon walls are mostly ancient sedimentary and volcanic rock, recording the
         design: { title: `Rock Layers & Colours`, content: `The cliffs are an open geological textbook: red, orange and grey bands from minerals deposited in different eras — iron oxide gives the red, calcium carbonate the pale stripes.
 
 Under the low-angle morning and evening sun, the colours are most intense, contrasting sharply with the turquoise lake — a favourite subject for photographers.` },
-        optics: { title: `Hydrology & Reservoirs`, content: `The Atuel has limited annual runoff with strong seasonal swings. To regulate flow, generate power and irrigate, Mendoza built five cascading reservoirs, storing flood-season water for both flood control and energy.
+        optics: { title: `Hydrology & Reservoirs`, content: `The Atuel has limited annual runoff with strong seasonal swings. To regulate flow, generate power and irrigate, Mendoza built a cascade of reservoirs on the Atuel, storing flood-season water for both flood control and energy.
 
 The reservoir chain tamed the wild river into something gentle and controllable, creating a unique hydraulic canyon: bare rock next to blue water, wilderness next to oasis.` }
       },
@@ -397,7 +397,7 @@ The reservoir chain tamed the wild river into something gentle and controllable,
           { label: `Name`, value: `Cañón del Atuel` },
           { label: `Location`, value: `South of San Rafael, Mendoza, Argentina` },
           { label: `River`, value: `Río Atuel (≈185 km)` },
-          { label: `Reservoirs`, value: `5 cascading dams (Agua del Toro–El Nihuil)` },
+          { label: `Reservoirs`, value: `4 reservoirs of the Atuel (Valle Grande–El Nihuil)` },
           { label: `Type`, value: `Deep gorge / Hydraulic landscape / Outdoor paradise` },
           { label: `Gateway town`, value: `San Rafael` }
         ]
@@ -467,7 +467,7 @@ The reservoir chain tamed the wild river into something gentle and controllable,
       tips: { title: `Transport & Driving Tips`, items: [
         `Gateway town: San Rafael is the base for the canyon, with full supplies and lodging`,
         `Mendoza city is ~240 km from the canyon — budget half a day of driving`,
-        `RP173 is paved but curvy; watch for rockfall and slipperiness in the rainy season`,
+        `The main canyon stretch of RP173 is paved but curvy; side roads are gravel — watch for rockfall and slipperiness in the rainy season`,
         `Combine with San Rafael’s Ruta del Vino (wine route) for a day trip`,
         `Fuel up in San Rafael — fill the tank before entering the mountains`
       ] }
@@ -475,12 +475,12 @@ The reservoir chain tamed the wild river into something gentle and controllable,
     gallery: { title: `Photo Gallery`, viewMore: `View More Photos on Google Maps`, categories: [ { key: `canyon`, label: `Canyon` }, { key: `reservoir`, label: `Reservoirs` }, { key: `rock`, label: `Rocks & Pillars` }, { key: `panorama`, label: `Panoramas` } ] },
     reviews: {
       title: `Visitor Reviews & Nearby Exploration`,
-      subtitle: `Voices from Cañón del Atuel: Real Google Maps Testimonies`,
+      subtitle: `A snapshot of visitor ratings for Cañón del Atuel, based on Google Maps`,
       viewMore: `View More Reviews on Google Maps`,
       nearbyTitle: `Nearby Attractions Worth Visiting`,
       nearbyIntro: `After exploring Cañón del Atuel, you can easily visit the following nearby destinations:`,
       nearbyItems: [
-        { name: `El Nihuil Reservoir`, description: `One of the downstream Atuel reservoirs, with open, calm water — popular for sailing, water-skiing and lakeside camping, about an hour from San Rafael.` },
+        { name: `El Nihuil Reservoir`, description: `One of the upstream Atuel reservoirs, with open, calm water — popular for sailing, water-skiing and lakeside camping, about an hour from San Rafael.` },
         { name: `San Rafael Wine Route (Ruta del Vino)`, description: `San Rafael is a key Mendoza wine region, famous for Malbec and Torrontés. After the canyon, taste and dine at nearby wineries.` },
         { name: `Cañón del Río Mendoza (Potrerillos)`, description: `Another famous canyon and reservoir (Embalse Potrerillos) near Mendoza city, also known for rafting and climbing — a great contrast to Cañón del Atuel.` }
       ]
@@ -489,7 +489,7 @@ The reservoir chain tamed the wild river into something gentle and controllable,
       { question: `Where is Cañón del Atuel and how do I get there?`, answer: `Cañón del Atuel is about 40 km south of San Rafael, Mendoza Province, reached via RP173. The easiest way is to drive or take a bus from Mendoza city (~240 km) to San Rafael, then a private transfer or day tour to the canyon.` },
       { question: `How long does a visit take?`, answer: `Sightseeing along RP173 with the main viewpoints takes about 4–5 hours; with rafting, zip-line or San Rafael wineries, plan a full day. The canyon road is open all day; water activities generally run 09:00–18:00.` },
       { question: `Is Cañón del Atuel suitable for families with children?`, answer: `Very much so. Viewpoints and reservoir areas are easy and safe for families and photography; rafting and zip-line provide professional safety gear but choose difficulty by the child’s age. Supervise children and keep clear of swollen water.` },
-      { question: `Are the turquoise reservoirs natural?`, answer: `The five Atuel reservoirs (Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas, El Nihuil) are artificial hydraulic works built from the mid-20th century for power and irrigation. They reshaped the wild river into today’s linked turquoise lakes — a joint work of nature and engineering.` },
+      { question: `Are the turquoise reservoirs natural?`, answer: `The Atuel’s own reservoirs — Valle Grande, Tierras Blancas, Aisol and El Nihuil — are artificial hydraulic works built from the mid-20th century for power and irrigation. (Agua del Toro and Los Reyunos, often mentioned nearby, belong to the separate Río Diamante basin.) Together they reshaped the wild river into today’s linked turquoise lakes — a joint work of nature and engineering.` },
       { question: `What should I know about driving RP173?`, answer: `RP173 is a scenic road hugging the canyon wall with many curves and some cliff-edge sections. Control your speed, avoid night driving, fill the tank before entering, and watch for rockfall and sudden strong winds in the rainy season. Download offline maps as mobile signal is weak in the canyon.` }
     ]},
     location: { title: `Map Location`, address: `RP173, Cañón del Atuel\nSan Rafael, Mendoza Province\nArgentina`, openMaps: `View on Google Maps` },
@@ -504,7 +504,7 @@ The reservoir chain tamed the wild river into something gentle and controllable,
         { key: `iglesia`, name: `RP173 Canyon Road`, desc: `A scenic road winding along the cliff, with viewpoints over the canyon and reservoirs — a favourite of drivers.` },
         { key: `monumento`, name: `El Laberinto (Rock Labyrinth)`, desc: `Red rock pillars sculpted by wind and water, bizarre in shape like nature’s sculpture park — great for hiking and photos.` },
         { key: `corrales`, name: `Valle Grande Reservoir`, desc: `One of the Atuel’s cascading reservoirs; turquoise water against ochre cliffs, with boat rental, fishing and leisure.` },
-        { key: `necrópolis`, name: `El Nihuil Reservoir`, desc: `A broad downstream reservoir with calm water — popular for sailing, water-skiing and lakeside camping.` }
+        { key: `necrópolis`, name: `El Nihuil Reservoir`, desc: `A broad upstream reservoir with calm water — popular for sailing, water-skiing and lakeside camping.` }
       ]
     },
     itinerary: {
@@ -515,7 +515,7 @@ The reservoir chain tamed the wild river into something gentle and controllable,
         { time: `09:30`, title: `Valle Grande Reservoir`, text: `Stop at the first viewpoint to overlook the turquoise lake woven with red cliffs — the hydraulic painting.` },
         { time: `11:00`, title: `El Laberinto Rock Pillars`, text: `Get out and hike among the red pillars, feeling the sculpting force of wind and water.` },
         { time: `12:30`, title: `Canyon Lunch / Rafting`, text: `Picnic by the reservoir, or join a rafting trip for white-water thrills in the gorge.` },
-        { time: `15:00`, title: `El Nihuil Reservoir`, text: `Continue downstream to the open lake; enjoy a peaceful afternoon — rent a boat or watch birds.` },
+        { time: `15:00`, title: `El Nihuil Reservoir`, text: `Continue upstream to the open lake; enjoy a peaceful afternoon — rent a boat or watch birds.` },
         { time: `17:30`, title: `Sunset Return`, text: `Drive back along RP173 as the setting sun gilds the ochre canyon — a perfect end to the day.` }
       ]
     },
@@ -539,7 +539,7 @@ The reservoir chain tamed the wild river into something gentle and controllable,
         category: `Maravilla natural · Cañón y embalses`
       }
     },
-    rating: { reviews: `opiniones`, source: `Opiniones de Google` },
+    rating: { reviews: `opiniones`, source: `Opiniones de Google`, verified: `Verificado octubre 2026 · agregado de valoraciones de Google Maps` },
     history: {
       title: `Una Grieta en la Precordillera Andina`,
       intro: `El Cañón del Atuel es uno de los paisajes naturales e ingenieriles más asombrosos de la provincia de Mendoza, en la Precordillera de los Andes, al sur de San Rafael. El río Atuel baja de la nieve andina y ha tallado un cañón profundo en roca roja y árida, que luego fue encadenado por una serie de embalses que convierten lagos turquesa y acantilados ocre en un mismo panorama inolvidable.
@@ -547,8 +547,8 @@ The reservoir chain tamed the wild river into something gentle and controllable,
 El nacimiento del cañón
 El río Atuel nace en los Andes del sudoeste de Mendoza y recorre unos 185 km. Durante millones de años ha incidido a lo largo de fallas geológicas, cortando roca sedimentaria y volcánica antigua en una garganta profunda. En su parte más estrecha apenas entra un hilo de cielo; las paredes muestran tonos rojos, naranjas y grises superpuestos.
 
-Domar el agua: la leyenda de los cinco embalses
-Desde mediados del siglo XX, Mendoza comenzó a construir cinco embalses en cascada (Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas y El Nihuil) para generar hidroelectricidad y regar la tierra. El río fue cortado tramo a tramo, y en medio del desierto aparecieron cinco lagos turquesa, convirtiendo este lugar en uno de los paisajes hidráulicos más notables de Argentina y en fuente de energía y vida para el oasis de San Rafael.
+Domar el agua: la leyenda de los embalses del Atuel
+Desde mediados del siglo XX, Mendoza construyó una cadena de embalses en el Atuel — Valle Grande, Tierras Blancas, Aisol y El Nihuil — para generar hidroelectricidad y regar la tierra. (Agua del Toro y Los Reyunos, que suelen mencionarse por cercanía, pertenecen a la cuenca separada del Río Diamante.) El río fue cortado tramo a tramo, y en medio del desierto aparecieron sus lagos turquesa enlazados, convirtiendo este lugar en uno de los paisajes hidráulicos más notables de Argentina y en fuente de energía y vida para el oasis de San Rafael.
 
 El "banco de agua" de Mendoza
 Hoy la cuenca del Atuel aporta una parte importante de la electricidad y el riego de Mendoza. La cadena de embalses es a la vez sustento de energía y agricultura, y escenario de rafting, canopy y recreación lacustre: una rara simbiosis entre fuerza natural e ingeniería humana.`
@@ -579,8 +579,8 @@ Estos relatos sencillos, continuos con el respeto huarpe por el agua, forman el 
     },
     curiosities: {
       title: `Datos de Naturaleza e Ingeniería`,
-      content: `Cinco lagos en hilera
-De arriba abajo, cinco embalses se enhebran como perlas: Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas y El Nihuil. Vistos desde arriba, el agua turquesa serpentea por el cañón ocre: el cuadro hidráulico más impactante de Mendoza.
+      content: `Cuatro lagos del Atuel
+De arriba abajo, los cuatro embalses del Atuel se enhebran como perlas: Valle Grande, Tierras Blancas, Aisol y El Nihuil. Vistos desde arriba, el agua turquesa serpentea por el cañón ocre: el cuadro hidráulico más impactante de Mendoza. (La cuenca del Río Diamante, con Agua del Toro y Los Reyunos, queda en un valle aparte cercano.)
 
 El Laberinto
 Cerca del embalse Valle Grande, el viento y el agua esculpieron un campo de pilares rojos y extraños, llamado justamente El Laberinto. Recorrerlos es entrar al parque de esculturas de la naturaleza.
@@ -613,7 +613,7 @@ Las paredes son roca sedimentaria y volcánica antigua, que registra la larga hi
         design: { title: `Estratos y Colores`, content: `Los acantilados son un libro geológico abierto: bandas rojas, naranjas y grises de minerales depositados en distintas eras — el óxido de hierro da el rojo, el carbonato de calcio las franjas claras.
 
 Con el sol bajo de la mañana y el atardecer, los colores son más intensos y contrastan con el lago turquesa: un tema favorito de los fotógrafos.` },
-        optics: { title: `Hidrología y Embalses`, content: `El Atuel tiene escorrentía anual limitada y muy estacional. Para regular el caudal, generar energía y regar, Mendoza construyó cinco embalses en cascada, guardando el agua de crecidas para control de inundaciones y energía.
+        optics: { title: `Hidrología y Embalses`, content: `El Atuel tiene escorrentía anual limitada y muy estacional. Para regular el caudal, generar energía y regar, Mendoza construyó una cadena de embalses en el Atuel, guardando el agua de crecidas para control de inundaciones y energía.
 
 La cadena de embalses domesticó al río salvaje en algo apacible y controlable, creando un cañón hidráulico único: roca desnuda junto al agua azul, desierto junto al oasis.` }
       },
@@ -623,7 +623,7 @@ La cadena de embalses domesticó al río salvaje en algo apacible y controlable,
           { label: `Nombre`, value: `Cañón del Atuel` },
           { label: `Ubicación`, value: `Sur de San Rafael, Mendoza, Argentina` },
           { label: `Río`, value: `Río Atuel (≈185 km)` },
-          { label: `Embalses`, value: `5 represas en cascata (Agua del Toro–El Nihuil)` },
+          { label: `Embalses`, value: `4 embalses del Atuel (Valle Grande–El Nihuil)` },
           { label: `Tipo`, value: `Garganta profunda / Paisaje hidráulico / Paraíso outdoor` },
           { label: `Localidad puerta`, value: `San Rafael` }
         ]
@@ -693,7 +693,7 @@ La cadena de embalses domesticó al río salvaje en algo apacible y controlable,
       tips: { title: `Consejos de Transporte y Conducción`, items: [
         `Localidad base: San Rafael es el punto de partida del cañón, con suministros y alojamiento completos`,
         `Mendoza ciudad queda a ~240 km del cañón — presupuestá medio día de manejo`,
-        `RP173 está pavimentada pero con curvas; ojo con desmoronamientos y resbalón en temporada de lluvias`,
+        `El tramo principal del cañón por RP173 está pavimentado pero con curvas; los desvíos de tierra son de ripio — ojo con desmoronamientos y resbalón en temporada de lluvias`,
         `Combiná con la Ruta del Vino de San Rafael para una salida de día`,
         `Cargá combustible en San Rafael — llená el tanque antes de entrar a la montaña`
       ] }
@@ -701,21 +701,21 @@ La cadena de embalses domesticó al río salvaje en algo apacible y controlable,
     gallery: { title: `Galería de Fotos`, viewMore: `Ver más fotos en Google Maps`, categories: [ { key: `canyon`, label: `Cañón` }, { key: `reservoir`, label: `Embalses` }, { key: `rock`, label: `Rocas y Pilares` }, { key: `panorama`, label: `Panorámicas` } ] },
     reviews: {
       title: `Opiniones de Visitantes y Exploración`,
-      subtitle: `Voces del Cañón del Atuel: testimonios reales de Google Maps`,
+      subtitle: `Una instantánea de las valoraciones de los visitantes del Cañón del Atuel, según Google Maps`,
       viewMore: `Ver más opiniones en Google Maps`,
       nearbyTitle: `Atracciones cercanas`,
       nearbyIntro: `Tras explorar el Cañón del Atuel, podés visitar los siguientes destinos cercanos:`,
       nearbyItems: [
-        { name: `Embalse El Nihuil`, description: `Uno de los embalses aguas abajo del Atuel, con agua abierta y tranquila — ideal para velero, esquí acuático y camping lacustre, a una hora de San Rafael.` },
+        { name: `Embalse El Nihuil`, description: `Uno de los embalses aguas arriba del Atuel, con agua abierta y tranquila — ideal para velero, esquí acuático y camping lacustre, a una hora de San Rafael.` },
         { name: `Ruta del Vino de San Rafael`, description: `San Rafael es una zona vitivinícola clave de Mendoza, famosa por Malbec y Torrontés. Tras el cañón, probá y cená en bodegas cercanas.` },
         { name: `Cañón del Río Mendoza (Potrerillos)`, description: `Otro cañón y embalse famoso (Embalse Potrerillos) cerca de Mendoza ciudad, también conocido por rafting y escalada — un buen contraste con el Cañón del Atuel.` }
       ]
     },
     faq: { title: `Preguntas Frecuentes`, subtitle: `Saber más sobre el Cañón del Atuel`, items: [
       { question: `¿Dónde está el Cañón del Atuel y cómo llego?`, answer: `El Cañón del Atuel queda unos 40 km al sur de San Rafael, Mendoza, por RP173. Lo más fácil es manejar o tomar ómnibus desde Mendoza ciudad (~240 km) a San Rafael, y luego traslado privado o excursión al cañón.` },
-      { question: `¿Cuánto dura la visita?`, answer: `El avistamiento por RP173 con los miradores principales lleva unas 4–5 horas; con rafting, canopy o bodegas de San Rafael, planeá un día completo. La ruta del cañón está abierta todo el día; las actividades acuáticas suelen ir de 09:00 a 18:00.` },
+      { question: `¿Cuánto dura la visita?`, answer: `El avistamiento por RP173 con los miradores principales lleva unas 4–5 horas; con rafting, canopy o bodegas de San Rafael, planeá un día completo. La ruta del cañón (RP173) es una ruta provincial pública y generalmente abierta, pero tramos pueden cerrarse temporalmente tras lluvias fuertes o derrumbes: consultá a Turismo de San Rafael el estado actual de la ruta antes de salir. Las actividades acuáticas suelen ir de 09:00 a 18:00.` },
       { question: `¿El Cañón del Atuel es apto para familias con niños?`, answer: `Mucho. Los miradores y embalses son fáciles y seguros para familias y fotos; rafting y canopy tienen equipo de seguridad profesional, pero elegí la dificultad según la edad. Supervisá a los niños y mantenelos lejos del agua crecida.` },
-      { question: `¿Los embalses turquesa son naturales?`, answer: `Los cinco embalses del Atuel (Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas, El Nihuil) son obras hidráulicas artificiales construidas desde mediados del siglo XX para energía y riego. Remodelaron el río salvaje en los lagos turquesa de hoy: una obra conjunta de naturaleza e ingeniería.` },
+      { question: `¿Los embalses turquesa son naturales?`, answer: `Los embalses propios del Atuel — Valle Grande, Tierras Blancas, Aisol y El Nihuil — son obras hidráulicas artificiales construidas desde mediados del siglo XX para energía y riego. (Agua del Toro y Los Reyunos, que suelen mencionarse por cercanía, pertenecen a la cuenca separada del Río Diamante.) Remodelaron el río salvaje en los lagos turquesa de hoy: una obra conjunta de naturaleza e ingeniería.` },
       { question: `¿Qué debo saber para manejar la RP173?`, answer: `RP173 es una ruta escénica pegada al acantilado, con muchas curvas y tramos al borde del barranco. Controlá la velocidad, evitá manejar de noche, cargá combustible antes de entrar y ojo con desmoronamientos y vientos fuertes en la temporada de lluvias. Descargá mapas offline: la señal es débil en el cañón.` }
     ]},
     location: { title: `Ubicación en el Mapa`, address: `RP173, Cañón del Atuel\nSan Rafael, Provincia de Mendoza\nArgentina`, openMaps: `Ver en Google Maps` },
@@ -730,7 +730,7 @@ La cadena de embalses domesticó al río salvaje en algo apacible y controlable,
         { key: `iglesia`, name: `Ruta RP173 del Cañón`, desc: `Ruta escénica que serpentea por el acantilado, con miradores sobre el cañón y embalses — favorita de los conductores.` },
         { key: `monumento`, name: `El Laberinto (Pilares de Roca)`, desc: `Pilares rojos esculpidos por viento y agua, de formas extrañas como parque de esculturas de la naturaleza — ideal para caminar y fotografiar.` },
         { key: `corrales`, name: `Embalse Valle Grande`, desc: `Uno de los embalses en cascata del Atuel; agua turquesa contra acantilados ocre, con alquiler de botes, pesca y recreación.` },
-        { key: `necrópolis`, name: `Embalse El Nihuil`, desc: `Embalse aguas abajo, amplio de aguas calmas — popular para velero, esquí acuático y camping lacustre.` }
+        { key: `necrópolis`, name: `Embalse El Nihuil`, desc: `Embalse aguas arriba, amplio de aguas calmas — popular para velero, esquí acuático y camping lacustre.` }
       ]
     },
     itinerary: {
@@ -741,7 +741,7 @@ La cadena de embalses domesticó al río salvaje en algo apacible y controlable,
         { time: `09:30`, title: `Embalse Valle Grande`, text: `Pará en el primer mirador para contemplar el lago turquesa entre rocas rojas: el cuadro hidráulico.` },
         { time: `11:00`, title: `Pilares de El Laberinto`, text: `Bajá a caminar entre los pilares rojos, sintiendo la fuerza esculpidora del viento y el agua.` },
         { time: `12:30`, title: `Almuerzo / Rafting en el cañón`, text: `Picnic junto al embalse o salida de rafting por los rápidos de la garganta.` },
-        { time: `15:00`, title: `Embalse El Nihuil`, text: `Seguí aguas abajo al lago abierto; disfrutá una tarde tranquila — alquilá bote o observá aves.` },
+        { time: `15:00`, title: `Embalse El Nihuil`, text: `Seguí aguas arriba al lago abierto; disfrutá una tarde tranquila — alquilá bote o observá aves.` },
         { time: `17:30`, title: `Regreso al atardecer`, text: `Volvé por RP173 mientras el sol tiñe de oro el cañón ocre: un cierre perfecto.` }
       ]
     },
@@ -754,7 +754,7 @@ La cadena de embalses domesticó al río salvaje en algo apacible y controlable,
   it: {
     nav: { history: `Panoramica del Cañón`, architecture: `Geologia e Dighe`, monuments: `Attività`, eco: `Conservazione`, visiting: `Info di Visita`, transportation: `Come Arrivare`, gallery: `Galleria`, reviews: `Recensioni`, faq: `FAQ`, location: `Posizione` },
     hero: {
-      tags: [`Meraviglia di Mendoza`, `Cinque invasi a cascata`, `Strada panoramica RP173`],
+      tags: [`Meraviglia di Mendoza`, `Quattro invasi dell'Atuel`, `Strada panoramica RP173`],
       tagline: `Argentina · Provincia di Mendoza · San Rafael`,
       title: `Cañón del Atuel`,
       subtitle: `Cañón del Atuel · Cañón idraulico · Precordillera Andina`,
@@ -765,7 +765,7 @@ La cadena de embalses domesticó al río salvaje en algo apacible y controlable,
         category: `Meraviglia naturale · Cañón e invasi`
       }
     },
-    rating: { reviews: `recensioni`, source: `Recensioni Google` },
+    rating: { reviews: `recensioni`, source: `Recensioni Google`, verified: `Verificato ottobre 2026 · aggregato dalle valutazioni di Google Maps` },
     history: {
       title: `Una Frattura nella Precordillera Andina`,
       intro: `Il Cañón del Atuel è uno dei paesaggi naturali e ingegneristici più sorprendenti della provincia di Mendoza, nella Precordillera andina a sud di San Rafael. Il fiume Atuel scende dalla neve andina e ha scavato un canyon profondo nella roccia rossa e arida, che poi è stato incatenato da una serie di invasi che trasformano laghi turchesi e scogliere ocra in un unico, indimenticabile panorama.
@@ -773,8 +773,8 @@ La cadena de embalses domesticó al río salvaje en algo apacible y controlable,
 La nascita del canyon
 Il fiume Atuel nasce nelle Ande del sud-ovest di Mendoza e percorre circa 185 km. Per milioni di anni ha inciso lungo faglie geologiche, tagliando roccia sedimentaria e vulcanica antica in una gola profonda. Nel punto più stretto entra appena un filo di cielo; le pareti mostrano tonalità rosse, arancioni e grigie sovrapposte.
 
-Domare l’acqua: la leggenda dei cinque invasi
-Dalla metà del XX secolo Mendoza ha costruito cinque invasi a cascata (Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas ed El Nihuil) per produrre idroelettricità e irrigare la terra. Il fiume è stato tagliato tratto per tratto, e nel mezzo del deserto sono apparsi cinque laghi turchesi, rendendo questo luogo uno dei paesaggi idraulici più notevoli dell’Argentina e fonte di energia e vita per l’oasis di San Rafael.
+Domare l’acqua: la leggenda degli invasi dell’Atuel
+Dalla metà del XX secolo Mendoza ha costruito una catena di invasi sull’Atuel — Valle Grande, Tierras Blancas, Aisol ed El Nihuil — per produrre idroelettricità e irrigare la terra. (Agua del Toro e Los Reyunos, spesso citati per vicinanza, appartengono alla separata conca del Río Diamante.) Il fiume è stato tagliato tratto per tratto, e nel mezzo del deserto sono apparsi i suoi laghi turchesi inanellati, rendendo questo luogo uno dei paesaggi idraulici più notevoli dell’Argentina e fonte di energia e vita per l’oasis di San Rafael.
 
 La "banca dell'acqua" di Mendoza
 Oggi il bacino dell’Atuel fornisce una parte importante dell’elettricità e dell’irrigazione di Mendoza. La catena di invasi è insieme sostegno per energia e agricoltura, e scenario di rafting, zip-line e svago lacustre: una rara simbiosi tra forza naturale e ingegneria umana.`
@@ -805,8 +805,8 @@ Questi racconti semplici, continui con il rispetto huarpe per l’acqua, formano
     },
     curiosities: {
       title: `Curiosità di Natura e Ingegneria`,
-      content: `Cinque laghi in fila
-Dall’alto verso il basso, cinque invasi si infilano come perle: Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas ed El Nihuil. Visti dall’alto, l’acqua turchese serpeggia nel canyon ocre: il quadro idraulico più impressionante di Mendoza.
+      content: `Quattro laghi dell’Atuel
+Dall’alto verso il basso, i quattro invasi dell’Atuel si infilano come perle: Valle Grande, Tierras Blancas, Aisol ed El Nihuil. Visti dall’alto, l’acqua turchese serpeggia nel canyon ocre: il quadro idraulico più impressionante di Mendoza. (La conca del Río Diamante, con Agua del Toro e Los Reyunos, si trova in una valle a parte vicina.)
 
 El Laberinto (Il Labirinto)
 Vicino all’invaso Valle Grande, vento e acqua hanno scolpito un campo di pilastri rossi e bizzarri, chiamato appunto Il Labirinto. Percorrerli è entrare nel parco di sculture della natura.
@@ -839,7 +839,7 @@ Le pareti sono roccia sedimentaria e vulcanica antica, che registra la lunga sto
         design: { title: `Strati e Colori`, content: `Le scogliere sono un libro geologico aperto: bande rosse, arancioni e grigie di minerali depositati in ere diverse — l’ossido di ferro dà il rosso, il carbonato di calcio le strisce chiare.
 
 Con il sole basso di mattina e tramonto i colori sono più intensi e contrastano con il lago turchese: un tema favorito dei fotografi.` },
-        optics: { title: `Idrologia e Invasi`, content: `L’Atuel ha deflusso annuo limitato e molto stagionale. Per regolare la portata, generare energia e irrigare, Mendoza ha costruito cinque invasi a cascata, conservando l’acqua delle piene per il controllo delle inondazioni e l’energia.
+        optics: { title: `Idrologia e Invasi`, content: `L’Atuel ha deflusso annuo limitato e molto stagionale. Per regolare la portata, generare energia e irrigare, Mendoza ha costruito una catena di invasi sull’Atuel, conservando l’acqua delle piene per il controllo delle inondazioni e l’energia.
 
 La catena di invasi ha domesticato il fiume selvaggio in qualcosa di placido e controllabile, creando un unico canyon idraulico: roccia nuda accanto all’acqua blu, deserto accanto all’oasis.` }
       },
@@ -849,7 +849,7 @@ La catena di invasi ha domesticato il fiume selvaggio in qualcosa di placido e c
           { label: `Nome`, value: `Cañón del Atuel` },
           { label: `Posizione`, value: `Sud di San Rafael, Mendoza, Argentina` },
           { label: `Fiume`, value: `Río Atuel (≈185 km)` },
-          { label: `Invasi`, value: `5 dighe a cascata (Agua del Toro–El Nihuil)` },
+          { label: `Invasi`, value: `4 invasi dell’Atuel (Valle Grande–El Nihuil)` },
           { label: `Tipo`, value: `Gola profonda / Paesaggio idraulico / Paradiso outdoor` },
           { label: `Centro porta`, value: `San Rafael` }
         ]
@@ -919,7 +919,7 @@ La catena di invasi ha domesticato il fiume selvaggio in qualcosa di placido e c
       tips: { title: `Consigli su Trasporto e Guida`, items: [
         `Centro base: San Rafael è il punto di partenza del canyon, con rifornimenti e alloggio completi`,
         `Mendoza città è a ~240 km dal canyon — budget mezza giornata di guida`,
-        `RP173 è asfaltata ma con curve; attenzione a frane e scivoli in stagione delle piogge`,
+        `Il tratto principale del canyon su RP173 è asfaltato ma con curve; le deviazioni di terra sono sterrate — attenzione a frane e scivoli in stagione delle piogge`,
         `Combina con la Ruta del Vino di San Rafael per un’uscita di giornata`,
         `Rifornisci carburante a San Rafael — fai il pieno prima di entrare in montagna`
       ] }
@@ -927,21 +927,21 @@ La catena di invasi ha domesticato il fiume selvaggio in qualcosa di placido e c
     gallery: { title: `Galleria Fotografica`, viewMore: `Vedi altre foto su Google Maps`, categories: [ { key: `canyon`, label: `Cañón` }, { key: `reservoir`, label: `Invasi` }, { key: `rock`, label: `Rocce e Pilastri` }, { key: `panorama`, label: `Panoramiche` } ] },
     reviews: {
       title: `Recensioni dei Visitatori ed Esplorazione`,
-      subtitle: `Voci dal Cañón del Atuel: veri testimoni di Google Maps`,
+      subtitle: `Uno spaccato delle valutazioni dei visitatori del Cañón del Atuel, basato su Google Maps`,
       viewMore: `Vedi altre recensioni su Google Maps`,
       nearbyTitle: `Attrazioni Vicine`,
       nearbyIntro: `Dopo aver esplorato il Cañón del Atuel, puoi visitare facilmente le seguenti destinazioni vicine:`,
       nearbyItems: [
-        { name: `Invaso El Nihuil`, description: `Uno degli invasi a valle dell’Atuel, con acqua aperta e calma — popolare per vela, sci d’acqua e campeggio lacustre, a un’ora da San Rafael.` },
+        { name: `Invaso El Nihuil`, description: `Uno degli invasi a monte dell’Atuel, con acqua aperta e calma — popolare per vela, sci d’acqua e campeggio lacustre, a un’ora da San Rafael.` },
         { name: `Ruta del Vino di San Rafael`, description: `San Rafael è una zona vitivinicola chiave di Mendoza, famosa per Malbec e Torrontés. Dopo il canyon, assaggia e cena nelle cantine vicine.` },
         { name: `Cañón del Río Mendoza (Potrerillos)`, description: `Un altro famoso canyon e invaso (Embalse Potrerillos) vicino a Mendoza città, noto anche per rafting e arrampicata — un bel contrasto con il Cañón del Atuel.` }
       ]
     },
     faq: { title: `Domande Frequenti`, subtitle: `Saperne di più sul Cañón del Atuel`, items: [
       { question: `Dove si trova il Cañón del Atuel e come ci arrivo?`, answer: `Il Cañón del Atuel si trova circa 40 km a sud di San Rafael, Mendoza, sulla RP173. Il modo più semplice è guidare o prendere un pullman da Mendoza città (~240 km) a San Rafael, poi un trasferimento privato o un tour al canyon.` },
-      { question: `Quanto dura la visita?`, answer: `L’avvistamento su RP173 con i miradores principali richiede circa 4–5 ore; con rafting, zip-line o cantine di San Rafael, prevedi una giornata intera. La strada del canyon è aperta tutto il giorno; le attività acquatiche di solito vanno dalle 09:00 alle 18:00.` },
+      { question: `Quanto dura la visita?`, answer: `L’avvistamento su RP173 con i miradores principali richiede circa 4–5 ore; con rafting, zip-line o cantine di San Rafael, prevedi una giornata intera. La strada del canyon (RP173) è una strada provinciale pubblica e generalmente aperta, ma alcuni tratti possono chiudersi temporaneamente dopo forti piogge o frane: controlla lo stato aggiornato della strada da Turismo di San Rafael prima di partire. Le attività acquatiche di solito vanno dalle 09:00 alle 18:00.` },
       { question: `Il Cañón del Atuel è adatto alle famiglie con bambini?`, answer: `Molto. Miradores e invasi sono facili e sicuri per famiglie e foto; rafting e zip-line hanno equipaggiamento di sicurezza professionale, ma scegli la difficoltà in base all’età. Sorveglia i bambini e stai lontano dall’acqua in piena.` },
-      { question: `Gli invasi turchesi sono naturali?`, answer: `I cinque invasi dell’Atuel (Agua del Toro, Los Reyunos, Valle Grande, Tierras Blancas, El Nihuil) sono opere idrauliche artificiali costruite dalla metà del XX secolo per energia e irrigazione. Hanno rimodellato il fiume selvaggio nei laghi turchesi di oggi: un’opera congiunta di natura e ingegneria.` },
+      { question: `Gli invasi turchesi sono naturali?`, answer: `Gli invasi propri dell’Atuel — Valle Grande, Tierras Blancas, Aisol ed El Nihuil — sono opere idrauliche artificiali costruite dalla metà del XX secolo per energia e irrigazione. (Agua del Toro e Los Reyunos, spesso citati per vicinanza, appartengono alla separata conca del Río Diamante.) Hanno rimodellato il fiume selvaggio nei laghi turchesi di oggi: un’opera congiunta di natura e ingegneria.` },
       { question: `Cosa devo sapere per guidare la RP173?`, answer: `RP173 è una strada panoramica attaccata alla scogliera, con molte curve e tratti sul bordo del baratro. Controlla la velocità, evita la guida notturna, fai il pieno prima di entrare e attenzione a frane e venti forti in stagione delle piogge. Scarica mappe offline: il segnale nel canyon è debole.` }
     ]},
     location: { title: `Posizione sulla Mappa`, address: `RP173, Cañón del Atuel\nSan Rafael, Provincia di Mendoza\nArgentina`, openMaps: `Vedi su Google Maps` },
@@ -956,7 +956,7 @@ La catena di invasi ha domesticato il fiume selvaggio in qualcosa di placido e c
         { key: `iglesia`, name: `Strada RP173 del Cañón`, desc: `Strada panoramica che serpeggia sulla scogliera, con miradores sul canyon e gli invasi — favorita di chi guida.` },
         { key: `monumento`, name: `El Laberinto (Pilastri di Roccia)`, desc: `Pilastri rossi scolpiti da vento e acqua, di forme bizzarre come parco di sculture della natura — ideale per camminare e fotografare.` },
         { key: `corrales`, name: `Invaso Valle Grande`, desc: `Uno degli invasi a cascata dell’Atuel; acqua turchese contro scogliere ocra, con noleggio barche, pesca e svago.` },
-        { key: `necrópolis`, name: `Invaso El Nihuil`, desc: `Invaso a valle ampio dalle acque calme — popolare per vela, sci d’acqua e campeggio lacustre.` }
+        { key: `necrópolis`, name: `Invaso El Nihuil`, desc: `Invaso a monte ampio dalle acque calme — popolare per vela, sci d’acqua e campeggio lacustre.` }
       ]
     },
     itinerary: {
@@ -967,7 +967,7 @@ La catena di invasi ha domesticato il fiume selvaggio in qualcosa di placido e c
         { time: `09:30`, title: `Invaso Valle Grande`, text: `Fermati al primo mirador per contemplare il lago turchese tra le rocce rosse: il quadro idraulico.` },
         { time: `11:00`, title: `Pilastri di El Laberinto`, text: `Scendi a camminare tra i pilastri rossi, sentendo la forza scultrice di vento e acqua.` },
         { time: `12:30`, title: `Pranzo / Rafting nel canyon`, text: `Picnic accanto all’invaso, o una uscita di rafting tra i rapidi della gola.` },
-        { time: `15:00`, title: `Invaso El Nihuil`, text: `Prosegui a valle fino al lago aperto; goditi un pomeriggio tranquillo — noleggia una barca o osserva gli uccelli.` },
+        { time: `15:00`, title: `Invaso El Nihuil`, text: `Prosegui a monte fino al lago aperto; goditi un pomeriggio tranquillo — noleggia una barca o osserva gli uccelli.` },
         { time: `17:30`, title: `Rientro al tramonto`, text: `Torna su RP173 mentre il sole d’oro tinge il canyon ocre: una chiusura perfetta.` }
       ]
     },

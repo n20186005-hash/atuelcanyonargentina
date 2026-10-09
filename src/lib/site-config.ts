@@ -29,7 +29,10 @@ export const ATTRACTION = {
   latitude: -34.8393846,
   longitude: -68.5191883,
   ratingValue: '4.8',
-  reviewCount: '7396',
+  reviewCount: '7444',
+  /** 评价快照核对日期（与 Google Maps 同步），用于页面展示「verificado octubre 2026」。 */
+  ratingVerifiedDate: 'octubre 2026',
+  ratingSource: 'Google Maps',
   mapsShareUrl: 'https://maps.app.goo.gl/HPuD1u4M1LSnEJ178',
   mapsEmbedSrc:
     'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11640.429103543722!2d-68.5191883!3d-34.8393846!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9679bd683f8f7881%3A0xdfa13148a0b79300!2zQ2HDscOzbiBkZWwgQXR1ZWw!5e1!3m2!1szh-CN!2s!4v1789006161414!5m2!1szh-CN!2s',
@@ -97,5 +100,5 @@ export function attractionName(locale: string): string {
 }
 
 export function canonicalFor(locale: string): string {
-  return `${SITE.baseUrl}/${locale}`;
+  return `${SITE.baseUrl}/${locale}/`;
 }

@@ -26,6 +26,8 @@ export interface EntityContent {
   sourcesTitle: string;
   sourcesIntro: string;
   officialLabel: string;
+  /** 内容最后更新日期（E-E-A-T 信号） */
+  sourcesUpdated: string;
   /** NAP 一致性 */
   napTitle: string;
   napName: string;
@@ -62,6 +64,7 @@ export const ENTITY_CONTENT: Record<Locale, EntityContent> = {
     sourcesIntro:
       '本页面信息整理自以下官方与权威来源，用于进一步查证与规划行程。所有出站链接均指向政府（.gob.ar）或官方旅游机构网站。',
     officialLabel: '阿根廷 / 门多萨省官方旅游局',
+    sourcesUpdated: '最后更新：2026 年 10 月',
     napTitle: '地点信息（名称 · 地址）',
     napName: '景点全称：Cañón del Atuel（阿图埃尔峡谷）',
     napAddress: '地址：RP173, San Rafael, Mendoza, Argentina（邮政编码 5600）',
@@ -94,6 +97,7 @@ export const ENTITY_CONTENT: Record<Locale, EntityContent> = {
     sourcesIntro:
       'The information on this page is compiled from the following official and authoritative sources for further verification and trip planning. All outbound links point to government (.gob.ar) or official tourism bodies.',
     officialLabel: 'Argentina / Mendoza Province Official Tourism Portal',
+    sourcesUpdated: 'Last updated: October 2026',
     napTitle: 'Place Information (Name · Address)',
     napName: 'Official name: Cañón del Atuel (Atuel Canyon)',
     napAddress: 'Address: RP173, San Rafael, Mendoza, Argentina (postal code 5600)',
@@ -127,6 +131,7 @@ export const ENTITY_CONTENT: Record<Locale, EntityContent> = {
     sourcesIntro:
       'La información de esta página se recopila de las siguientes fuentes oficiales y autorizadas para su verificación y planificación. Todos los enlaces externos apuntan a sitios de gobierno (.gob.ar) o de turismo oficial.',
     officialLabel: 'Portal Oficial de Turismo de Argentina / Provincia de Mendoza',
+    sourcesUpdated: 'Última actualización: octubre de 2026',
     napTitle: 'Información del lugar (Nombre · Dirección)',
     napName: 'Nombre oficial: Cañón del Atuel',
     napAddress: 'Dirección: RP173, San Rafael, Mendoza, Argentina (código postal 5600)',
@@ -160,6 +165,7 @@ export const ENTITY_CONTENT: Record<Locale, EntityContent> = {
     sourcesIntro:
       'Le informazioni di questa pagina sono raccolte dalle seguenti fonti ufficiali e autorevoli per ulteriori verifiche e pianificazione. Tutti i link esterni puntano a siti governativi (.gob.ar) o di turismo ufficiale.',
     officialLabel: 'Portale Turistico Ufficiale dell’Argentina / Provincia di Mendoza',
+    sourcesUpdated: 'Ultimo aggiornamento: ottobre 2026',
     napTitle: 'Informazioni sul luogo (Nome · Indirizzo)',
     napName: 'Nome ufficiale: Cañón del Atuel',
     napAddress: 'Indirizzo: RP173, San Rafael, Mendoza, Argentina (codice postale 5600)',

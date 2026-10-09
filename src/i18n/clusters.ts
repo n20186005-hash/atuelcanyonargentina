@@ -62,7 +62,7 @@ export const CLUSTER_UI: Record<Locale, ClusterUi> = {
     relatedTitle: '相关指南',
     relatedIntro: '这些页面覆盖同一景点的其他出行意图，可一并参考。',
     mainGuide: '阿图埃尔峡谷完整旅行指南',
-    mainGuideDesc: '景点概览、五座水库、参观信息、交通、地图、天气与常见问题。',
+    mainGuideDesc: '景点概览、阿图埃尔水库群、参观信息、交通、地图、天气与常见问题。',
   },
   en: {
     home: 'Atuel Canyon Travel Guide',
@@ -71,7 +71,7 @@ export const CLUSTER_UI: Record<Locale, ClusterUi> = {
     relatedTitle: 'Related guides',
     relatedIntro: 'These pages cover the other planning needs for the same destination.',
     mainGuide: 'Complete Atuel Canyon travel guide',
-    mainGuideDesc: 'Overview, the five reservoirs, visiting information, transport, map, weather and FAQs.',
+    mainGuideDesc: 'Overview, the Atuel reservoirs, visiting information, transport, map, weather and FAQs.',
   },
   es: {
     home: 'Guía del Cañón del Atuel',
@@ -80,7 +80,7 @@ export const CLUSTER_UI: Record<Locale, ClusterUi> = {
     relatedTitle: 'Guías relacionadas',
     relatedIntro: 'Estas páginas cubren las otras necesidades de planificación del mismo destino.',
     mainGuide: 'Guía completa del Cañón del Atuel',
-    mainGuideDesc: 'Resumen, los cinco embalses, información de visita, transporte, mapa, clima y preguntas frecuentes.',
+    mainGuideDesc: 'Resumen, los embalses del Atuel, información de visita, transporte, mapa, clima y preguntas frecuentes.',
   },
   it: {
     home: 'Guida del Cañón del Atuel',
@@ -89,7 +89,7 @@ export const CLUSTER_UI: Record<Locale, ClusterUi> = {
     relatedTitle: 'Guide correlate',
     relatedIntro: 'Queste pagine coprono le altre esigenze di pianificazione della stessa destinazione.',
     mainGuide: 'Guida completa al Cañón del Atuel',
-    mainGuideDesc: 'Panoramica, i cinque invasi, informazioni di visita, trasporti, mappa, meteo e domande frequenti.',
+    mainGuideDesc: 'Panoramica, gli invasi dell’Atuel, informazioni di visita, trasporti, mappa, meteo e domande frequenti.',
   },
 };
 
@@ -186,7 +186,7 @@ export const CLUSTER: Record<Locale, Record<ClusterSlug, ClusterPage>> = {
             'Valle Grande Reservoir (~40 km) — first reservoir and the classic viewpoint.',
             'El Laberinto rock labyrinth (~45 km) — park and walk among the red pillars.',
             'Lago Atuel shoreline (~55 km) — the busiest stretch for water activities.',
-            'El Nihuil village (~70 km) — downstream reservoir, food, camping, supplies.',
+            'El Nihuil village (~70 km) — upstream reservoir, food, camping, supplies.',
             'Volcán Overo turn-off (~80 km) — dirt road to the volcanic cone.',
           ],
         },
@@ -198,6 +198,7 @@ export const CLUSTER: Record<Locale, Record<ClusterSlug, ClusterPage>> = {
             'Cliff-edge sections get noticeable crosswinds in strong wind; keep both hands on the wheel.',
             'Rockfall is possible after rain, particularly where the road runs directly under the rock walls.',
             'Dirt detours such as the Volcán Overo approach need a high-clearance vehicle.',
+            'The road is a public provincial route and generally open, but sections can close temporarily after heavy rain or rockfall — check San Rafael Turismo for the current road status before you travel.',
           ],
         },
         {
@@ -254,7 +255,7 @@ export const CLUSTER: Record<Locale, Record<ClusterSlug, ClusterPage>> = {
       sections: [
         {
           h2: 'Where Lago Atuel fits in the canyon',
-          body: 'The Atuel river is dammed in a cascade of reservoirs as it leaves the Andes, and the stretch held back at the downstream end is the lake known as Lago Atuel. It sits at roughly the 55 km mark along RP173, before El Nihuil village, and its wide turquoise banks make it the natural centre for water activities.',
+          body: 'The Atuel river is dammed in a cascade of reservoirs as it leaves the Andes, and the stretch held back at the upstream end is the lake known as Lago Atuel. It sits at roughly the 55 km mark along RP173, before El Nihuil village, and its wide turquoise banks make it the natural centre for water activities.',
           bullets: [
             'Approached along RP173 from San Rafael — see the full driving guide.',
             'Close to El Nihuil village, where you find food, camping and supplies.',
@@ -414,7 +415,7 @@ export const CLUSTER: Record<Locale, Record<ClusterSlug, ClusterPage>> = {
             'Embalse Valle Grande (~40 km) — primer embalse y mirador clásico.',
             'El Laberinto (~45 km) — estacioná y caminá entre las columnas rojas.',
             'Costa del Lago Atuel (~55 km) — el tramo de agua más concurrido.',
-            'Paraje El Nihuil (~70 km) — embalse aguas abajo, gastronomía, camping, aprovisionamiento.',
+            'Paraje El Nihuil (~70 km) — embalse aguas arriba, gastronomía, camping, aprovisionamiento.',
             'Desvío al Volcán Overo (~80 km) — camino de tierra hacia el cono volcánico.',
           ],
         },
@@ -426,6 +427,7 @@ export const CLUSTER: Record<Locale, Record<ClusterSlug, ClusterPage>> = {
             'Los tramos al borde reciben viento lateral con viento fuerte; sostené el volante con ambas manos.',
             'Puede haber derrumbes después de lluvias, sobre todo donde el camino corre justo bajo las paredes de roca.',
             'Los desvíos de tierra, como el acceso al Volcán Overo, requieren vehículo alto.',
+            'La ruta es una ruta provincial pública y generalmente abierta, pero tramos pueden cerrarse temporalmente tras lluvias fuertes o derrumbes: consultá a Turismo de San Rafael el estado actual de la ruta antes de salir.',
           ],
         },
         {
@@ -482,7 +484,7 @@ export const CLUSTER: Record<Locale, Record<ClusterSlug, ClusterPage>> = {
       sections: [
         {
           h2: 'Dónde queda el Lago Atuel dentro del cañón',
-          body: 'El río Atuel está represado en una cascada de embalses a medida que baja de los Andes, y el tramo contenido en el extremo inferior es el lago conocido como Lago Atuel. Está aproximadamente en el kilómetro 55 de la RP173, antes del paraje El Nihuil, y sus costas amplias y turquesas lo vuelven el centro natural de las actividades acuáticas.',
+          body: 'El río Atuel está represado en una cascada de embalses a medida que baja de los Andes, y el tramo contenido en el extremo superior es el lago conocido como Lago Atuel. Está aproximadamente en el kilómetro 55 de la RP173, antes del paraje El Nihuil, y sus costas amplias y turquesas lo vuelven el centro natural de las actividades acuáticas.',
           bullets: [
             'Se llega por la RP173 desde San Rafael: ver la guía completa de manejo.',
             'Cerca del paraje El Nihuil, donde hay gastronomía, camping y aprovisionamiento.',
@@ -654,6 +656,7 @@ export const CLUSTER: Record<Locale, Record<ClusterSlug, ClusterPage>> = {
             '大风天气临崖路段侧风明显，请双手稳握方向盘。',
             '雨后可能落石，尤其是公路紧贴岩壁的路段。',
             '前往 Volcán Overo 等土路岔道需要高底盘车辆。',
+            '本路为公共省道，通常全天可通行，但大雨或落石后部分路段可能临时封闭——出发前请查询圣拉斐尔旅游局的实时路况。',
           ],
         },
         {
@@ -870,7 +873,7 @@ export const CLUSTER: Record<Locale, Record<ClusterSlug, ClusterPage>> = {
             'Invaso Valle Grande (~40 km) — primo invaso e mirador classico.',
             'El Laberinto (~45 km) — parcheggia e cammina tra le colonne rosse.',
             'Riva del Lago Atuel (~55 km) — il tratto d’acqua più frequentato.',
-            'Abitato di El Nihuil (~70 km) — invaso a valle, ristorazione, campeggio, rifornimenti.',
+            'Abitato di El Nihuil (~70 km) — invaso a monte, ristorazione, campeggio, rifornimenti.',
             'Bivio per il Volcán Overo (~80 km) — sterrato verso il cono vulcanico.',
           ],
         },
@@ -882,6 +885,7 @@ export const CLUSTER: Record<Locale, Record<ClusterSlug, ClusterPage>> = {
             'I tratti a picco ricevono vento laterale con vento forte; tieni entrambe le mani sul volante.',
             'Sono possibili cadute massi dopo la pioggia, soprattutto dove la strada corre sotto le pareti rocciose.',
             'Gli sterrati, come l’accesso al Volcán Overo, richiedono un veicolo alto.',
+            'La strada è una strada provinciale pubblica e generalmente aperta, ma alcuni tratti possono chiudersi temporaneamente dopo forti piogge o frane: controlla lo stato aggiornato della strada da Turismo di San Rafael prima di partire.',
           ],
         },
         {
